@@ -1,0 +1,37 @@
+# IntelliJ IDEA / JetBrains
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# JetBrains build/cache files
+**/.gradle/
+**/build/
+**/target/
+
+# IntelliJ / JetBrains plugins & tooling
+.atlassian-ide-plugin.xml
+.idea_modules/
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/**/dataSources/
+.idea/**/dataSources.local.xml
+.idea/**/jdbcDrivers.xml
+
+# IntelliJ HTTP Client requests
+.httpRequests/
+
+# IntelliJ run configurations (often user/machine-specific)
+.idea/**/runConfigurations/
+
+# Kotlin / Java annotation processing / compiler artifacts (common with IDEA)
+.kotlin/
+.kotlinc/
+
+# OS junk (optional but recommended)
+.DS_Store
+Thumbs.db
