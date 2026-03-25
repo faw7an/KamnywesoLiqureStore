@@ -1,128 +1,80 @@
 package com.example.kamnywesoliqourstore;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import java.io.IOException;
 
 public class LoginController {
 
     @FXML private ComboBox<String> branchComboBox;
-    @FXML private TextField usernameField;
+    @FXML private TextField staffIdField;
     @FXML private PasswordField passwordField;
-    @FXML private CheckBox rememberMeCheckBox;
-    @FXML private Hyperlink forgotPasswordLink;
-    @FXML private Hyperlink signUpLink;
-    @FXML private Label errorLabel;
-    @FXML private Button loginButton;
-    @FXML private Label orLabel;
 
+    /**
+     * This method runs automatically when the FXML is loaded.
+     * It populates the branch dropdown to match your design specs.
+     */
     @FXML
     public void initialize() {
-        branchComboBox.getItems().addAll(
-                "Nairobi HQ",
-                "Mombasa Branch",
-                "Kisumu Branch",
-                "Nakuru Branch"
-        );
+        branchComboBox.getItems().addAll("Nairobi HQ", "Nakuru", "Mombasa", "Kisumu");
+        // Set a default selection to look professional on load
+        branchComboBox.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Handles the "Sign In" button click.
+     * Currently configured with the 'admin' bypass for testing.
+     */
     @FXML
-    private void handleBranchSelection() {
-        String selectedBranch = branchComboBox.getValue();
-        if (selectedBranch != null) {
-            System.out.println("Branch selected: " + selectedBranch);
-        }
-    }
+    private void handleSignIn(ActionEvent event) {
+        String branch = branchComboBox.getValue();
+        String staffId = staffIdField.getText();
+        String password = passwordField.getText();
 
-    @FXML
-    private void handleLogin() {
-        String branch   = branchComboBox.getValue();
-        String username = usernameField.getText().trim();
-        String password = passwordField.getText().trim();
-
-        if (branch == null || branch.isEmpty()) {
-            showError("Please select a branch.");
-            return;
-        }
-        if (username.isEmpty()) {
-            showError("Please enter your Staff ID or Email.");
-            return;
-        }
-        if (password.isEmpty()) {
-            showError("Please enter your password.");
+        // Simple validation logic
+        if (staffId.isEmpty() || password.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Form Error!", "Please enter your Staff ID and Password.");
             return;
         }
 
-        // TODO: Replace with real authentication (database check)
-        // Simulated credentials for testing
-        // username: admin, password: Admin@123
-        if (username.equals("admin") && password.equals("Admin@123")) {
-            errorLabel.setVisible(false);
-            navigateToOtp(username, branch, "Manager", "John Doe",
-                    "+254712345678");
+        // Test credentials: Staff ID 'admin' and Password '1234'
+        if (staffId.equals("admin") && password.equals("1234")) {
+            System.out.println("Login Successful for Branch: " + branch);
+            navigateToBranchPortal(event);
         } else {
-            showError("Invalid Staff ID or password.");
+            showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid Staff ID or Password.");
         }
     }
 
-    @FXML
-    private void handleForgotPassword() {
+    private void navigateToBranchPortal(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("forgotPassword.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void handleSignUp() {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("register.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // ── Helpers ────────────────────────────────────────────────
-    private void showError(String message) {
-        errorLabel.setText(message);
-        errorLabel.setVisible(true);
-    }
-
-    private void navigateToOtp(String username, String branch,
-                               String role, String name, String phone) {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("otpVerification.fxml"));
+            // This loads the next screen in your UI implementation plan
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("branch-portal-view.fxml"));
             Parent root = loader.load();
 
-            // Pass login data to OTP controller
-            OtpVerificationController otpCtrl = loader.getController();
-            otpCtrl.initData(phone, branch, role, name);
-
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-
-            // re-center after scene change
+            // Get the current window (Stage) and swap the scene
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
             stage.centerOnScreen();
-
             stage.show();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
-            showError("Navigation error. Please try again.");
+            showAlert(Alert.AlertType.ERROR, "Navigation Error", "Could not find branch-portal-view.fxml");
         }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
