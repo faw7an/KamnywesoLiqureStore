@@ -1,0 +1,55 @@
+/* Global Root - Deep Navy Background */
+.root {
+    -fx-background-color: #0f172a;
+    -fx-font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* The White Login Card */
+.card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 16px;
+    -fx-padding: 40px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 20, 0, 0, 10);
+}
+
+/* DS Logo Box */
+.logo-box {
+    -fx-background-color: #2563EB;
+    -fx-background-radius: 12px;
+    -fx-min-width: 60px;
+    -fx-min-height: 60px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+    -fx-alignment: center;
+}
+
+/* Primary Button - Bright Blue */
+.button-primary {
+    -fx-background-color: #2563EB;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px;
+    -fx-cursor: hand;
+}
+.button-primary:hover {
+    -fx-background-color: #1d4ed8;
+}
+
+/* Inputs */
+.input-field {
+    -fx-background-color: white;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 10px;
+}
+.input-field:focused {
+    -fx-border-color: #2563EB;
+}
+
+/* Text Colors */
+.text-navy { -fx-text-fill: #0f172a; }
+.text-muted { -fx-text-fill: #64748b; }
+.text-primary { -fx-text-fill: #2563EB; }
