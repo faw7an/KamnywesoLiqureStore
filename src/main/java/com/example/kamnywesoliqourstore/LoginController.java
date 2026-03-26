@@ -9,12 +9,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LoginController {
+
+    private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
 
     @FXML private ComboBox<String> branchComboBox;
     @FXML private TextField staffIdField;
     @FXML private PasswordField passwordField;
+    @FXML private Button signInButton;
 
     /**
      * This method runs automatically when the FXML is loaded.
@@ -27,46 +32,32 @@ public class LoginController {
         branchComboBox.getSelectionModel().selectFirst();
     }
 
-    /**
-     * Handles the "Sign In" button click.
-     * Currently configured with the 'admin' bypass for testing.
-     */
     @FXML
     private void handleSignIn(ActionEvent event) {
-        String branch = branchComboBox.getValue();
+        // 1. Get data from fields
         String staffId = staffIdField.getText();
         String password = passwordField.getText();
 
-        // Simple validation logic
-        if (staffId.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Form Error!", "Please enter your Staff ID and Password.");
-            return;
-        }
-
-        // Test credentials: Staff ID 'admin' and Password '1234'
-        if (staffId.equals("admin") && password.equals("1234")) {
-            System.out.println("Login Successful for Branch: " + branch);
-            navigateToBranchPortal(event);
+        // 2. Logic to move to OTP (based on your implementation plan)
+        if (!staffId.isEmpty() && !password.isEmpty()) {
+            LOGGER.info("Transitioning to 2FA Screen...");
+            navigateToOtpScreen(event);
         } else {
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid Staff ID or Password.");
+            showAlert(Alert.AlertType.WARNING, "Form Error!", "Please enter your Staff ID and Password.");
         }
     }
 
-    private void navigateToBranchPortal(ActionEvent event) {
+    private void navigateToOtpScreen(ActionEvent event) {
         try {
-            // This loads the next screen in your UI implementation plan
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("branch-portal-view.fxml"));
+            // Change from branch-portal-view.fxml to otp-view.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("otp-view.fxml"));
             Parent root = loader.load();
 
-            // Get the current window (Stage) and swap the scene
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.centerOnScreen();
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Navigation Error", "Could not find branch-portal-view.fxml");
+            LOGGER.log(Level.SEVERE, "Failed to navigate to OTP screen: otp-view.fxml", e);
         }
     }
 
