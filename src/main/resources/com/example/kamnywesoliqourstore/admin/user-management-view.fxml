@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox spacing="25" style="-fx-padding: 30; -fx-background-color: #F8FAFC;" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kamnywesoliqourstore.admin.UserManagementController">
+    <Label text="User Management" style="-fx-font-size: 28px; -fx-font-weight: bold;" styleClass="text-navy"/>
+    <VBox styleClass="card" VBox.vgrow="ALWAYS" spacing="10">
+        <HBox spacing="10"><Button text="Staff Accounts" styleClass="button-primary"/><Button text="Pending Approvals" style="-fx-background-color: transparent;"/></HBox>
+        <TableView fx:id="userTable" VBox.vgrow="ALWAYS" prefHeight="350"/>
+    </VBox>
+</VBox>

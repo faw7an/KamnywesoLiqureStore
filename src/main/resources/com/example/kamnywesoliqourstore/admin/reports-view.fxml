@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox spacing="25" style="-fx-padding: 30; -fx-background-color: #F8FAFC;" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kamnywesoliqourstore.admin.ReportsController">
+    <Label text="Reports" style="-fx-font-size: 28px; -fx-font-weight: bold;" styleClass="text-navy"/>
+    <HBox spacing="25" VBox.vgrow="ALWAYS">
+        <VBox spacing="10" minWidth="220" styleClass="card" style="-fx-padding: 15;">
+            <Button text="Sales Report" styleClass="button-primary" maxWidth="Infinity" style="-fx-alignment: CENTER_LEFT; -fx-padding: 12 20;"/>
+            <Button text="Profit &amp; Loss" style="-fx-background-color: transparent; -fx-alignment: CENTER_LEFT; -fx-padding: 12 20;" maxWidth="Infinity"/>
+            <Button text="Order Report" style="-fx-background-color: transparent; -fx-alignment: CENTER_LEFT; -fx-padding: 12 20;" maxWidth="Infinity"/>
+            <Button text="Stock Report" style="-fx-background-color: transparent; -fx-alignment: CENTER_LEFT; -fx-padding: 12 20;" maxWidth="Infinity"/>
+        </VBox>
+        <VBox spacing="25" HBox.hgrow="ALWAYS">
+            <VBox styleClass="card" spacing="20">
+                <Label text="Generate Sales Report" style="-fx-font-weight: bold; -fx-font-size: 16;"/>
+                <HBox spacing="15">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS"><Label text="FROM DATE" styleClass="text-muted"/><DatePicker maxWidth="Infinity" styleClass="input-field"/></VBox>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS"><Label text="TO DATE" styleClass="text-muted"/><DatePicker maxWidth="Infinity" styleClass="input-field"/></VBox>
+                </HBox>
+                <VBox spacing="10">
+                    <Label text="BRANCHES" styleClass="text-muted"/>
+                    <HBox spacing="15"><CheckBox text="All" selected="true"/><CheckBox text="Nakuru"/><CheckBox text="Mombasa"/><CheckBox text="Kisumu"/><CheckBox text="HQ"/></HBox>
+                </VBox>
+                <Button text="Generate Report" styleClass="button-primary"/>
+            </VBox>
+            <VBox styleClass="card" VBox.vgrow="ALWAYS" spacing="10">
+                <Label text="Preview: Sales Report" style="-fx-font-weight: bold; -fx-font-size: 16;"/>
+                <TableView fx:id="reportTable" VBox.vgrow="ALWAYS" prefHeight="250"/>
+            </VBox>
+        </VBox>
+    </HBox>
+</VBox>

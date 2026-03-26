@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane fx:id="mainBorderPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
@@ -16,7 +17,7 @@
 
             <HBox spacing="12" alignment="CENTER_LEFT">
                 <StackPane style="-fx-background-color: #2563EB; -fx-background-radius: 8;" prefWidth="35" prefHeight="35">
-                    <Label text="D" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18;"/>
+                    <Label text="KLS" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18;"/>
                 </StackPane>
                 <Label fx:id="lblBrand" text="Kamnyweso Liqour Store" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;"/>
             </HBox>
@@ -24,17 +25,42 @@
             <Region prefHeight="30"/>
 
             <VBox spacing="5" VBox.vgrow="ALWAYS">
-                <Button fx:id="btnDashboard" text="Dashboard" onAction="#handleNavDashboard" styleClass="nav-button-active" maxWidth="Infinity" prefHeight="40"/>
-                <Button text="Orders" styleClass="nav-button" maxWidth="Infinity" prefHeight="40"/>
-                <Button fx:id="btnOrderTracking" text="Order Tracking" onAction="#handleNavOrderTracking" styleClass="nav-button" maxWidth="Infinity" prefHeight="40"/>
-                <Button text="Stock Management" styleClass="nav-button" maxWidth="Infinity" prefHeight="40"/>
-                <Button text="Reports" styleClass="nav-button" maxWidth="Infinity" prefHeight="40"/>
-                <Button text="User Management" styleClass="nav-button" maxWidth="Infinity" prefHeight="40"/>
+                <Button fx:id="btnDashboard" text="Dashboard" onAction="#handleNavDashboard" styleClass="nav-button-active" maxWidth="Infinity" prefHeight="40" graphicTextGap="12">
+                    <graphic>
+                    <StackPane prefWidth="24" alignment="CENTER_LEFT"><SVGPath content="M3 3h7v7H3z M14 3h7v7h-7z M14 14h7v7h-7z M3 14h7v7H3z" fill="transparent"  strokeWidth="2"/></graphic>
+                </Button>
+                <Button fx:id="btnOrders" text="Orders" onAction="#handleNavOrders" styleClass="nav-button" maxWidth="Infinity" prefHeight="40" graphicTextGap="12">
+                    <graphic>
+                    <StackPane prefWidth="24" alignment="CENTER_LEFT"><SVGPath content="M16.5 9.4l-9-5.19M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16zM3.27 6.96L12 12.01l8.73-5.05M12 22.08V12" fill="transparent"  strokeWidth="2"/></graphic>
+                </Button>
+                <Button fx:id="btnOrderTracking" text="Order Tracking" onAction="#handleNavOrderTracking" styleClass="nav-button" maxWidth="Infinity" prefHeight="40" graphicTextGap="12">
+                    <graphic>
+                    <StackPane prefWidth="24" alignment="CENTER_LEFT"><SVGPath content="M10 17h4V5H2v12h3M20 17h2v-3.34a4 4 0 00-1.17-2.83L19 9h-5v8h2M14 17h1M5 17a2 2 0 104 0 2 2 0 00-4 0zM15 17a2 2 0 104 0 2 2 0 00-4 0z" fill="transparent"  strokeWidth="2"/></graphic>
+                </Button>
+                <Button fx:id="btnStock" text="Stock Management" onAction="#handleNavStock" styleClass="nav-button" maxWidth="Infinity" prefHeight="40" graphicTextGap="12">
+                    <graphic>
+                    <StackPane prefWidth="24" alignment="CENTER_LEFT"><SVGPath content="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" fill="transparent"  strokeWidth="2"/></graphic>
+                </Button>
+                <Button fx:id="btnReports" text="Reports" onAction="#handleNavReports" styleClass="nav-button" maxWidth="Infinity" prefHeight="40" graphicTextGap="12">
+                    <graphic>
+                    <StackPane prefWidth="24" alignment="CENTER_LEFT"><SVGPath content="M18 20V10M12 20V4M6 20v-6" fill="transparent"  strokeWidth="2" strokeLineCap="ROUND"/></graphic>
+                </Button>
+                <Button fx:id="btnUsers" text="User Management" onAction="#handleNavUsers" styleClass="nav-button" maxWidth="Infinity" prefHeight="40" graphicTextGap="12">
+                    <graphic>
+                    <StackPane prefWidth="24" alignment="CENTER_LEFT"><SVGPath content="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M8.5 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z M22 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75" fill="transparent"  strokeWidth="2"/></graphic>
+                </Button>
             </VBox>
 
             <VBox spacing="5">
-                <Button text="Log Out" onAction="#handleLogout" styleClass="nav-button" maxWidth="Infinity"/>
-                <Button fx:id="btnCollapse" text="Collapse" onAction="#handleCollapseSidebar" styleClass="nav-button" maxWidth="Infinity"/>
+                <Separator style="-fx-background-color: transparent; -fx-padding: 10 0; -fx-opacity: 0.2;"/>
+                <Button text="Settings" onAction="#handleLogout" styleClass="nav-button" maxWidth="Infinity" graphicTextGap="12">
+                    <graphic>
+                    <StackPane prefWidth="24" alignment="CENTER_LEFT"><SVGPath content="M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.09a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2z M12 15a3 3 0 100-6 3 3 0 000 6z" fill="transparent"  strokeWidth="2"/></graphic>
+                </Button>
+                <Button fx:id="btnCollapse" text="Collapse" onAction="#handleCollapseSidebar" styleClass="nav-button" maxWidth="Infinity" graphicTextGap="12">
+                    <graphic>
+                    <StackPane prefWidth="24" alignment="CENTER_LEFT"><SVGPath content="M15 18l-6-6 6-6" fill="transparent"  strokeWidth="2" strokeLineCap="ROUND" strokeLineJoin="ROUND"/></graphic>
+                </Button>
             </VBox>
         </VBox>
     </left>

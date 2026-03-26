@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox spacing="25" style="-fx-padding: 30; -fx-background-color: #F8FAFC;" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kamnywesoliqourstore.admin.StockManagementController">
+    <Label text="Stock Management" style="-fx-font-size: 28px; -fx-font-weight: bold;" styleClass="text-navy"/>
+    <HBox fx:id="statCardsContainer" spacing="20" alignment="CENTER_LEFT"/>
+    <VBox styleClass="card" VBox.vgrow="ALWAYS" spacing="10">
+        <Label text="Stock Inventory" style="-fx-font-weight: bold; -fx-font-size: 16;"/>
+        <TableView fx:id="stockTable" VBox.vgrow="ALWAYS" prefHeight="300" styleClass="table-view"/>
+    </VBox>
+    <VBox styleClass="card" VBox.vgrow="ALWAYS" spacing="10">
+        <Label text="Damaged Stock Returns" style="-fx-font-weight: bold; -fx-font-size: 16;"/>
+        <TableView fx:id="returnsTable" VBox.vgrow="ALWAYS" prefHeight="200" styleClass="table-view"/>
+    </VBox>
+</VBox>
