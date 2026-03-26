@@ -47,6 +47,21 @@ public class LoginController {
         }
     }
 
+    @FXML
+    private void handleRegisterNavigation() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("register-view.fxml"));
+            Parent root = loader.load();
+            
+            Stage stage = (Stage) signInButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("DrinkShop - Create New Account");
+            stage.show();
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Failed to load register-view.fxml", e);
+        }
+    }
+
     private void navigateToOtpScreen(ActionEvent event) {
         try {
             // Change from branch-portal-view.fxml to otp-view.fxml

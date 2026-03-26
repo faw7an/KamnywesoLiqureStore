@@ -82,3 +82,25 @@
     -fx-font-weight: bold;
     -fx-font-size: 10px;
 }
+
+/* Progress Dots */
+.dot {
+    -fx-min-width: 12px;
+    -fx-min-height: 12px;
+    -fx-background-radius: 50;
+    -fx-background-color: #E2E8F0; /* Default border color */
+}
+.dot-active { -fx-background-color: #2563EB; }
+.dot-complete { -fx-background-color: #22C55E; }
+
+/* Password Rules */
+.rule-text { -fx-font-size: 11px; -fx-text-fill: #64748b; }
+.rule-met { -fx-text-fill: #22C55E; -fx-font-weight: bold; }
+
+/* Back Button */
+.button-ghost {
+    -fx-background-color: transparent;
+    -fx-text-fill: #64748b;
+    -fx-font-weight: bold;
+}
+.button-ghost:hover { -fx-background-color: #f1f5f9; }
