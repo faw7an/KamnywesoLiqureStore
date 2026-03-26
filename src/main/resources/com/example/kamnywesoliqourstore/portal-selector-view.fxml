@@ -11,8 +11,8 @@
     <VBox alignment="CENTER" maxWidth="800.0" spacing="40.0">
         <children>
             <VBox alignment="CENTER" spacing="10.0">
-                <Label style="-fx-background-color: #2563EB; -fx-background-radius: 16; -fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 15 25;" text="KL" />
-                <Label style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;" text="Kamnyweso Liquor" />
+                <Label style="-fx-background-color: #2563EB; -fx-background-radius: 16; -fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 15 25;" text="KLS" />
+                <Label style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;" text="Kamnyweso Liquor Store" />
                 <Label style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 16px;" text="Distributed Management System" />
             </VBox>
 
