@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="mainBorderPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.kamnywesoliqourstore.admin.AdminDashboardController"
+            style="-fx-background-color: #F8FAFC;">
+
+    <left>
+        <VBox fx:id="sideNavVBox" prefWidth="260" spacing="10" style="-fx-background-color: #0F172A;">
+            <padding><Insets top="25" right="15" bottom="25" left="15"/></padding>
+
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <StackPane style="-fx-background-color: #2563EB; -fx-background-radius: 8;" prefWidth="35" prefHeight="35">
+                    <Label text="D" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18;"/>
+                </StackPane>
+                <Label fx:id="lblBrand" text="Kamnyweso Liqour Store" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;"/>
+            </HBox>
+
+            <Region prefHeight="30"/>
+
+            <VBox spacing="5" VBox.vgrow="ALWAYS">
+                <Button fx:id="btnDashboard" text="Dashboard" onAction="#handleNavDashboard" styleClass="nav-button-active" maxWidth="Infinity" prefHeight="40"/>
+                <Button text="Orders" styleClass="nav-button" maxWidth="Infinity" prefHeight="40"/>
+                <Button fx:id="btnOrderTracking" text="Order Tracking" onAction="#handleNavOrderTracking" styleClass="nav-button" maxWidth="Infinity" prefHeight="40"/>
+                <Button text="Stock Management" styleClass="nav-button" maxWidth="Infinity" prefHeight="40"/>
+                <Button text="Reports" styleClass="nav-button" maxWidth="Infinity" prefHeight="40"/>
+                <Button text="User Management" styleClass="nav-button" maxWidth="Infinity" prefHeight="40"/>
+            </VBox>
+
+            <VBox spacing="5">
+                <Button text="Log Out" onAction="#handleLogout" styleClass="nav-button" maxWidth="Infinity"/>
+                <Button fx:id="btnCollapse" text="Collapse" onAction="#handleCollapseSidebar" styleClass="nav-button" maxWidth="Infinity"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox>
+            <HBox spacing="20" alignment="CENTER_LEFT" style="-fx-background-color: #0F172A; -fx-padding: 10 30;">
+                <HBox spacing="8" alignment="CENTER" style="-fx-background-color: #2563EB; -fx-padding: 5 12; -fx-background-radius: 20;">
+                    <Label text="HQ NAIROBI" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;"/>
+                </HBox>
+                <HBox spacing="5" alignment="CENTER">
+                    <Circle radius="4" fill="#10B981"/>
+                    <Label text="System Live" style="-fx-text-fill: #94A3B8; -fx-font-size: 11;"/>
+                </HBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <VBox alignment="CENTER_RIGHT">
+                    <Label text="Alex Mwakideu" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+                    <Label text="ADMINISTRATOR" style="-fx-text-fill: #64748B; -fx-font-size: 10;"/>
+                </VBox>
+            </HBox>
+
+            <ScrollPane fx:id="dashboardContent" fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent; -fx-background: #F8FAFC; -fx-border-color: transparent;">
+                <VBox spacing="25.0">
+                    <padding><Insets bottom="30.0" left="30.0" right="30.0" top="30.0" /></padding>
+
+                    <HBox fx:id="statCardsContainer" spacing="20.0" alignment="CENTER" />
+
+                    <HBox spacing="20.0">
+                        <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);" HBox.hgrow="ALWAYS">
+                            <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
+                            <Label text="Revenue by Branch" style="-fx-font-weight: bold; -fx-font-size: 16;" />
+                            <HBox fx:id="revenueBarContainer" alignment="BOTTOM_CENTER" spacing="35.0" prefHeight="200" />
+                        </VBox>
+
+                        <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);" minWidth="450">
+                            <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
+                            <Label text="Profit / Loss per Branch" style="-fx-font-weight: bold; -fx-font-size: 16;" />
+                            <TableView fx:id="profitTable" prefHeight="220"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="20.0">
+                        <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);" HBox.hgrow="ALWAYS">
+                            <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
+                            <Label text="Orders Dispatched Today" style="-fx-font-weight: bold; -fx-font-size: 16;" />
+                            <TableView fx:id="dispatchTable" prefHeight="250"/>
+                            <Hyperlink text="View Full Tracking →" onAction="#handleNavOrderTracking" style="-fx-text-fill: #2563EB; -fx-font-weight: bold;" />
+                        </VBox>
+
+                        <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);" minWidth="400">
+                            <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
+                            <Label text="Stock Alerts" style="-fx-font-weight: bold; -fx-font-size: 16;" />
+                            <HBox fx:id="stockSummaryBox" /> <VBox fx:id="stockAlertsContainer" spacing="10" />
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </center>
+</BorderPane>

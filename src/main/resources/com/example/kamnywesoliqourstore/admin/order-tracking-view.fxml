@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<VBox prefHeight="650.0" prefWidth="950.0" spacing="20.0" style="-fx-padding: 30; -fx-background-color: #F4F6FA;" stylesheets="@../style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kamnywesoliqourstore.admin.OrderTrackingController">
+    <Label text="Global Order Tracking" style="-fx-font-size: 28px; -fx-font-weight: bold;" styleClass="text-navy"/>
+    
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="Search by Branch, ID or Status..." styleClass="input-field" HBox.hgrow="ALWAYS" />
+        <Button text="Search Records" styleClass="button-primary"/>
+    </HBox>
+
+    <TableView fx:id="orderTable" VBox.vgrow="ALWAYS" styleClass="card">
+        <columns>
+            <TableColumn text="Order Tag ID" prefWidth="150" fx:id="colId">
+                <cellValueFactory><PropertyValueFactory property="id" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Destination Branch" prefWidth="200" fx:id="colBranch">
+                <cellValueFactory><PropertyValueFactory property="branch" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Items Shipped" prefWidth="120" fx:id="colItems">
+                <cellValueFactory><PropertyValueFactory property="items" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Live Status" prefWidth="150" fx:id="colStatus">
+                <cellValueFactory><PropertyValueFactory property="status" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Timestamp" prefWidth="180" fx:id="colTime">
+                <cellValueFactory><PropertyValueFactory property="time" /></cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+</VBox>

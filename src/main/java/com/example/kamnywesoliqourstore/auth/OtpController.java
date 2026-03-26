@@ -1,4 +1,4 @@
-package com.example.kamnywesoliqourstore;
+package com.example.kamnywesoliqourstore.auth;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -75,7 +75,7 @@ public class OtpController {
 
         // For now, any 6-digit code works. Let's redirect to branch-portal.
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("branch-portal-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/kamnywesoliqourstore/admin/admin-dashboard-view.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));

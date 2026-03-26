@@ -14,7 +14,7 @@
 
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<StackPane prefHeight="700.0" prefWidth="900.0" stylesheets="@style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kamnywesoliqourstore.LoginController">
+<StackPane prefHeight="700.0" prefWidth="900.0" stylesheets="@../style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kamnywesoliqourstore.auth.LoginController">
    <children>
       <VBox alignment="CENTER" maxWidth="420.0" maxHeight="-Infinity" spacing="25.0" styleClass="card">
          <children>

@@ -1,4 +1,4 @@
-package com.example.kamnywesoliqourstore;
+package com.example.kamnywesoliqourstore.auth;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -137,7 +137,7 @@ public class RegisterController {
     @FXML
     private void navigateToLogin() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/kamnywesoliqourstore/auth/login-view.fxml"));
             Stage stage = (Stage) stepContainer.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Kamnyweso Liquor Store - Login");
