@@ -118,7 +118,7 @@ public class RegisterController {
             Parent root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
             Stage stage = (Stage) stepContainer.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("DrinkShop - Login");
+            stage.setTitle("Kamnyweso Liquor - Login");
             stage.show();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Failed to navigate back to login-view.fxml", e);

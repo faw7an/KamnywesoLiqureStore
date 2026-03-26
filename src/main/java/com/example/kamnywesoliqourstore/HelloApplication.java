@@ -10,17 +10,10 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        // 1. Point to your login-view.fxml
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login-view.fxml"));
-
-        // 2. Set the window size (matching your design)
-        Scene scene = new Scene(fxmlLoader.load(), 900, 700);
-
-        stage.setTitle("DrinkShop - Distributed Management System");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("portal-selector-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1000, 750);
+        stage.setTitle("DrinkShop - Select Portal");
         stage.setScene(scene);
-
-        // 3. Optional: Center on screen
-        stage.centerOnScreen();
         stage.show();
     }
 }
