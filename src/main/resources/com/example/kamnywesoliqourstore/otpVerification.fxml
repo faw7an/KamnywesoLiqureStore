@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane style="-fx-background-color: #D6D6D1;"
+           xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.kamnywesoliqourstore.OtpVerificationController">
+
+    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity"
+                minHeight="-Infinity" minWidth="-Infinity"
+                prefHeight="580.0" prefWidth="620.0">
+
+        <!-- LEFT - same decorative image panel -->
+        <center>
+            <AnchorPane prefHeight="580.0" prefWidth="228.0"
+                        BorderPane.alignment="CENTER">
+                <children>
+                    <ImageView fitHeight="580.0" fitWidth="233.0"
+                               pickOnBounds="true" preserveRatio="false"
+                               AnchorPane.bottomAnchor="0.0"
+                               AnchorPane.leftAnchor="0.0"
+                               AnchorPane.rightAnchor="0.0"
+                               AnchorPane.topAnchor="0.0">
+                        <image>
+                            <Image url="@distributedsystemprojectimages/one.jpg" />
+                        </image>
+                    </ImageView>
+                </children>
+            </AnchorPane>
+        </center>
+
+        <!-- RIGHT - OTP form -->
+        <right>
+            <AnchorPane prefHeight="580.0" prefWidth="392.0"
+                        style="-fx-background-color: #ECECE7;"
+                        BorderPane.alignment="CENTER">
+                <children>
+
+                    <!-- Lock image -->
+                    <ImageView fitHeight="80.0" fitWidth="100.0"
+                               layoutX="146.0" layoutY="20.0"
+                               pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@distributedsystemprojectimages/lock1.jpg" />
+                        </image>
+                    </ImageView>
+
+                    <!-- Title -->
+                    <Label layoutX="14.0" layoutY="110.0" prefWidth="364.0"
+                           alignment="CENTER"
+                           text="Two-Factor Authentication">
+                        <font><Font name="System Bold" size="20.0" /></font>
+                    </Label>
+
+                    <!-- Subtitle -->
+                    <Label layoutX="14.0" layoutY="140.0" prefWidth="364.0"
+                           alignment="CENTER"
+                           style="-fx-text-fill: #666666;"
+                           text="Verify your identity to continue">
+                        <font><Font size="13.0" /></font>
+                    </Label>
+
+                    <!-- Info box -->
+                    <VBox layoutX="14.0" layoutY="168.0"
+                          prefWidth="364.0"
+                          style="-fx-background-color: #E8F0FE; -fx-border-color: #1a73e8; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 14 10 14;">
+                        <children>
+                            <Label fx:id="otpInfoLabel"
+                                   prefWidth="336.0"
+                                   wrapText="true"
+                                   text="OTP sent to +254 7XX XXX XXX"
+                                   style="-fx-text-fill: #1a73e8; -fx-font-size: 12;">
+                            </Label>
+                            <Label fx:id="branchInfoLabel"
+                                   prefWidth="336.0"
+                                   text="Branch: Nairobi HQ"
+                                   style="-fx-text-fill: #1a73e8; -fx-font-size: 12; -fx-padding: 4 0 0 0;">
+                            </Label>
+                        </children>
+                    </VBox>
+
+                    <!-- OTP label -->
+                    <Label layoutX="14.0" layoutY="244.0"
+                           prefWidth="364.0" alignment="CENTER"
+                           text="ENTER 6-DIGIT CODE">
+                        <font><Font name="System Bold" size="12.0" /></font>
+                    </Label>
+
+                    <!-- 6 OTP boxes -->
+                    <HBox layoutX="14.0" layoutY="264.0"
+                          prefWidth="364.0" alignment="CENTER" spacing="8.0">
+                        <children>
+                            <TextField fx:id="otp1" prefHeight="56.0" prefWidth="52.0"
+                                       style="-fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 22; -fx-alignment: center; -fx-font-weight: bold;" />
+                            <TextField fx:id="otp2" prefHeight="56.0" prefWidth="52.0"
+                                       style="-fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 22; -fx-alignment: center; -fx-font-weight: bold;" />
+                            <TextField fx:id="otp3" prefHeight="56.0" prefWidth="52.0"
+                                       style="-fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 22; -fx-alignment: center; -fx-font-weight: bold;" />
+                            <TextField fx:id="otp4" prefHeight="56.0" prefWidth="52.0"
+                                       style="-fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 22; -fx-alignment: center; -fx-font-weight: bold;" />
+                            <TextField fx:id="otp5" prefHeight="56.0" prefWidth="52.0"
+                                       style="-fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 22; -fx-alignment: center; -fx-font-weight: bold;" />
+                            <TextField fx:id="otp6" prefHeight="56.0" prefWidth="52.0"
+                                       style="-fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 22; -fx-alignment: center; -fx-font-weight: bold;" />
+                        </children>
+                    </HBox>
+
+                    <!-- Timer -->
+                    <Label fx:id="timerLabel"
+                           layoutX="14.0" layoutY="334.0"
+                           prefWidth="364.0" alignment="CENTER"
+                           text="Resend code in 04:59"
+                           style="-fx-text-fill: #555555; -fx-font-size: 13;" />
+
+                    <!-- Resend button (hidden until timer expires) -->
+                    <Button fx:id="resendBtn"
+                            layoutX="14.0" layoutY="330.0"
+                            onAction="#handleResendOtp"
+                            prefWidth="364.0" prefHeight="34.0"
+                            text="Resend OTP" visible="false"
+                            style="-fx-background-color: transparent; -fx-border-color: #E04A2A; -fx-border-radius: 6; -fx-background-radius: 6; -fx-cursor: hand; -fx-text-fill: #E04A2A;">
+                        <font><Font size="13.0" /></font>
+                    </Button>
+
+                    <!-- Attempt warning -->
+                    <Label fx:id="attemptsLabel"
+                           layoutX="14.0" layoutY="374.0"
+                           prefWidth="364.0" alignment="CENTER"
+                           style="-fx-text-fill: #888888; -fx-font-size: 11;"
+                           text="3 failed attempts will lock your account for 15 minutes" />
+
+                    <!-- Error label -->
+                    <Label fx:id="errorLabel"
+                           layoutX="14.0" layoutY="394.0"
+                           prefWidth="364.0" alignment="CENTER"
+                           style="-fx-text-fill: red; -fx-font-size: 12;"
+                           text="" visible="false" />
+
+                    <!-- Verify button -->
+                    <Button fx:id="verifyBtn"
+                            layoutX="14.0" layoutY="420.0"
+                            onAction="#handleVerify"
+                            prefHeight="46.0" prefWidth="364.0"
+                            style="-fx-background-color: #E04A2A; -fx-background-radius: 6; -fx-cursor: hand;"
+                            text="Verify and Enter System"
+                            textFill="WHITE">
+                        <font><Font name="System Bold" size="15.0" /></font>
+                    </Button>
+
+                    <!-- Security note -->
+                    <VBox layoutX="14.0" layoutY="476.0"
+                          prefWidth="364.0"
+                          style="-fx-background-color: #FFF8E7; -fx-border-color: #D97706; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 12 8 12;">
+                        <children>
+                            <Label text="Security Notice"
+                                   style="-fx-text-fill: #854F0B; -fx-font-size: 11; -fx-font-weight: bold;">
+                                <font><Font name="System Bold" size="11.0" /></font>
+                            </Label>
+                            <Label text="Sessions expire after 30 minutes of inactivity."
+                                   wrapText="true" prefWidth="340.0"
+                                   style="-fx-text-fill: #854F0B; -fx-font-size: 11; -fx-padding: 2 0 0 0;" />
+                        </children>
+                    </VBox>
+
+                    <!-- Bottom separator + back to login -->
+                    <Separator layoutX="14.0" layoutY="538.0"
+                               prefWidth="364.0"
+                               style="-fx-background-color: #CCCCCC;" />
+
+                    <HBox alignment="CENTER" layoutX="14.0" layoutY="550.0"
+                          prefHeight="24.0" prefWidth="364.0" spacing="5.0">
+                        <children>
+                            <Label text="Wrong account?"
+                                   style="-fx-font-size: 12; -fx-text-fill: #666666;" />
+                            <Hyperlink onAction="#handleBackToLogin"
+                                       style="-fx-text-fill: #1a73e8; -fx-font-size: 12;"
+                                       text="Back to Login" />
+                        </children>
+                    </HBox>
+
+                </children>
+            </AnchorPane>
+        </right>
+
+    </BorderPane>
+</StackPane>
+
