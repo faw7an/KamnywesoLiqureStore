@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true"
+            style="-fx-background-color: #F4F6FA; -fx-background: #F4F6FA; -fx-border-color: transparent;"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.kamnywesoliqourstore.CustomerController">
+    <content>
+        <VBox style="-fx-background-color: #F4F6FA; -fx-padding: 24;"
+              spacing="20.0">
+            <children>
+
+                <!-- HEADER -->
+                <HBox alignment="CENTER_LEFT">
+                    <children>
+                        <VBox spacing="3.0">
+                            <children>
+                                <Label text="Customer Management"
+                                       style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                                    <font><Font name="System Bold" size="22.0" /></font>
+                                </Label>
+                                <Label text="View and manage all registered and walk-in customers"
+                                       style="-fx-font-size: 13; -fx-text-fill: #666666;" />
+                            </children>
+                        </VBox>
+                        <javafx.scene.layout.Region HBox.hgrow="ALWAYS" />
+                        <Button onAction="#handleAddCustomer"
+                                text="+ Add Customer"
+                                style="-fx-background-color: #E04A2A; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-padding: 8 16 8 16; -fx-border-color: transparent;">
+                            <font><Font name="System Bold" size="12.0" /></font>
+                        </Button>
+                    </children>
+                </HBox>
+
+                <!-- STAT CARDS -->
+                <GridPane hgap="14.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="80.0" />
+                    </rowConstraints>
+                    <children>
+                        <!-- Total Customers -->
+                        <VBox GridPane.columnIndex="0"
+                              style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14 16 14 0;">
+                            <children>
+                                <HBox>
+                                    <children>
+                                        <StackPane prefWidth="4.0" prefHeight="50.0"
+                                                   style="-fx-background-color: #2563EB; -fx-background-radius: 4 0 0 4;" />
+                                        <VBox spacing="3.0" style="-fx-padding: 0 0 0 12;">
+                                            <children>
+                                                <Label text="Total Customers" style="-fx-font-size: 11; -fx-text-fill: #666666;" />
+                                                <Label fx:id="totalCustomersLabel" text="312"
+                                                       style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                                                    <font><Font name="System Bold" size="20.0" /></font>
+                                                </Label>
+                                                <Label text="All branches"
+                                                       style="-fx-font-size: 10; -fx-text-fill: #888888;" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <!-- Registered -->
+                        <VBox GridPane.columnIndex="1"
+                              style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14 16 14 0;">
+                            <children>
+                                <HBox>
+                                    <children>
+                                        <StackPane prefWidth="4.0" prefHeight="50.0"
+                                                   style="-fx-background-color: #059669; -fx-background-radius: 4 0 0 4;" />
+                                        <VBox spacing="3.0" style="-fx-padding: 0 0 0 12;">
+                                            <children>
+                                                <Label text="Registered" style="-fx-font-size: 11; -fx-text-fill: #666666;" />
+                                                <Label fx:id="registeredCountLabel" text="198"
+                                                       style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                                                    <font><Font name="System Bold" size="20.0" /></font>
+                                                </Label>
+                                                <Label text="Have accounts"
+                                                       style="-fx-font-size: 10; -fx-text-fill: #888888;" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <!-- Walk-in -->
+                        <VBox GridPane.columnIndex="2"
+                              style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14 16 14 0;">
+                            <children>
+                                <HBox>
+                                    <children>
+                                        <StackPane prefWidth="4.0" prefHeight="50.0"
+                                                   style="-fx-background-color: #D97706; -fx-background-radius: 4 0 0 4;" />
+                                        <VBox spacing="3.0" style="-fx-padding: 0 0 0 12;">
+                                            <children>
+                                                <Label text="Walk-in" style="-fx-font-size: 11; -fx-text-fill: #666666;" />
+                                                <Label fx:id="walkInCountLabel" text="114"
+                                                       style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                                                    <font><Font name="System Bold" size="20.0" /></font>
+                                                </Label>
+                                                <Label text="No account"
+                                                       style="-fx-font-size: 10; -fx-text-fill: #888888;" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <!-- New This Week -->
+                        <VBox GridPane.columnIndex="3"
+                              style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14 16 14 0;">
+                            <children>
+                                <HBox>
+                                    <children>
+                                        <StackPane prefWidth="4.0" prefHeight="50.0"
+                                                   style="-fx-background-color: #7C3AED; -fx-background-radius: 4 0 0 4;" />
+                                        <VBox spacing="3.0" style="-fx-padding: 0 0 0 12;">
+                                            <children>
+                                                <Label text="New This Week" style="-fx-font-size: 11; -fx-text-fill: #666666;" />
+                                                <Label fx:id="newThisWeekLabel" text="8"
+                                                       style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                                                    <font><Font name="System Bold" size="20.0" /></font>
+                                                </Label>
+                                                <Label text="&#8593; Growing"
+                                                       style="-fx-font-size: 10; -fx-text-fill: #059669;" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </GridPane>
+
+                <!-- MAIN CONTENT: TABLE + DETAIL PANEL -->
+                <HBox spacing="14.0" alignment="TOP_LEFT">
+                    <children>
+
+                        <!-- CUSTOMER TABLE -->
+                        <VBox HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 18;"
+                              spacing="12.0">
+                            <children>
+
+                                <!-- Table toolbar -->
+                                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                                    <children>
+                                        <TextField fx:id="searchField"
+                                                   prefHeight="36.0" prefWidth="220.0"
+                                                   promptText="Search by name or phone..."
+                                                   style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 0 8 0 8; -fx-font-size: 12;" />
+                                        <ComboBox fx:id="branchFilter"
+                                                  prefHeight="36.0" prefWidth="150.0"
+                                                  promptText="All Branches"
+                                                  style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 6; -fx-background-radius: 6;" />
+                                        <ComboBox fx:id="typeFilter"
+                                                  prefHeight="36.0" prefWidth="140.0"
+                                                  promptText="All Types"
+                                                  style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 6; -fx-background-radius: 6;" />
+                                        <Button onAction="#handleSearch"
+                                                prefHeight="36.0" prefWidth="80.0"
+                                                text="Search"
+                                                style="-fx-background-color: #0D1B2A; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;" />
+                                    </children>
+                                </HBox>
+
+                                <Separator style="-fx-background-color: #F3F4F6;" />
+
+                                <!-- Table Header -->
+                                <HBox style="-fx-padding: 6 0 6 0; -fx-background-color: #F9FAFB;"
+                                      spacing="0.0">
+                                    <children>
+                                        <Label text="Customer" prefWidth="160.0"
+                                               style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold; -fx-padding: 0 0 0 8;" />
+                                        <Label text="Phone" prefWidth="130.0"
+                                               style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;" />
+                                        <Label text="Branch" prefWidth="110.0"
+                                               style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;" />
+                                        <Label text="Type" prefWidth="90.0"
+                                               style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;" />
+                                        <Label text="Orders" prefWidth="70.0"
+                                               style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;" />
+                                        <Label text="Total Spent" prefWidth="100.0"
+                                               style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;" />
+                                        <Label text="Action" prefWidth="80.0"
+                                               style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;" />
+                                    </children>
+                                </HBox>
+
+                                <Separator style="-fx-background-color: #F3F4F6;" />
+
+                                <!-- Table Body -->
+                                <VBox fx:id="customerTableBody" spacing="0.0">
+                                    <children>
+                                        <!-- Row 1 -->
+                                        <HBox style="-fx-padding: 10 0 10 0; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;"
+                                              alignment="CENTER_LEFT">
+                                            <children>
+                                                <HBox prefWidth="160.0" alignment="CENTER_LEFT" spacing="8.0" style="-fx-padding: 0 0 0 8;">
+                                                    <children>
+                                                        <StackPane prefWidth="30.0" prefHeight="30.0">
+                                                            <children>
+                                                                <javafx.scene.shape.Circle radius="15.0" fill="#EEF2FF" />
+                                                                <Label text="AM" style="-fx-font-size: 10; -fx-text-fill: #3730A3; -fx-font-weight: bold;" />
+                                                            </children>
+                                                        </StackPane>
+                                                        <Label text="Alice Mwangi" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-font-weight: bold;" />
+                                                    </children>
+                                                </HBox>
+                                                <Label text="+254 712 345 678" prefWidth="130.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="Nairobi HQ" prefWidth="110.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="Registered" prefWidth="90.0"
+                                                       style="-fx-font-size: 11; -fx-text-fill: #065F46; -fx-background-color: #D1FAE5; -fx-background-radius: 10; -fx-padding: 2 8 2 8;" />
+                                                <Label text="14" prefWidth="70.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="KES 18,400" prefWidth="100.0" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-font-weight: bold;" />
+                                                <Button onAction="#handleViewCustomer" prefWidth="70.0" prefHeight="28.0"
+                                                        text="View"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #E04A2A; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #E04A2A; -fx-font-size: 11; -fx-cursor: hand;" />
+                                            </children>
+                                        </HBox>
+                                        <!-- Row 2 -->
+                                        <HBox style="-fx-padding: 10 0 10 0; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;"
+                                              alignment="CENTER_LEFT">
+                                            <children>
+                                                <HBox prefWidth="160.0" alignment="CENTER_LEFT" spacing="8.0" style="-fx-padding: 0 0 0 8;">
+                                                    <children>
+                                                        <StackPane prefWidth="30.0" prefHeight="30.0">
+                                                            <children>
+                                                                <javafx.scene.shape.Circle radius="15.0" fill="#FEF3C7" />
+                                                                <Label text="BO" style="-fx-font-size: 10; -fx-text-fill: #92400E; -fx-font-weight: bold;" />
+                                                            </children>
+                                                        </StackPane>
+                                                        <Label text="Brian Otieno" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-font-weight: bold;" />
+                                                    </children>
+                                                </HBox>
+                                                <Label text="+254 723 456 789" prefWidth="130.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="Mombasa" prefWidth="110.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="Walk-in" prefWidth="90.0"
+                                                       style="-fx-font-size: 11; -fx-text-fill: #92400E; -fx-background-color: #FEF3C7; -fx-background-radius: 10; -fx-padding: 2 8 2 8;" />
+                                                <Label text="3" prefWidth="70.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="KES 2,550" prefWidth="100.0" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-font-weight: bold;" />
+                                                <Button onAction="#handleViewCustomer" prefWidth="70.0" prefHeight="28.0"
+                                                        text="View"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #E04A2A; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #E04A2A; -fx-font-size: 11; -fx-cursor: hand;" />
+                                            </children>
+                                        </HBox>
+                                        <!-- Row 3 -->
+                                        <HBox style="-fx-padding: 10 0 10 0; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;"
+                                              alignment="CENTER_LEFT">
+                                            <children>
+                                                <HBox prefWidth="160.0" alignment="CENTER_LEFT" spacing="8.0" style="-fx-padding: 0 0 0 8;">
+                                                    <children>
+                                                        <StackPane prefWidth="30.0" prefHeight="30.0">
+                                                            <children>
+                                                                <javafx.scene.shape.Circle radius="15.0" fill="#F0FDF4" />
+                                                                <Label text="CN" style="-fx-font-size: 10; -fx-text-fill: #065F46; -fx-font-weight: bold;" />
+                                                            </children>
+                                                        </StackPane>
+                                                        <Label text="Carol Njeri" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-font-weight: bold;" />
+                                                    </children>
+                                                </HBox>
+                                                <Label text="+254 734 567 890" prefWidth="130.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="Kisumu" prefWidth="110.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="Registered" prefWidth="90.0"
+                                                       style="-fx-font-size: 11; -fx-text-fill: #065F46; -fx-background-color: #D1FAE5; -fx-background-radius: 10; -fx-padding: 2 8 2 8;" />
+                                                <Label text="9" prefWidth="70.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="KES 11,200" prefWidth="100.0" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-font-weight: bold;" />
+                                                <Button onAction="#handleViewCustomer" prefWidth="70.0" prefHeight="28.0"
+                                                        text="View"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #E04A2A; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #E04A2A; -fx-font-size: 11; -fx-cursor: hand;" />
+                                            </children>
+                                        </HBox>
+                                        <!-- Row 4 -->
+                                        <HBox style="-fx-padding: 10 0 10 0; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;"
+                                              alignment="CENTER_LEFT">
+                                            <children>
+                                                <HBox prefWidth="160.0" alignment="CENTER_LEFT" spacing="8.0" style="-fx-padding: 0 0 0 8;">
+                                                    <children>
+                                                        <StackPane prefWidth="30.0" prefHeight="30.0">
+                                                            <children>
+                                                                <javafx.scene.shape.Circle radius="15.0" fill="#FEE2E2" />
+                                                                <Label text="DK" style="-fx-font-size: 10; -fx-text-fill: #991B1B; -fx-font-weight: bold;" />
+                                                            </children>
+                                                        </StackPane>
+                                                        <Label text="David Kamau" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-font-weight: bold;" />
+                                                    </children>
+                                                </HBox>
+                                                <Label text="+254 745 678 901" prefWidth="130.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="Nakuru" prefWidth="110.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="Registered" prefWidth="90.0"
+                                                       style="-fx-font-size: 11; -fx-text-fill: #065F46; -fx-background-color: #D1FAE5; -fx-background-radius: 10; -fx-padding: 2 8 2 8;" />
+                                                <Label text="6" prefWidth="70.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="KES 7,800" prefWidth="100.0" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-font-weight: bold;" />
+                                                <Button onAction="#handleViewCustomer" prefWidth="70.0" prefHeight="28.0"
+                                                        text="View"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #E04A2A; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #E04A2A; -fx-font-size: 11; -fx-cursor: hand;" />
+                                            </children>
+                                        </HBox>
+                                        <!-- Row 5 -->
+                                        <HBox style="-fx-padding: 10 0 10 0;" alignment="CENTER_LEFT">
+                                            <children>
+                                                <HBox prefWidth="160.0" alignment="CENTER_LEFT" spacing="8.0" style="-fx-padding: 0 0 0 8;">
+                                                    <children>
+                                                        <StackPane prefWidth="30.0" prefHeight="30.0">
+                                                            <children>
+                                                                <javafx.scene.shape.Circle radius="15.0" fill="#EDE9FE" />
+                                                                <Label text="EA" style="-fx-font-size: 10; -fx-text-fill: #5B21B6; -fx-font-weight: bold;" />
+                                                            </children>
+                                                        </StackPane>
+                                                        <Label text="Eve Achieng" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-font-weight: bold;" />
+                                                    </children>
+                                                </HBox>
+                                                <Label text="+254 756 789 012" prefWidth="130.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="Nairobi HQ" prefWidth="110.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="Walk-in" prefWidth="90.0"
+                                                       style="-fx-font-size: 11; -fx-text-fill: #92400E; -fx-background-color: #FEF3C7; -fx-background-radius: 10; -fx-padding: 2 8 2 8;" />
+                                                <Label text="2" prefWidth="70.0" style="-fx-font-size: 12; -fx-text-fill: #444444;" />
+                                                <Label text="KES 3,900" prefWidth="100.0" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-font-weight: bold;" />
+                                                <Button onAction="#handleViewCustomer" prefWidth="70.0" prefHeight="28.0"
+                                                        text="View"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #E04A2A; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #E04A2A; -fx-font-size: 11; -fx-cursor: hand;" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+
+                                <!-- Pagination -->
+                                <HBox alignment="CENTER_RIGHT" spacing="6.0"
+                                      style="-fx-padding: 10 0 0 0; -fx-border-color: #F3F4F6 transparent transparent transparent; -fx-border-width: 1;">
+                                    <children>
+                                        <Label text="Showing 1-5 of 312 customers"
+                                               style="-fx-font-size: 11; -fx-text-fill: #888888;" />
+                                        <javafx.scene.layout.Region HBox.hgrow="ALWAYS" />
+                                        <Button text="&#8592; Prev"
+                                                prefHeight="30.0" prefWidth="70.0"
+                                                style="-fx-background-color: transparent; -fx-border-color: #E5E7EB; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #666666; -fx-font-size: 11; -fx-cursor: hand;" />
+                                        <Label text="1"
+                                               style="-fx-background-color: #E04A2A; -fx-text-fill: white; -fx-font-size: 12; -fx-padding: 4 10 4 10; -fx-background-radius: 6;" />
+                                        <Label text="2"
+                                               style="-fx-text-fill: #666666; -fx-font-size: 12; -fx-padding: 4 10 4 10;" />
+                                        <Label text="3"
+                                               style="-fx-text-fill: #666666; -fx-font-size: 12; -fx-padding: 4 10 4 10;" />
+                                        <Button text="Next &#8594;"
+                                                prefHeight="30.0" prefWidth="70.0"
+                                                style="-fx-background-color: transparent; -fx-border-color: #E5E7EB; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #666666; -fx-font-size: 11; -fx-cursor: hand;" />
+                                    </children>
+                                </HBox>
+
+                            </children>
+                        </VBox>
+
+                        <!-- CUSTOMER DETAIL PANEL -->
+                        <VBox prefWidth="280.0" spacing="0.0"
+                              style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1;">
+                            <children>
+
+                                <!-- Panel header -->
+                                <HBox alignment="CENTER_LEFT"
+                                      style="-fx-padding: 16 18 16 18; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;">
+                                    <children>
+                                        <Label text="Customer Details"
+                                               style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                                            <font><Font name="System Bold" size="14.0" /></font>
+                                        </Label>
+                                    </children>
+                                </HBox>
+
+                                <!-- Avatar + name -->
+                                <VBox alignment="CENTER" spacing="6.0"
+                                      style="-fx-padding: 20 18 16 18; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;">
+                                    <children>
+                                        <StackPane prefWidth="56.0" prefHeight="56.0" maxWidth="56.0">
+                                            <children>
+                                                <javafx.scene.shape.Circle radius="28.0" fill="#EEF2FF" />
+                                                <Label fx:id="detailAvatarLabel" text="AM"
+                                                       style="-fx-font-size: 18; -fx-text-fill: #3730A3; -fx-font-weight: bold;" />
+                                            </children>
+                                        </StackPane>
+                                        <Label fx:id="detailNameLabel" text="Alice Mwangi"
+                                               style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                                            <font><Font name="System Bold" size="15.0" /></font>
+                                        </Label>
+                                        <Label text="Registered Customer"
+                                               style="-fx-font-size: 11; -fx-text-fill: #065F46; -fx-background-color: #D1FAE5; -fx-background-radius: 10; -fx-padding: 2 10 2 10;" />
+                                    </children>
+                                </VBox>
+
+                                <!-- Details -->
+                                <VBox spacing="10.0" style="-fx-padding: 14 18 14 18; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;">
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT">
+                                            <children>
+                                                <Label text="Phone" prefWidth="90.0"
+                                                       style="-fx-font-size: 12; -fx-text-fill: #888888;" />
+                                                <Label fx:id="detailPhoneLabel" text="+254 712 345 678"
+                                                       style="-fx-font-size: 12; -fx-text-fill: #0D1B2A;" />
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT">
+                                            <children>
+                                                <Label text="Branch" prefWidth="90.0"
+                                                       style="-fx-font-size: 12; -fx-text-fill: #888888;" />
+                                                <Label fx:id="detailBranchLabel" text="Nairobi HQ"
+                                                       style="-fx-font-size: 12; -fx-text-fill: #0D1B2A;" />
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT">
+                                            <children>
+                                                <Label text="Total Orders" prefWidth="90.0"
+                                                       style="-fx-font-size: 12; -fx-text-fill: #888888;" />
+                                                <Label fx:id="detailOrdersLabel" text="14"
+                                                       style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-font-weight: bold;" />
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT">
+                                            <children>
+                                                <Label text="Total Spent" prefWidth="90.0"
+                                                       style="-fx-font-size: 12; -fx-text-fill: #888888;" />
+                                                <Label fx:id="detailSpentLabel" text="KES 18,400"
+                                                       style="-fx-font-size: 12; -fx-text-fill: #E04A2A; -fx-font-weight: bold;" />
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT">
+                                            <children>
+                                                <Label text="Loyalty Pts" prefWidth="90.0"
+                                                       style="-fx-font-size: 12; -fx-text-fill: #888888;" />
+                                                <Label fx:id="detailLoyaltyLabel" text="1,840 pts"
+                                                       style="-fx-font-size: 12; -fx-text-fill: #7C3AED; -fx-font-weight: bold;" />
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT">
+                                            <children>
+                                                <Label text="Member Since" prefWidth="90.0"
+                                                       style="-fx-font-size: 12; -fx-text-fill: #888888;" />
+                                                <Label fx:id="detailSinceLabel" text="Jan 2025"
+                                                       style="-fx-font-size: 12; -fx-text-fill: #0D1B2A;" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+
+                                <!-- Recent Orders mini list -->
+                                <VBox style="-fx-padding: 14 18 14 18;" spacing="8.0">
+                                    <children>
+                                        <Label text="Recent Orders"
+                                               style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                                            <font><Font name="System Bold" size="13.0" /></font>
+                                        </Label>
+                                        <HBox alignment="CENTER_LEFT" spacing="6.0"
+                                              style="-fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1; -fx-padding: 0 0 8 0;">
+                                            <children>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="#ORD-8829" style="-fx-font-size: 11; -fx-text-fill: #2563EB;" />
+                                                        <Label text="KES 1,200 · Nairobi HQ" style="-fx-font-size: 11; -fx-text-fill: #888888;" />
+                                                    </children>
+                                                </VBox>
+                                                <Label text="Completed"
+                                                       style="-fx-font-size: 10; -fx-text-fill: #065F46; -fx-background-color: #D1FAE5; -fx-background-radius: 8; -fx-padding: 2 6 2 6;" />
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" spacing="6.0"
+                                              style="-fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1; -fx-padding: 0 0 8 0;">
+                                            <children>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="#ORD-8801" style="-fx-font-size: 11; -fx-text-fill: #2563EB;" />
+                                                        <Label text="KES 850 · Nairobi HQ" style="-fx-font-size: 11; -fx-text-fill: #888888;" />
+                                                    </children>
+                                                </VBox>
+                                                <Label text="Completed"
+                                                       style="-fx-font-size: 10; -fx-text-fill: #065F46; -fx-background-color: #D1FAE5; -fx-background-radius: 8; -fx-padding: 2 6 2 6;" />
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" spacing="6.0">
+                                            <children>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="#ORD-8775" style="-fx-font-size: 11; -fx-text-fill: #2563EB;" />
+                                                        <Label text="KES 2,400 · Nairobi HQ" style="-fx-font-size: 11; -fx-text-fill: #888888;" />
+                                                    </children>
+                                                </VBox>
+                                                <Label text="Completed"
+                                                       style="-fx-font-size: 10; -fx-text-fill: #065F46; -fx-background-color: #D1FAE5; -fx-background-radius: 8; -fx-padding: 2 6 2 6;" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+
+                                <!-- Action buttons -->
+                                <VBox style="-fx-padding: 0 18 18 18;" spacing="8.0">
+                                    <children>
+                                        <Button onAction="#handlePlaceOrderForCustomer"
+                                                prefWidth="244.0" prefHeight="38.0"
+                                                text="Place Order for Customer"
+                                                style="-fx-background-color: #E04A2A; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;">
+                                            <font><Font name="System Bold" size="12.0" /></font>
+                                        </Button>
+                                        <Button onAction="#handleViewFullHistory"
+                                                prefWidth="244.0" prefHeight="36.0"
+                                                text="View Full Order History"
+                                                style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #444444; -fx-font-size: 12; -fx-cursor: hand;" />
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </VBox>
+
+                    </children>
+                </HBox>
+
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>

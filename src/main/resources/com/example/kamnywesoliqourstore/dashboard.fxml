@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.kamnywesoliqourstore.DashboardController"
+            style="-fx-background-color: #F4F6FA;">
+
+    <!-- ═══════════════════════════════════════════════════════
+         TOP BAR
+         ═══════════════════════════════════════════════════════ -->
+    <top>
+        <HBox prefHeight="52.0"
+              style="-fx-background-color: #0D1B2A; -fx-padding: 0 20 0 0;"
+              alignment="CENTER_LEFT">
+            <children>
+
+                <!-- Sidebar toggle button -->
+                <Button fx:id="sidebarToggleBtn"
+                        onAction="#handleSidebarToggle"
+                        prefHeight="52.0" prefWidth="56.0"
+                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand; -fx-text-fill: white; -fx-font-size: 18;"
+                        text="&#9776;">
+                </Button>
+
+                <!-- Logo -->
+                <Label text="DrinkShop"
+                       style="-fx-text-fill: white; -fx-font-size: 17; -fx-font-weight: bold;">
+                    <font><Font name="System Bold" size="17.0" /></font>
+                </Label>
+                <Label text=" MS"
+                       style="-fx-text-fill: #E04A2A; -fx-font-size: 17; -fx-font-weight: bold;">
+                    <font><Font name="System Bold" size="17.0" /></font>
+                </Label>
+
+                <!-- Branch pill -->
+                <Label fx:id="branchPill"
+                       text="Nairobi HQ"
+                       style="-fx-background-color: #E04A2A; -fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold; -fx-padding: 3 10 3 10; -fx-background-radius: 20;"
+                       HBox.hgrow="NEVER">
+                    <HBox.margin>
+                        <javafx.geometry.Insets left="14.0" />
+                    </HBox.margin>
+                </Label>
+
+                <!-- Spacer -->
+                <javafx.scene.layout.Region HBox.hgrow="ALWAYS" />
+
+                <!-- Stock alert badge -->
+                <Button fx:id="alertBadge"
+                        onAction="#handleAlertClick"
+                        text="&#9888; 3 Stock Alerts"
+                        style="-fx-background-color: #633806; -fx-text-fill: #FAC775; -fx-font-size: 11; -fx-padding: 4 12 4 12; -fx-background-radius: 20; -fx-cursor: hand; -fx-border-color: transparent;">
+                    <HBox.margin>
+                        <javafx.geometry.Insets right="16.0" />
+                    </HBox.margin>
+                </Button>
+
+                <!-- Session timer -->
+                <HBox alignment="CENTER" spacing="6.0">
+                    <HBox.margin>
+                        <javafx.geometry.Insets right="16.0" />
+                    </HBox.margin>
+                    <children>
+                        <Label text="Session:"
+                               style="-fx-text-fill: #888888; -fx-font-size: 11;" />
+                        <Label fx:id="sessionTimerLabel"
+                               text="30:00"
+                               style="-fx-text-fill: #4CAF50; -fx-font-size: 11; -fx-font-weight: bold;">
+                            <font><Font name="System Bold" size="11.0" /></font>
+                        </Label>
+                    </children>
+                </HBox>
+
+                <!-- Staff avatar + name -->
+                <HBox alignment="CENTER" spacing="8.0">
+                    <HBox.margin>
+                        <javafx.geometry.Insets right="14.0" />
+                    </HBox.margin>
+                    <children>
+                        <StackPane prefWidth="32.0" prefHeight="32.0">
+                            <children>
+                                <javafx.scene.shape.Circle
+                                        radius="16.0"
+                                        fill="#E04A2A" />
+                                <Label fx:id="avatarLabel"
+                                       text="JD"
+                                       style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" />
+                            </children>
+                        </StackPane>
+                        <VBox spacing="1.0">
+                            <children>
+                                <Label fx:id="staffNameLabel"
+                                       text="John Doe"
+                                       style="-fx-text-fill: white; -fx-font-size: 12;">
+                                    <font><Font size="12.0" /></font>
+                                </Label>
+                                <Label fx:id="staffRoleLabel"
+                                       text="Manager"
+                                       style="-fx-text-fill: #888888; -fx-font-size: 10;" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <!-- Logout button -->
+                <Button onAction="#handleLogout"
+                        text="Sign Out"
+                        style="-fx-background-color: transparent; -fx-border-color: #444; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #cccccc; -fx-font-size: 12; -fx-cursor: hand; -fx-padding: 5 12 5 12;">
+                </Button>
+
+            </children>
+        </HBox>
+    </top>
+
+    <!-- ═══════════════════════════════════════════════════════
+         MAIN BODY (sidebar + content)
+         ═══════════════════════════════════════════════════════ -->
+    <center>
+        <HBox>
+            <children>
+
+                <!-- ───────────────────────────────────────────
+                     SIDEBAR
+                     ─────────────────────────────────────────── -->
+                <VBox fx:id="sidebar"
+                      prefWidth="200.0"
+                      style="-fx-background-color: #16213e;"
+                      spacing="0.0">
+                    <children>
+
+                        <!-- Staff info card -->
+                        <VBox fx:id="sidebarStaffCard"
+                              style="-fx-background-color: #0D1B2A; -fx-padding: 14 16 14 16;"
+                              spacing="2.0">
+                            <children>
+                                <Label fx:id="sidebarNameLabel"
+                                       text="John Doe"
+                                       style="-fx-text-fill: white; -fx-font-size: 13; -fx-font-weight: bold;">
+                                    <font><Font name="System Bold" size="13.0" /></font>
+                                </Label>
+                                <Label fx:id="sidebarRoleLabel"
+                                       text="Manager · Nairobi HQ"
+                                       style="-fx-text-fill: #888888; -fx-font-size: 11;" />
+                            </children>
+                        </VBox>
+
+                        <Separator style="-fx-background-color: #2a3a5e;" />
+
+                        <!-- MAIN section -->
+                        <Label fx:id="secMainLabel"
+                               text="MAIN"
+                               style="-fx-text-fill: #555; -fx-font-size: 10; -fx-padding: 12 16 4 16; -fx-font-weight: bold;" />
+
+                        <Button fx:id="navDashboard"
+                                onAction="#showDashboardHome"
+                                text="  Dashboard"
+                                prefWidth="200.0" prefHeight="40.0"
+                                style="-fx-background-color: rgba(224,74,42,0.15); -fx-border-color: transparent; -fx-text-fill: white; -fx-font-size: 13; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-border-left-width: 3; -fx-padding: 0 0 0 14;"
+                                maxWidth="Infinity">
+                        </Button>
+
+                        <Button fx:id="navOrders"
+                                onAction="#showOrderProcessing"
+                                text="  Order Processing"
+                                prefWidth="200.0" prefHeight="40.0"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 13; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"
+                                maxWidth="Infinity">
+                        </Button>
+
+                        <Button fx:id="navTracking"
+                                onAction="#showOrderTracking"
+                                text="  Order Tracking"
+                                prefWidth="200.0" prefHeight="40.0"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 13; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"
+                                maxWidth="Infinity">
+                        </Button>
+
+                        <Button fx:id="navCustomers"
+                                onAction="#showCustomers"
+                                text="  Customers"
+                                prefWidth="200.0" prefHeight="40.0"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 13; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"
+                                maxWidth="Infinity">
+                        </Button>
+
+                        <!-- MANAGEMENT section -->
+                        <Label fx:id="secMgmtLabel"
+                               text="MANAGEMENT"
+                               style="-fx-text-fill: #555; -fx-font-size: 10; -fx-padding: 12 16 4 16; -fx-font-weight: bold;" />
+
+                        <Button fx:id="navInventory"
+                                onAction="#showInventory"
+                                text="  Inventory"
+                                prefWidth="200.0" prefHeight="40.0"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 13; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"
+                                maxWidth="Infinity">
+                        </Button>
+
+                        <Button fx:id="navBranches"
+                                onAction="#showBranches"
+                                text="  Branch Management"
+                                prefWidth="200.0" prefHeight="40.0"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 13; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"
+                                maxWidth="Infinity">
+                        </Button>
+
+                        <Button fx:id="navStaff"
+                                onAction="#showStaff"
+                                text="  Staff Management"
+                                prefWidth="200.0" prefHeight="40.0"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 13; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"
+                                maxWidth="Infinity">
+                        </Button>
+
+                        <!-- REPORTS section -->
+                        <Label fx:id="secReportsLabel"
+                               text="REPORTS &amp; ALERTS"
+                               style="-fx-text-fill: #555; -fx-font-size: 10; -fx-padding: 12 16 4 16; -fx-font-weight: bold;" />
+
+                        <Button fx:id="navReports"
+                                onAction="#showReports"
+                                text="  Sales Reports"
+                                prefWidth="200.0" prefHeight="40.0"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 13; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"
+                                maxWidth="Infinity">
+                        </Button>
+
+                        <Button fx:id="navAlerts"
+                                onAction="#showAlerts"
+                                text="  Stock Alerts"
+                                prefWidth="200.0" prefHeight="40.0"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 13; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"
+                                maxWidth="Infinity">
+                        </Button>
+
+                        <Button fx:id="navLoyalty"
+                                onAction="#showLoyalty"
+                                text="  Loyalty Programme"
+                                prefWidth="200.0" prefHeight="40.0"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 13; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"
+                                maxWidth="Infinity">
+                        </Button>
+
+                        <Button fx:id="navReturns"
+                                onAction="#showReturns"
+                                text="  Stock Returns"
+                                prefWidth="200.0" prefHeight="40.0"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 13; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"
+                                maxWidth="Infinity">
+                        </Button>
+
+                    </children>
+                </VBox>
+
+                <!-- ───────────────────────────────────────────
+                     MAIN CONTENT AREA
+                     ─────────────────────────────────────────── -->
+                <ScrollPane fx:id="contentScroll"
+                            HBox.hgrow="ALWAYS"
+                            fitToWidth="true"
+                            style="-fx-background-color: #F4F6FA; -fx-border-color: transparent; -fx-background: #F4F6FA;">
+                    <content>
+                        <StackPane fx:id="contentArea"
+                                   style="-fx-background-color: #F4F6FA;"
+                                   minHeight="600.0">
+                        </StackPane>
+                    </content>
+                </ScrollPane>
+
+            </children>
+        </HBox>
+    </center>
+
+</BorderPane>
