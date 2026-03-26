@@ -11,9 +11,9 @@
     <VBox alignment="CENTER" maxWidth="420.0" maxHeight="-Infinity" spacing="20.0" styleClass="card">
         <children>
             <VBox alignment="CENTER" spacing="8.0">
-                <Label styleClass="logo-box" text="KL" />
+                <Label styleClass="logo-box" text="KLS" />
                 <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" styleClass="text-navy" text="Create Account" />
-                <Label styleClass="text-muted" text="Join Kamnyweso Liquor Management System" />
+                <Label styleClass="text-muted" text="Join Kamnyweso Liquor Store Management System" />
             </VBox>
 
             <HBox alignment="CENTER" spacing="10.0">

@@ -1,11 +1,12 @@
 package com.example.kamnywesoliqourstore;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -88,10 +89,31 @@ public class RegisterController {
         Label info = new Label("OTP sent to +254 7XX XXX XXX");
         info.getStyleClass().add("text-muted");
 
-        HBox otpBox = new HBox(5); // You can reuse your OTP logic here
+        HBox otpBox = new HBox(8);
+        TextField[] fields = new TextField[6];
         for(int i=0; i<6; i++) {
-            TextField tf = new TextField(); tf.getStyleClass().add("otp-input");
-            tf.setPrefWidth(45); otpBox.getChildren().add(tf);
+            final int index = i;
+            TextField tf = new TextField();
+            tf.getStyleClass().add("otp-input");
+            tf.setPrefWidth(45);
+            fields[index] = tf;
+
+            tf.textProperty().addListener((obs, oldVal, newVal) -> {
+                if (!newVal.matches("\\d*")) tf.setText(newVal.replaceAll("\\D", ""));
+                if (tf.getText().length() > 1) tf.setText(tf.getText().substring(0, 1));
+                if (!tf.getText().isEmpty() && index < 5) {
+                    Platform.runLater(() -> fields[index + 1].requestFocus());
+                }
+            });
+
+            tf.setOnKeyReleased(event -> {
+                if (event.getCode() == KeyCode.BACK_SPACE) {
+                    if (tf.getText().isEmpty() && index > 0) {
+                        fields[index - 1].requestFocus();
+                    }
+                }
+            });
+            otpBox.getChildren().add(tf);
         }
 
         Button complete = new Button("Complete Registration");
@@ -118,7 +140,7 @@ public class RegisterController {
             Parent root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
             Stage stage = (Stage) stepContainer.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("Kamnyweso Liquor - Login");
+            stage.setTitle("Kamnyweso Liquor Store - Login");
             stage.show();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Failed to navigate back to login-view.fxml", e);

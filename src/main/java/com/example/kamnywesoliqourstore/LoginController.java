@@ -55,7 +55,7 @@ public class LoginController {
             
             Stage stage = (Stage) signInButton.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("Kamnyweso Liquor - Create New Account");
+            stage.setTitle("Kamnyweso Liquor Store - Create New Account");
             stage.show();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Failed to load register-view.fxml", e);

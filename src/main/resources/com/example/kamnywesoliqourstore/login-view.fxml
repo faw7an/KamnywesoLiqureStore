@@ -19,8 +19,8 @@
       <VBox alignment="CENTER" maxWidth="420.0" maxHeight="-Infinity" spacing="25.0" styleClass="card">
          <children>
             <VBox alignment="CENTER" spacing="10.0">
-               <Label styleClass="logo-box" text="KL" />
-               <Label style="-fx-font-size: 28px; -fx-font-weight: bold;" styleClass="text-navy" text="Kamnyweso Liquor" />
+               <Label styleClass="logo-box" text="KLS" />
+               <Label style="-fx-font-size: 28px; -fx-font-weight: bold;" styleClass="text-navy" text="Kamnyweso Liquor Store" />
                <Label styleClass="text-muted" text="Distributed Management System" />
             </VBox>
 
@@ -28,25 +28,8 @@
                <children>
                   <VBox spacing="5.0">
                      <Label style="-fx-font-weight: bold; -fx-font-size: 11px;" styleClass="text-muted" text="BRANCH" />
-                           <ComboBox fx:id="branchComboBox" maxWidth="Infinity" promptText="Select Branch" styleClass="input-field">
+                           <ComboBox fx:id="branchComboBox" maxWidth="Infinity" promptText="Select Branch" styleClass="input-field" />
 
-                              <items>
-
-                                 <FXCollections fx:factory="observableArrayList">
-
-                                    <String fx:value="Nakuru" />
-
-                                    <String fx:value="Mombasa" />
-
-                                    <String fx:value="Kisumu" />
-
-                                    <String fx:value="Nairobi HQ" />
-
-                                 </FXCollections>
-
-                              </items>
-
-                           </ComboBox>                  
                   </VBox>
                   
                   <VBox spacing="5.0">
