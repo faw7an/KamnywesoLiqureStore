@@ -136,6 +136,8 @@
                      ─────────────────────────────────────────── -->
                 <VBox fx:id="sidebar"
                       prefWidth="200.0"
+                      minWidth="200.0"
+                      maxWidth="200.0"
                       style="-fx-background-color: #16213e;"
                       spacing="0.0">
                     <children>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true"
+            style="-fx-background-color: #F4F6FA; -fx-background: #F4F6FA; -fx-border-color: transparent;"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.kamnywesoliqourstore.StockAlertsController">
+    <content>
+        <VBox style="-fx-background-color: #F4F6FA; -fx-padding: 24;" spacing="20.0">
+            <children>
+
+                <!-- HEADER -->
+                <HBox alignment="CENTER_LEFT">
+                    <children>
+                        <VBox spacing="3.0">
+                            <children>
+                                <Label text="Stock Alerts"
+                                       style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                                    <font><Font name="System Bold" size="22.0"/></font>
+                                </Label>
+                                <Label text="Items below minimum threshold — automatic restock requests sent to HQ"
+                                       style="-fx-font-size: 13; -fx-text-fill: #666666;"/>
+                            </children>
+                        </VBox>
+                        <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+                        <Button onAction="#handleAcknowledgeAll" text="Acknowledge All"
+                                style="-fx-background-color: white; -fx-border-color: #DDDDDD; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #444444; -fx-font-size: 12; -fx-cursor: hand; -fx-padding: 8 16 8 16;"/>
+                    </children>
+                </HBox>
+
+                <!-- ALERT BANNER -->
+                <HBox style="-fx-background-color: #FEE2E2; -fx-border-color: #FCA5A5; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 14 18 14 18; -fx-border-width: 1;"
+                      alignment="CENTER_LEFT" spacing="10.0">
+                    <children>
+                        <Label text="&#9888;" style="-fx-font-size: 20; -fx-text-fill: #DC2626;"/>
+                        <VBox spacing="2.0">
+                            <children>
+                                <Label text="6 stock alerts detected across all branches"
+                                       style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #991B1B;">
+                                    <font><Font name="System Bold" size="14.0"/></font>
+                                </Label>
+                                <Label text="Automatic restock requests have been sent to HQ. Review and approve below."
+                                       style="-fx-font-size: 12; -fx-text-fill: #B91C1C;"/>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <!-- STAT CARDS -->
+                <GridPane hgap="14.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0"/>
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0"/>
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0"/>
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0"/>
+                    </columnConstraints>
+                    <rowConstraints><RowConstraints minHeight="80.0"/></rowConstraints>
+                    <children>
+                        <VBox GridPane.columnIndex="0" style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14 16 14 0;">
+                            <children><HBox><children>
+                                <StackPane prefWidth="4.0" prefHeight="50.0" style="-fx-background-color: #DC2626; -fx-background-radius: 4 0 0 4;"/>
+                                <VBox spacing="3.0" style="-fx-padding: 0 0 0 12;"><children>
+                                    <Label text="Out of Stock" style="-fx-font-size: 11; -fx-text-fill: #666666;"/>
+                                    <Label text="2" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #DC2626;"><font><Font name="System Bold" size="20.0"/></font></Label>
+                                    <Label text="Immediate action" style="-fx-font-size: 10; -fx-text-fill: #888888;"/>
+                                </children></VBox>
+                            </children></HBox></children>
+                        </VBox>
+                        <VBox GridPane.columnIndex="1" style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14 16 14 0;">
+                            <children><HBox><children>
+                                <StackPane prefWidth="4.0" prefHeight="50.0" style="-fx-background-color: #DC2626; -fx-background-radius: 4 0 0 4;"/>
+                                <VBox spacing="3.0" style="-fx-padding: 0 0 0 12;"><children>
+                                    <Label text="Critical (1-5 units)" style="-fx-font-size: 11; -fx-text-fill: #666666;"/>
+                                    <Label text="1" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #DC2626;"><font><Font name="System Bold" size="20.0"/></font></Label>
+                                    <Label text="Restock urgently" style="-fx-font-size: 10; -fx-text-fill: #888888;"/>
+                                </children></VBox>
+                            </children></HBox></children>
+                        </VBox>
+                        <VBox GridPane.columnIndex="2" style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14 16 14 0;">
+                            <children><HBox><children>
+                                <StackPane prefWidth="4.0" prefHeight="50.0" style="-fx-background-color: #D97706; -fx-background-radius: 4 0 0 4;"/>
+                                <VBox spacing="3.0" style="-fx-padding: 0 0 0 12;"><children>
+                                    <Label text="Low Stock" style="-fx-font-size: 11; -fx-text-fill: #666666;"/>
+                                    <Label text="3" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #D97706;"><font><Font name="System Bold" size="20.0"/></font></Label>
+                                    <Label text="Below threshold" style="-fx-font-size: 10; -fx-text-fill: #888888;"/>
+                                </children></VBox>
+                            </children></HBox></children>
+                        </VBox>
+                        <VBox GridPane.columnIndex="3" style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14 16 14 0;">
+                            <children><HBox><children>
+                                <StackPane prefWidth="4.0" prefHeight="50.0" style="-fx-background-color: #2563EB; -fx-background-radius: 4 0 0 4;"/>
+                                <VBox spacing="3.0" style="-fx-padding: 0 0 0 12;"><children>
+                                    <Label text="Requests Sent" style="-fx-font-size: 11; -fx-text-fill: #666666;"/>
+                                    <Label text="6" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2563EB;"><font><Font name="System Bold" size="20.0"/></font></Label>
+                                    <Label text="Auto-dispatched" style="-fx-font-size: 10; -fx-text-fill: #888888;"/>
+                                </children></VBox>
+                            </children></HBox></children>
+                        </VBox>
+                    </children>
+                </GridPane>
+
+                <!-- ALERTS TABLE -->
+                <VBox style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 18;" spacing="12.0">
+                    <children>
+                        <Label text="Active Stock Alerts"
+                               style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                            <font><Font name="System Bold" size="15.0"/></font>
+                        </Label>
+                        <Separator style="-fx-background-color: #F3F4F6;"/>
+                        <HBox style="-fx-padding: 6 0 6 0; -fx-background-color: #F9FAFB;">
+                            <children>
+                                <Label text="Item" prefWidth="160.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold; -fx-padding: 0 0 0 8;"/>
+                                <Label text="Branch" prefWidth="120.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                <Label text="Current Stock" prefWidth="110.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                <Label text="Threshold" prefWidth="90.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                <Label text="Stock Level" prefWidth="130.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                <Label text="Severity" prefWidth="100.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                <Label text="HQ Request" prefWidth="110.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                <Label text="Actions" prefWidth="120.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                            </children>
+                        </HBox>
+                        <Separator style="-fx-background-color: #F3F4F6;"/>
+                        <VBox spacing="0.0">
+                            <children>
+                                <!-- Alert rows -->
+                                <HBox style="-fx-padding: 10 0 10 0; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1; -fx-background-color: #FFF5F5;" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label text="Sprite 500ml" prefWidth="160.0" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #0D1B2A; -fx-padding: 0 0 0 8;"/>
+                                        <Label text="Nakuru" prefWidth="120.0" style="-fx-font-size: 12; -fx-text-fill: #444444;"/>
+                                        <Label text="0 units" prefWidth="110.0" style="-fx-font-size: 12; -fx-text-fill: #DC2626; -fx-font-weight: bold;"/>
+                                        <Label text="20 units" prefWidth="90.0" style="-fx-font-size: 12; -fx-text-fill: #666666;"/>
+                                        <VBox prefWidth="130.0"><children><ProgressBar progress="0.0" prefWidth="110.0" prefHeight="6.0" style="-fx-accent: #DC2626; -fx-background-color: #E5E7EB; -fx-background-radius: 4; -fx-border-radius: 4;"/></children></VBox>
+                                        <Label text="Out of Stock" prefWidth="100.0" style="-fx-font-size: 11; -fx-text-fill: #991B1B; -fx-background-color: #FEE2E2; -fx-background-radius: 10; -fx-padding: 2 8 2 8;"/>
+                                        <Label text="Sent &#10003;" prefWidth="110.0" style="-fx-font-size: 11; -fx-text-fill: #059669;"/>
+                                        <HBox spacing="6.0">
+                                            <children>
+                                                <Button onAction="#handleApproveRestock" prefHeight="28.0" prefWidth="68.0" text="Approve"
+                                                        style="-fx-background-color: #059669; -fx-background-radius: 4; -fx-text-fill: white; -fx-font-size: 11; -fx-cursor: hand; -fx-border-color: transparent;"/>
+                                                <Button onAction="#handleDismissAlert" prefHeight="28.0" prefWidth="52.0" text="Dismiss"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #CCCCCC; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #666666; -fx-font-size: 11; -fx-cursor: hand;"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </HBox>
+                                <HBox style="-fx-padding: 10 0 10 0; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1; -fx-background-color: #FFF5F5;" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label text="Coca Cola 500ml" prefWidth="160.0" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #0D1B2A; -fx-padding: 0 0 0 8;"/>
+                                        <Label text="Kisumu" prefWidth="120.0" style="-fx-font-size: 12; -fx-text-fill: #444444;"/>
+                                        <Label text="3 units" prefWidth="110.0" style="-fx-font-size: 12; -fx-text-fill: #DC2626; -fx-font-weight: bold;"/>
+                                        <Label text="20 units" prefWidth="90.0" style="-fx-font-size: 12; -fx-text-fill: #666666;"/>
+                                        <VBox prefWidth="130.0"><children><ProgressBar progress="0.08" prefWidth="110.0" prefHeight="6.0" style="-fx-accent: #DC2626; -fx-background-color: #E5E7EB; -fx-background-radius: 4; -fx-border-radius: 4;"/></children></VBox>
+                                        <Label text="Critical" prefWidth="100.0" style="-fx-font-size: 11; -fx-text-fill: #991B1B; -fx-background-color: #FEE2E2; -fx-background-radius: 10; -fx-padding: 2 8 2 8;"/>
+                                        <Label text="Sent &#10003;" prefWidth="110.0" style="-fx-font-size: 11; -fx-text-fill: #059669;"/>
+                                        <HBox spacing="6.0">
+                                            <children>
+                                                <Button onAction="#handleApproveRestock" prefHeight="28.0" prefWidth="68.0" text="Approve"
+                                                        style="-fx-background-color: #059669; -fx-background-radius: 4; -fx-text-fill: white; -fx-font-size: 11; -fx-cursor: hand; -fx-border-color: transparent;"/>
+                                                <Button onAction="#handleDismissAlert" prefHeight="28.0" prefWidth="52.0" text="Dismiss"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #CCCCCC; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #666666; -fx-font-size: 11; -fx-cursor: hand;"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </HBox>
+                                <HBox style="-fx-padding: 10 0 10 0; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1; -fx-background-color: #FFFBEB;" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label text="Fanta Orange 500ml" prefWidth="160.0" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #0D1B2A; -fx-padding: 0 0 0 8;"/>
+                                        <Label text="Mombasa" prefWidth="120.0" style="-fx-font-size: 12; -fx-text-fill: #444444;"/>
+                                        <Label text="8 units" prefWidth="110.0" style="-fx-font-size: 12; -fx-text-fill: #D97706; -fx-font-weight: bold;"/>
+                                        <Label text="15 units" prefWidth="90.0" style="-fx-font-size: 12; -fx-text-fill: #666666;"/>
+                                        <VBox prefWidth="130.0"><children><ProgressBar progress="0.27" prefWidth="110.0" prefHeight="6.0" style="-fx-accent: #D97706; -fx-background-color: #E5E7EB; -fx-background-radius: 4; -fx-border-radius: 4;"/></children></VBox>
+                                        <Label text="Low" prefWidth="100.0" style="-fx-font-size: 11; -fx-text-fill: #92400E; -fx-background-color: #FEF3C7; -fx-background-radius: 10; -fx-padding: 2 8 2 8;"/>
+                                        <Label text="Sent &#10003;" prefWidth="110.0" style="-fx-font-size: 11; -fx-text-fill: #059669;"/>
+                                        <HBox spacing="6.0">
+                                            <children>
+                                                <Button onAction="#handleApproveRestock" prefHeight="28.0" prefWidth="68.0" text="Approve"
+                                                        style="-fx-background-color: #059669; -fx-background-radius: 4; -fx-text-fill: white; -fx-font-size: 11; -fx-cursor: hand; -fx-border-color: transparent;"/>
+                                                <Button onAction="#handleDismissAlert" prefHeight="28.0" prefWidth="52.0" text="Dismiss"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #CCCCCC; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #666666; -fx-font-size: 11; -fx-cursor: hand;"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>
