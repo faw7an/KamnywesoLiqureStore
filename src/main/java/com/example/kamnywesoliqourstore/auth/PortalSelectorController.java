@@ -1,4 +1,4 @@
-package com.example.kamnywesoliqourstore;
+package com.example.kamnywesoliqourstore.auth;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,13 +17,13 @@ public class PortalSelectorController {
 
     @FXML
     private void handleAdminSelect(MouseEvent event) {
-        navigateTo(event, "login-view.fxml");
+        navigateTo(event, "/com/example/kamnywesoliqourstore/auth/login-view.fxml");
     }
 
     @FXML
     private void handleBranchSelect(MouseEvent event) {
         // You can point this to login or a specialized branch portal entry
-        navigateTo(event, "login-view.fxml");
+        navigateTo(event, "/com/example/kamnywesoliqourstore/auth/login-view.fxml");
     }
 
     private void navigateTo(MouseEvent event, String fxmlFile) {

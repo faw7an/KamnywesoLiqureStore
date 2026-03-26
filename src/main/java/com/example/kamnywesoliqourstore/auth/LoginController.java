@@ -1,4 +1,4 @@
-package com.example.kamnywesoliqourstore;
+package com.example.kamnywesoliqourstore.auth;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,7 +50,7 @@ public class LoginController {
     @FXML
     private void handleRegisterNavigation() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("register-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/kamnywesoliqourstore/auth/register-view.fxml"));
             Parent root = loader.load();
             
             Stage stage = (Stage) signInButton.getScene().getWindow();
@@ -65,7 +65,7 @@ public class LoginController {
     private void navigateToOtpScreen(ActionEvent event) {
         try {
             // Change from branch-portal-view.fxml to otp-view.fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("otp-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/kamnywesoliqourstore/auth/otp-view.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
