@@ -3,6 +3,41 @@
     -fx-background-color: #0f172a;
     -fx-font-family: 'Inter', 'Segoe UI', sans-serif;
 }
+/*landing page style*/
+/* Portal Card Container */
+.portal-card {
+    -fx-background-color: white;
+    -fx-background-radius: 16px;
+    -fx-padding: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-width: 2px;
+    -fx-border-radius: 16px;
+}
+
+.portal-card:hover {
+    -fx-border-color: #2563EB; /* primary */
+}
+
+/* Icon Containers */
+.icon-box-admin {
+    -fx-background-color: rgba(37, 99, 235, 0.1); /* primary/10 */
+    -fx-background-radius: 12px;
+    -fx-min-width: 48px;
+    -fx-min-height: 48px;
+    -fx-alignment: center;
+}
+
+.icon-box-branch {
+    -fx-background-color: rgba(34, 197, 94, 0.1); /* ds-green/10 */
+    -fx-background-radius: 12px;
+    -fx-min-width: 48px;
+    -fx-min-height: 48px;
+    -fx-alignment: center;
+}
+
+/* HQ admin Login page */
 
 /* The White Login Card */
 .card {

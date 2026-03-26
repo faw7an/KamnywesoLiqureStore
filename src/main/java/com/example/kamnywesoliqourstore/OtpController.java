@@ -79,7 +79,7 @@ public class OtpController {
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("DrinkShop - Branch Portal Dashboard");
+            stage.setTitle("Kamnyweso Liquor - Branch Portal Dashboard");
             stage.show();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Failed to navigate to Branch Portal: branch-portal-view.fxml", e);
