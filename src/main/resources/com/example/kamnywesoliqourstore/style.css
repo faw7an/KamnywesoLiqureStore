@@ -53,3 +53,32 @@
 .text-navy { -fx-text-fill: #0f172a; }
 .text-muted { -fx-text-fill: #64748b; }
 .text-primary { -fx-text-fill: #2563EB; }
+
+/* 2FA Icon Circle */
+.icon-circle {
+    -fx-background-color: rgba(37, 99, 235, 0.1); /* primary/10 */
+    -fx-background-radius: 50;
+    -fx-min-width: 48px;
+    -fx-min-height: 48px;
+    -fx-alignment: center;
+}
+
+/* OTP Input Boxes */
+.otp-input {
+    -fx-background-color: transparent;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 8px;
+    -fx-min-width: 45px;
+    -fx-min-height: 55px;
+    -fx-alignment: center;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0f172a;
+}
+
+/* Red Warning Text */
+.text-danger {
+    -fx-text-fill: #ef4444;
+    -fx-font-weight: bold;
+    -fx-font-size: 10px;
+}
