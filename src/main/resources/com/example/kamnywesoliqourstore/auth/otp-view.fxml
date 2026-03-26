@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kamnywesoliqourstore.auth.OtpController">
+    <children>
+        <VBox alignment="CENTER" prefWidth="400.0" minWidth="400.0" maxWidth="400.0" spacing="20.0" styleClass="card" StackPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" spacing="10.0">
+                    <Label style="-fx-font-size: 32px;" text="🛡️" />
+                    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" styleClass="text-navy" text="Two-factor authentication" />
+                    <Label styleClass="text-muted" text="Enter the 6-digit code sent to +254 7XX XXX 882" />
+                    <HBox alignment="CENTER" spacing="5.0">
+                        <Label styleClass="text-muted" text="Branch: " />
+                        <Label style="-fx-font-weight: bold;" styleClass="text-navy" text="Nairobi HQ" />
+                    </HBox>
+                </VBox>
+
+                <HBox alignment="CENTER" spacing="8.0">
+                    <TextField fx:id="otpSlot1" prefWidth="50.0" minWidth="50.0" maxWidth="50.0" styleClass="otp-input" />
+                    <TextField fx:id="otpSlot2" prefWidth="50.0" minWidth="50.0" maxWidth="50.0" styleClass="otp-input" />
+                    <TextField fx:id="otpSlot3" prefWidth="50.0" minWidth="50.0" maxWidth="50.0" styleClass="otp-input" />
+                    <TextField fx:id="otpSlot4" prefWidth="50.0" minWidth="50.0" maxWidth="50.0" styleClass="otp-input" />
+                    <TextField fx:id="otpSlot5" prefWidth="50.0" minWidth="50.0" maxWidth="50.0" styleClass="otp-input" />
+                    <TextField fx:id="otpSlot6" prefWidth="50.0" minWidth="50.0" maxWidth="50.0" styleClass="otp-input" />
+                </HBox>
+
+                <Label styleClass="text-muted" text="Resend code in 04:59" />
+
+                <Button prefWidth="320.0" maxWidth="320.0" styleClass="button-primary" text="Verify &amp; Enter System" onAction="#handleVerify" />
+
+                <Label alignment="CENTER" maxWidth="Infinity" style="-fx-text-fill: #dc2626; -fx-font-size: 11px;" text="3 FAILED ATTEMPTS LOCKS ACCOUNT FOR 15 MINUTES" />
+            </children>
+        </VBox>
+    </children>
+</StackPane>
