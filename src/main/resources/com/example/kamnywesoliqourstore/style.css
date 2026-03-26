@@ -156,24 +156,29 @@
 /* Sidebar Nav Button */
 .nav-button {
     -fx-background-color: transparent;
-    -fx-text-fill: #94A3B8;
+    -fx-text-fill: white;
     -fx-alignment: CENTER_LEFT;
-    -fx-padding: 10px 15px;
+    -fx-padding: 12px 20px;
     -fx-background-radius: 8px;
     -fx-font-weight: bold;
 }
+.nav-button SVGPath {
+    -fx-stroke: white;
+}
 .nav-button:hover {
     -fx-background-color: #1E293B;
-    -fx-text-fill: white;
     -fx-cursor: hand;
 }
 .nav-button-active {
     -fx-background-color: #1E293B;
     -fx-text-fill: white;
     -fx-alignment: CENTER_LEFT;
-    -fx-padding: 10px 15px;
+    -fx-padding: 12px 20px;
     -fx-background-radius: 8px;
     -fx-font-weight: bold;
+}
+.nav-button-active SVGPath {
+    -fx-stroke: #2563EB;
 }
 
 /* Revenue Chart Bars */

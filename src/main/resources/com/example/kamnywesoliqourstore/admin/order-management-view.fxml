@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<VBox spacing="25" style="-fx-padding: 30; -fx-background-color: #F8FAFC;" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kamnywesoliqourstore.admin.OrderManagementController">
+    <Label text="Order Management" style="-fx-font-size: 28px; -fx-font-weight: bold;" styleClass="text-navy"/>
+    <VBox spacing="15" styleClass="card">
+        <HBox spacing="15" alignment="BOTTOM_LEFT">
+            <VBox spacing="5" HBox.hgrow="ALWAYS"><Label text="SEARCH" styleClass="text-muted" style="-fx-font-size: 10px; -fx-font-weight: bold;"/><TextField fx:id="searchField" promptText="Search by customer name..." styleClass="input-field"/></VBox>
+            <VBox spacing="5" minWidth="150"><Label text="BRANCH" styleClass="text-muted" style="-fx-font-size: 10px; -fx-font-weight: bold;"/><ComboBox fx:id="branchCombo" maxWidth="Infinity" styleClass="input-field" promptText="All Branches"/></VBox>
+            <VBox spacing="5" minWidth="150"><Label text="STATUS" styleClass="text-muted" style="-fx-font-size: 10px; -fx-font-weight: bold;"/><ComboBox fx:id="statusCombo" maxWidth="Infinity" styleClass="input-field" promptText="All Statuses"/></VBox>
+            <VBox spacing="5" minWidth="150"><Label text="DATE RANGE" styleClass="text-muted" style="-fx-font-size: 10px; -fx-font-weight: bold;"/><DatePicker fx:id="datePicker" maxWidth="Infinity" styleClass="input-field" promptText="mm / dd / yyyy"/></VBox>
+            <Button text="Apply" styleClass="button-primary" prefHeight="42" prefWidth="100"/>
+        </HBox>
+    </VBox>
+    <VBox styleClass="card" VBox.vgrow="ALWAYS" spacing="0"><TableView fx:id="orderTable" VBox.vgrow="ALWAYS" prefHeight="400" styleClass="table-view"/></VBox>
+</VBox>

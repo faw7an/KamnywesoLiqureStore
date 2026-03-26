@@ -27,8 +27,7 @@ public class AdminDashboardController {
 
     @FXML private BorderPane mainBorderPane;
     @FXML private ScrollPane dashboardContent;
-    @FXML private Button btnDashboard;
-    @FXML private Button btnOrderTracking;
+    @FXML private Button btnDashboard, btnOrders, btnOrderTracking, btnStock, btnReports, btnUsers;
 
     @FXML private VBox sideNavVBox;
     @FXML private Button btnCollapse;
@@ -49,13 +48,36 @@ public class AdminDashboardController {
         loadMockData();
     }
 
-    @FXML
-    private void handleNavDashboard(ActionEvent event) {
-        // Update active styles
-        btnDashboard.getStyleClass().setAll("button", "nav-button-active");
-        btnOrderTracking.getStyleClass().setAll("button", "nav-button");
+    private void setActiveNav(Button activeBtn) {
+        Button[] navBtns = {btnDashboard, btnOrders, btnOrderTracking, btnStock, btnReports, btnUsers};
+        for (Button btn : navBtns) {
+            if (btn != null) {
+                if (btn == activeBtn) {
+                    btn.getStyleClass().setAll("button", "nav-button-active");
+                } else {
+                    btn.getStyleClass().setAll("button", "nav-button");
+                }
+            }
+        }
+    }
 
-        // Swap back to dashboard
+    private void loadView(String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent node = loader.load();
+            if (mainBorderPane.getCenter() instanceof VBox) {
+                VBox centerVBox = (VBox) mainBorderPane.getCenter();
+                if (centerVBox.getChildren().size() > 1) {
+                    centerVBox.getChildren().set(1, node);
+                }
+            }
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Failed to load view: " + fxmlPath, e);
+        }
+    }
+
+    @FXML private void handleNavDashboard(ActionEvent event) {
+        setActiveNav(btnDashboard);
         if (mainBorderPane.getCenter() instanceof VBox) {
             VBox centerVBox = (VBox) mainBorderPane.getCenter();
             if (centerVBox.getChildren().size() > 1) {
@@ -63,27 +85,20 @@ public class AdminDashboardController {
             }
         }
     }
-
-    @FXML
-    private void handleNavOrderTracking(ActionEvent event) {
-        // Update active styles
-        btnOrderTracking.getStyleClass().setAll("button", "nav-button-active");
-        btnDashboard.getStyleClass().setAll("button", "nav-button");
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/kamnywesoliqourstore/admin/order-tracking-view.fxml"));
-            Parent orderTrackingNode = loader.load();
-            
-            // Swap out the center ScrollPane with the Order Tracking Node
-            if (mainBorderPane.getCenter() instanceof VBox) {
-                VBox centerVBox = (VBox) mainBorderPane.getCenter();
-                if (centerVBox.getChildren().size() > 1) {
-                    centerVBox.getChildren().set(1, orderTrackingNode);
-                }
-            }
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Failed to load order-tracking-view", e);
-        }
+    @FXML private void handleNavOrders(ActionEvent event) {
+        setActiveNav(btnOrders); loadView("/com/example/kamnywesoliqourstore/admin/order-management-view.fxml");
+    }
+    @FXML private void handleNavOrderTracking(ActionEvent event) {
+        setActiveNav(btnOrderTracking); loadView("/com/example/kamnywesoliqourstore/admin/order-tracking-view.fxml");
+    }
+    @FXML private void handleNavStock(ActionEvent event) {
+        setActiveNav(btnStock); loadView("/com/example/kamnywesoliqourstore/admin/stock-management-view.fxml");
+    }
+    @FXML private void handleNavReports(ActionEvent event) {
+        setActiveNav(btnReports); loadView("/com/example/kamnywesoliqourstore/admin/reports-view.fxml");
+    }
+    @FXML private void handleNavUsers(ActionEvent event) {
+        setActiveNav(btnUsers); loadView("/com/example/kamnywesoliqourstore/admin/user-management-view.fxml");
     }
 
     @FXML
