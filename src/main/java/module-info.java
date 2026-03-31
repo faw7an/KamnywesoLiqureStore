@@ -4,9 +4,6 @@ module com.example.kamnywesoliqourstore {
     requires java.logging;
 
 
-    opens com.example.kamnywesoliqourstore.auth to javafx.fxml;
-
-
     opens com.example.kamnywesoliqourstore to javafx.fxml;
     exports com.example.kamnywesoliqourstore;
 }

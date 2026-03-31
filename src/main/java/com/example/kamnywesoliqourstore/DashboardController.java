@@ -245,7 +245,7 @@ public class DashboardController {
         stopSessionTimer();
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("login.fxml"));
+                    getClass().getResource("login-view.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) contentArea.getScene().getWindow();
             stage.setScene(new Scene(root));
