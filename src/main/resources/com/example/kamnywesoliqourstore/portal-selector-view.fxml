@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #0f172a;" stylesheets="@style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kamnywesoliqourstore.PortalSelectorController">
+<children>
+    <VBox alignment="CENTER" maxWidth="800.0" spacing="40.0">
+        <children>
+            <VBox alignment="CENTER" spacing="10.0">
+                <Label style="-fx-background-color: #2563EB; -fx-background-radius: 16; -fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 15 25;" text="KLS" />
+                <Label style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;" text="Kamnyweso Liquor Store" />
+                <Label style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 16px;" text="Distributed Management System" />
+            </VBox>
+
+            <GridPane hgap="25.0" alignment="CENTER">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50.0" />
+                    <ColumnConstraints percentWidth="50.0" />
+                </columnConstraints>
+                <children>
+                    <VBox onMouseClicked="#handleAdminSelect" spacing="15.0" styleClass="portal-card" GridPane.columnIndex="0" alignment="TOP_LEFT">
+                        <children>
+                            <HBox styleClass="icon-box-admin" alignment="CENTER" maxWidth="-Infinity">
+                                <ImageView fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
+                                    <Image url="@distributedsystemprojectimages/admin-icon.png" />
+                                </ImageView>
+                            </HBox>
+                            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Admin Portal" />
+                            <Label wrapText="true" styleClass="text-muted" text="HQ Nairobi — Full system management, reports, stock control, and user management." />
+                            <Label style="-fx-text-fill: #2563EB; -fx-font-weight: bold;" text="Enter Admin Portal →" />
+                        </children>
+                    </VBox>
+
+                    <VBox onMouseClicked="#handleBranchSelect" spacing="15.0" styleClass="portal-card" GridPane.columnIndex="1" alignment="TOP_LEFT">
+                        <children>
+                            <HBox styleClass="icon-box-branch" alignment="CENTER" maxWidth="-Infinity">
+                                <ImageView fitHeight="32.0" fitWidth="32.0" preserveRatio="true">
+                                    <Image url="@distributedsystemprojectimages/branch-icon.png" />
+                                </ImageView>
+                            </HBox>
+                            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Branch Portal" />
+                            <Label wrapText="true" styleClass="text-muted" text="Place orders, track stock, manage loyalty, and handle returns at branch level." />
+                            <Label style="-fx-text-fill: #22C55E; -fx-font-weight: bold;" text="Enter Branch Portal →" />
+                        </children>
+                    </VBox>
+                </children>
+            </GridPane>
+
+            <Label style="-fx-text-fill: rgba(255,255,255,0.4); -fx-font-size: 10px; -fx-letter-spacing: 2px;" text="4 BRANCHES: NAIROBI HQ • NAKURU • MOMBASA • KISUMU" />
+        </children>
+    </VBox>
+</children>
+</StackPane>

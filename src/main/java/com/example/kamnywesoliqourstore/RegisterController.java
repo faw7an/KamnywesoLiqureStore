@@ -57,8 +57,16 @@ public class RegisterController {
     private Timeline countdownTimer;
     private int secondsRemaining = 299; // 4:59
 
-    // ── Simulated OTP (replace with real OTP logic later) ──────
+    // ── Simulated OTP (replace with real OTP logic from HQ) ────
     private String generatedOtp = "123456";
+
+    // Store user data for registration
+    private String registeredFullName;
+    private String registeredPhone;
+    private String registeredEmail;
+    private String registeredBranch;
+    private String registeredRole;
+    private String registeredPassword;
 
     // ───────────────────────────────────────────────────────────
     // INITIALIZE
@@ -115,13 +123,17 @@ public class RegisterController {
     }
 
     private void updateDots(int step) {
-        String activeColor   = "-fx-text-fill: #E04A2A; -fx-font-size: 18;";
-        String doneColor     = "-fx-text-fill: #4CAF50; -fx-font-size: 18;";
-        String inactiveColor = "-fx-text-fill: #CCCCCC; -fx-font-size: 18;";
+        // Active dot color: orange (#E04A2A)
+        // Complete dot color: green (#4CAF50)
+        // Inactive dot color: gray (#CCCCCC)
 
-        dot1.setStyle(step == 1 ? activeColor : (step > 1 ? doneColor : inactiveColor));
-        dot2.setStyle(step == 2 ? activeColor : (step > 2 ? doneColor : inactiveColor));
-        dot3.setStyle(step == 3 ? activeColor : inactiveColor);
+        String activeStyle = "-fx-text-fill: #E04A2A; -fx-font-size: 18;";
+        String completeStyle = "-fx-text-fill: #22C55E; -fx-font-size: 18;";
+        String inactiveStyle = "-fx-text-fill: #D1D5DB; -fx-font-size: 18;";
+
+        dot1.setStyle(step == 1 ? activeStyle : (step > 1 ? completeStyle : inactiveStyle));
+        dot2.setStyle(step == 2 ? activeStyle : (step > 2 ? completeStyle : inactiveStyle));
+        dot3.setStyle(step == 3 ? activeStyle : inactiveStyle);
     }
 
     // ───────────────────────────────────────────────────────────
@@ -135,8 +147,13 @@ public class RegisterController {
         String branch   = regBranchComboBox.getValue();
         String role     = roleComboBox.getValue();
 
+        // Validation
         if (fullName.isEmpty()) {
             showError(step1ErrorLabel, "Please enter your full name.");
+            return;
+        }
+        if (fullName.length() < 3) {
+            showError(step1ErrorLabel, "Full name must be at least 3 characters.");
             return;
         }
         if (phone.isEmpty()) {
@@ -147,18 +164,29 @@ public class RegisterController {
             showError(step1ErrorLabel, "Phone must be in format +254XXXXXXXXX.");
             return;
         }
-        if (email.isEmpty() || !email.contains("@")) {
+        if (email.isEmpty()) {
+            showError(step1ErrorLabel, "Please enter your email address.");
+            return;
+        }
+        if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
             showError(step1ErrorLabel, "Please enter a valid email address.");
             return;
         }
-        if (branch == null) {
+        if (branch == null || branch.isEmpty()) {
             showError(step1ErrorLabel, "Please select a branch.");
             return;
         }
-        if (role == null) {
+        if (role == null || role.isEmpty()) {
             showError(step1ErrorLabel, "Please select a role.");
             return;
         }
+
+        // Store validated data
+        registeredFullName = fullName;
+        registeredPhone = phone;
+        registeredEmail = email;
+        registeredBranch = branch;
+        registeredRole = role;
 
         step1ErrorLabel.setVisible(false);
         showStep(2);
@@ -170,6 +198,8 @@ public class RegisterController {
     @FXML
     private void handleStep2Back() {
         step2ErrorLabel.setVisible(false);
+        regPasswordField.clear();
+        confirmPasswordField.clear();
         showStep(1);
     }
 
@@ -178,20 +208,32 @@ public class RegisterController {
         String password = regPasswordField.getText();
         String confirm  = confirmPasswordField.getText();
 
+        if (password.isEmpty()) {
+            showError(step2ErrorLabel, "Please enter a password.");
+            return;
+        }
+
         if (!isPasswordValid(password)) {
             showError(step2ErrorLabel, "Password does not meet all requirements.");
             return;
         }
+
+        if (confirm.isEmpty()) {
+            showError(step2ErrorLabel, "Please confirm your password.");
+            return;
+        }
+
         if (!password.equals(confirm)) {
             showError(step2ErrorLabel, "Passwords do not match.");
             return;
         }
 
+        // Store password
+        registeredPassword = password;
         step2ErrorLabel.setVisible(false);
 
         // Update OTP sent label with actual phone number
-        String phone = phoneField.getText().trim();
-        otpSentLabel.setText("OTP sent to " + phone);
+        otpSentLabel.setText("OTP sent to " + registeredPhone);
 
         // Start countdown timer and go to step 3
         startCountdown();
@@ -217,6 +259,8 @@ public class RegisterController {
         timerLabel.setVisible(true);
         clearOtpFields();
         startCountdown();
+
+        // TODO: Call HQ server to resend OTP
         System.out.println("OTP resent. New OTP: " + generatedOtp);
     }
 
@@ -235,13 +279,15 @@ public class RegisterController {
             return;
         }
 
-        // TODO: Save registration data to database here
-        System.out.println("Registration complete!");
-        System.out.println("Name:    " + fullNameField.getText());
-        System.out.println("Phone:   " + phoneField.getText());
-        System.out.println("Email:   " + emailField.getText());
-        System.out.println("Branch:  " + regBranchComboBox.getValue());
-        System.out.println("Role:    " + roleComboBox.getValue());
+        // TODO: Send registration data to HQ server
+        System.out.println("═══ REGISTRATION COMPLETE ═══");
+        System.out.println("Full Name:   " + registeredFullName);
+        System.out.println("Phone:       " + registeredPhone);
+        System.out.println("Email:       " + registeredEmail);
+        System.out.println("Branch:      " + registeredBranch);
+        System.out.println("Role:        " + registeredRole);
+        System.out.println("Password:    " + (registeredPassword.length() + " chars"));
+        System.out.println("═══════════════════════════════");
 
         stopCountdown();
 
@@ -256,23 +302,36 @@ public class RegisterController {
     }
 
     // ───────────────────────────────────────────────────────────
-    // HELPERS
+    // PASSWORD VALIDATION HELPERS
     // ───────────────────────────────────────────────────────────
 
     private void updatePasswordRules(String password) {
-        setRule(rule8Chars,   password.length() >= 8);
-        setRule(ruleUppercase, password.matches(".*[A-Z].*"));
-        setRule(ruleNumber,   password.matches(".*[0-9].*"));
-        setRule(ruleSpecial,  password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*"));
+        boolean has8Chars   = password.length() >= 8;
+        boolean hasUppercase = password.matches(".*[A-Z].*");
+        boolean hasNumber   = password.matches(".*[0-9].*");
+        boolean hasSpecial  = password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");
+
+        updateRuleDisplay(rule8Chars, has8Chars);
+        updateRuleDisplay(ruleUppercase, hasUppercase);
+        updateRuleDisplay(ruleNumber, hasNumber);
+        updateRuleDisplay(ruleSpecial, hasSpecial);
     }
 
-    private void setRule(Label label, boolean passed) {
-        if (passed) {
-            label.setText(label.getText().replace("X  ", "✓  "));
-            label.setStyle("-fx-text-fill: #4CAF50; -fx-font-size: 12;");
+    private void updateRuleDisplay(Label ruleLabel, boolean isMet) {
+        String labelText = ruleLabel.getText();
+
+        if (isMet) {
+            // Replace X with ✓ and mark as complete
+            if (labelText.contains("X  ")) {
+                ruleLabel.setText(labelText.replace("X  ", "✓  "));
+            }
+            ruleLabel.setStyle("-fx-text-fill: #22C55E; -fx-font-weight: bold; -fx-font-size: 12;");
         } else {
-            label.setText(label.getText().replace("✓  ", "X  "));
-            label.setStyle("-fx-text-fill: #999999; -fx-font-size: 12;");
+            // Ensure X is displayed
+            if (labelText.contains("✓  ")) {
+                ruleLabel.setText(labelText.replace("✓  ", "X  "));
+            }
+            ruleLabel.setStyle("-fx-text-fill: #9CA3AF; -fx-font-size: 12;");
         }
     }
 
@@ -283,15 +342,24 @@ public class RegisterController {
                 && password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");
     }
 
+    // ───────────────────────────────────────────────────────────
+    // OTP FIELD SETUP
+    // ───────────────────────────────────────────────────────────
+
     private void setupOtpField(TextField current, TextField prev, TextField next) {
+        // Allow only single digits
         current.textProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal.length() > 1) {
                 current.setText(newVal.substring(0, 1));
+                return;
             }
-            if (newVal.length() == 1 && next != null) {
+            // Auto-advance to next field when digit entered
+            if (newVal.length() == 1 && newVal.matches("[0-9]") && next != null) {
                 next.requestFocus();
             }
         });
+
+        // Handle backspace to go to previous field
         current.setOnKeyPressed(e -> {
             if (e.getCode().toString().equals("BACK_SPACE")
                     && current.getText().isEmpty() && prev != null) {
@@ -299,6 +367,10 @@ public class RegisterController {
             }
         });
     }
+
+    // ───────────────────────────────────────────────────────────
+    // COUNTDOWN TIMER
+    // ───────────────────────────────────────────────────────────
 
     private void startCountdown() {
         stopCountdown();
@@ -325,6 +397,7 @@ public class RegisterController {
     private void stopCountdown() {
         if (countdownTimer != null) {
             countdownTimer.stop();
+            countdownTimer = null;
         }
     }
 
@@ -333,26 +406,40 @@ public class RegisterController {
         otp4.clear(); otp5.clear(); otp6.clear();
     }
 
+    // ───────────────────────────────────────────────────────────
+    // UTILITY METHODS
+    // ───────────────────────────────────────────────────────────
+
     private void showError(Label label, String message) {
-        label.setText(message);
-        label.setVisible(true);
+        if (label != null) {
+            label.setText(message);
+            label.setVisible(true);
+        } else {
+            System.err.println("Error: " + message);
+        }
     }
 
     private void navigateToLogin() {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("login.fxml"));
+                    getClass().getResource("login-view.fxml"));  // FIXED: was login.fxml
+
+            if (loader.getLocation() == null) {
+                System.err.println("Login page not found!");
+                return;
+            }
+
             Parent root = loader.load();
             Stage stage = (Stage) dot1.getScene().getWindow();
             stage.setScene(new Scene(root));
 
-            // re-center after scene change
+            // Re-center after scene change
             stage.centerOnScreen();
-
             stage.show();
+
         } catch (Exception e) {
+            System.err.println("Error navigating to login: " + e.getMessage());
             e.printStackTrace();
         }
     }
 }
-

@@ -55,10 +55,14 @@ public class ForgotPasswordController {
 
     // ── Internal state ─────────────────────────────────────────
     private Timeline countdownTimer;
-    private int secondsRemaining = 299;
+    private int secondsRemaining = 299;  // 4:59
 
-    // Simulated OTP — replace with real OTP service later
+    // Simulated OTP — replace with real OTP service from HQ
+    // TODO: Get this from server (sent via SMS/Email)
     private String generatedOtp = "123456";
+
+    // Store user identifier for resetting password
+    private String userIdentifier = "";
 
     // ───────────────────────────────────────────────────────────
     // INITIALIZE
@@ -68,21 +72,26 @@ public class ForgotPasswordController {
         // Update info label when radio selection changes
         phoneRadio.selectedProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal) {
-                sendToInfoLabel.setText(
-                        "OTP will be sent to the phone number linked to your account.");
+                if (sendToInfoLabel != null) {
+                    sendToInfoLabel.setText("Reset code will be sent to the phone number linked to your account.");
+                }
             }
         });
+
         emailRadio.selectedProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal) {
-                sendToInfoLabel.setText(
-                        "OTP will be sent to the email address linked to your account.");
+                if (sendToInfoLabel != null) {
+                    sendToInfoLabel.setText("Reset code will be sent to the email address linked to your account.");
+                }
             }
         });
 
         // Live password rule validation on step 3
-        newPasswordField.textProperty().addListener((obs, oldVal, newVal) -> {
-            updatePasswordRules(newVal);
-        });
+        if (newPasswordField != null) {
+            newPasswordField.textProperty().addListener((obs, oldVal, newVal) -> {
+                updatePasswordRules(newVal);
+            });
+        }
 
         // Auto-advance OTP boxes
         setupOtpField(otp1, null, otp2);
@@ -92,6 +101,12 @@ public class ForgotPasswordController {
         setupOtpField(otp5, otp4, otp6);
         setupOtpField(otp6, otp5, null);
 
+        // Clear error labels
+        if (step1ErrorLabel != null) step1ErrorLabel.setVisible(false);
+        if (step2ErrorLabel != null) step2ErrorLabel.setVisible(false);
+        if (step3ErrorLabel != null) step3ErrorLabel.setVisible(false);
+        if (successLabel != null) successLabel.setVisible(false);
+
         showStep(1);
     }
 
@@ -99,114 +114,160 @@ public class ForgotPasswordController {
     // STEP NAVIGATION
     // ───────────────────────────────────────────────────────────
     private void showStep(int step) {
-        step1Pane.setVisible(step == 1);
-        step1Pane.setManaged(step == 1);
-        step2Pane.setVisible(step == 2);
-        step2Pane.setManaged(step == 2);
-        step3Pane.setVisible(step == 3);
-        step3Pane.setManaged(step == 3);
+        if (step1Pane != null) {
+            step1Pane.setVisible(step == 1);
+            step1Pane.setManaged(step == 1);
+        }
+        if (step2Pane != null) {
+            step2Pane.setVisible(step == 2);
+            step2Pane.setManaged(step == 2);
+        }
+        if (step3Pane != null) {
+            step3Pane.setVisible(step == 3);
+            step3Pane.setManaged(step == 3);
+        }
         updateDots(step);
     }
 
     private void updateDots(int step) {
-        String active   = "-fx-text-fill: #E04A2A; -fx-font-size: 18;";
-        String done     = "-fx-text-fill: #4CAF50; -fx-font-size: 18;";
-        String inactive = "-fx-text-fill: #CCCCCC; -fx-font-size: 18;";
-        dot1.setStyle(step == 1 ? active : (step > 1 ? done : inactive));
-        dot2.setStyle(step == 2 ? active : (step > 2 ? done : inactive));
-        dot3.setStyle(step == 3 ? active : inactive);
+        String activeStyle = "-fx-text-fill: #E04A2A; -fx-font-size: 18;";
+        String completeStyle = "-fx-text-fill: #22C55E; -fx-font-size: 18;";
+        String inactiveStyle = "-fx-text-fill: #D1D5DB; -fx-font-size: 18;";
+
+        if (dot1 != null) dot1.setStyle(step == 1 ? activeStyle : (step > 1 ? completeStyle : inactiveStyle));
+        if (dot2 != null) dot2.setStyle(step == 2 ? activeStyle : (step > 2 ? completeStyle : inactiveStyle));
+        if (dot3 != null) dot3.setStyle(step == 3 ? activeStyle : inactiveStyle);
     }
 
     // ───────────────────────────────────────────────────────────
-    // STEP 1 — Enter Details
+    // STEP 1 — VERIFY ACCOUNT
     // ───────────────────────────────────────────────────────────
     @FXML
     private void handleStep1Continue() {
         String identifier = identifierField.getText().trim();
 
+        // Validation
         if (identifier.isEmpty()) {
             showError(step1ErrorLabel, "Please enter your Staff ID or Email.");
             return;
         }
 
-        step1ErrorLabel.setVisible(false);
+        // Store identifier for later use
+        userIdentifier = identifier;
+
+        // Clear error and proceed
+        if (step1ErrorLabel != null) {
+            step1ErrorLabel.setVisible(false);
+        }
 
         // Set OTP sent label based on method chosen
         boolean usingPhone = phoneRadio.isSelected();
-        if (usingPhone) {
-            otpSentLabel.setText("OTP sent to the phone number linked to: " + identifier);
-        } else {
-            otpSentLabel.setText("OTP sent to the email linked to: " + identifier);
+        if (otpSentLabel != null) {
+            if (usingPhone) {
+                otpSentLabel.setText("Reset code sent to phone linked to: " + identifier);
+            } else {
+                otpSentLabel.setText("Reset code sent to email linked to: " + identifier);
+            }
         }
 
-        // TODO: Trigger real OTP send here
-        System.out.println("Sending OTP via "
-                + (usingPhone ? "phone" : "email")
-                + " for account: " + identifier);
+        // TODO: Call HQ server to send reset code via SMS/Email
+        System.out.println("═══ PASSWORD RESET INITIATED ═══");
+        System.out.println("Method:      " + (usingPhone ? "SMS" : "Email"));
+        System.out.println("Identifier:  " + identifier);
+        System.out.println("Simulated Code: " + generatedOtp);
+        System.out.println("═════════════════════════════════");
 
         startCountdown();
         showStep(2);
     }
 
     // ───────────────────────────────────────────────────────────
-    // STEP 2 — Verify OTP
+    // STEP 2 — VERIFY RESET CODE
     // ───────────────────────────────────────────────────────────
     @FXML
     private void handleStep2Back() {
         stopCountdown();
         clearOtpFields();
-        step2ErrorLabel.setVisible(false);
+        if (step2ErrorLabel != null) {
+            step2ErrorLabel.setVisible(false);
+        }
         showStep(1);
     }
 
     @FXML
     private void handleStep2Continue() {
-        String enteredOtp = otp1.getText() + otp2.getText() + otp3.getText()
-                + otp4.getText() + otp5.getText() + otp6.getText();
+        String enteredOtp = getEnteredOtp();
 
+        // Validate OTP length
         if (enteredOtp.length() < 6) {
-            showError(step2ErrorLabel, "Please enter the full 6-digit OTP.");
+            showError(step2ErrorLabel, "Please enter the full 6-digit code.");
             return;
         }
 
+        // Validate OTP correctness
         if (!enteredOtp.equals(generatedOtp)) {
-            showError(step2ErrorLabel, "Invalid OTP. Please try again.");
+            showError(step2ErrorLabel, "Invalid code. Please try again.");
+            clearOtpFields();
             return;
         }
+
+        // Code correct — proceed to password reset
+        System.out.println("✅ Reset code verified successfully");
 
         stopCountdown();
-        step2ErrorLabel.setVisible(false);
+        if (step2ErrorLabel != null) {
+            step2ErrorLabel.setVisible(false);
+        }
         showStep(3);
     }
 
     @FXML
     private void handleResendOtp() {
         secondsRemaining = 299;
-        resendBtn.setVisible(false);
-        timerLabel.setVisible(true);
+        if (resendBtn != null) {
+            resendBtn.setVisible(false);
+        }
+        if (timerLabel != null) {
+            timerLabel.setVisible(true);
+        }
         clearOtpFields();
         startCountdown();
-        // TODO: Trigger real OTP resend here
-        System.out.println("OTP resent. Simulated OTP: " + generatedOtp);
+
+        // TODO: Call HQ server to resend reset code
+        System.out.println("Reset code resent to " + userIdentifier);
+        System.out.println("Simulated Code: " + generatedOtp);
     }
 
     // ───────────────────────────────────────────────────────────
-    // STEP 3 — Reset Password
+    // STEP 3 — RESET PASSWORD
     // ───────────────────────────────────────────────────────────
     @FXML
     private void handleStep3Back() {
-        step3ErrorLabel.setVisible(false);
-        successLabel.setVisible(false);
+        if (step3ErrorLabel != null) step3ErrorLabel.setVisible(false);
+        if (successLabel != null) successLabel.setVisible(false);
+        newPasswordField.clear();
+        confirmNewPasswordField.clear();
         showStep(2);
     }
 
     @FXML
     private void handleResetPassword() {
-        String newPassword     = newPasswordField.getText();
+        String newPassword = newPasswordField.getText();
         String confirmPassword = confirmNewPasswordField.getText();
+
+        // Validation
+        if (newPassword.isEmpty()) {
+            showError(step3ErrorLabel, "Please enter a new password.");
+            return;
+        }
 
         if (!isPasswordValid(newPassword)) {
             showError(step3ErrorLabel, "Password does not meet all requirements.");
+            return;
+        }
+
+        if (confirmPassword.isEmpty()) {
+            showError(step3ErrorLabel, "Please confirm your password.");
             return;
         }
 
@@ -215,12 +276,15 @@ public class ForgotPasswordController {
             return;
         }
 
-        step3ErrorLabel.setVisible(false);
-        successLabel.setVisible(true);
+        // Password reset successful
+        System.out.println("✅ PASSWORD RESET SUCCESSFUL");
+        System.out.println("Account: " + userIdentifier);
+        System.out.println("═════════════════════════════════");
 
-        // TODO: Save new password to database here
-        System.out.println("Password reset successfully for: "
-                + identifierField.getText());
+        if (step3ErrorLabel != null) step3ErrorLabel.setVisible(false);
+        if (successLabel != null) successLabel.setVisible(true);
+
+        // TODO: Send new password to HQ server to update database
 
         // Navigate back to login after 2 seconds
         Timeline delay = new Timeline(
@@ -235,23 +299,30 @@ public class ForgotPasswordController {
     }
 
     // ───────────────────────────────────────────────────────────
-    // HELPERS
+    // PASSWORD VALIDATION HELPERS
     // ───────────────────────────────────────────────────────────
+
     private void updatePasswordRules(String password) {
-        setRule(rule8Chars,   password.length() >= 8,            "At least 8 characters");
-        setRule(ruleUppercase, password.matches(".*[A-Z].*"),    "One uppercase letter");
-        setRule(ruleNumber,   password.matches(".*[0-9].*"),     "One number");
-        setRule(ruleSpecial,  password.matches(
-                ".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*"), "One special symbol");
+        boolean has8Chars = password.length() >= 8;
+        boolean hasUppercase = password.matches(".*[A-Z].*");
+        boolean hasNumber = password.matches(".*[0-9].*");
+        boolean hasSpecial = password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");
+
+        updateRuleDisplay(rule8Chars, has8Chars, "At least 8 characters");
+        updateRuleDisplay(ruleUppercase, hasUppercase, "One uppercase letter (A-Z)");
+        updateRuleDisplay(ruleNumber, hasNumber, "One number (0-9)");
+        updateRuleDisplay(ruleSpecial, hasSpecial, "One special character (!@#$%)");
     }
 
-    private void setRule(Label label, boolean passed, String ruleText) {
-        if (passed) {
-            label.setText("✓  " + ruleText);
-            label.setStyle("-fx-text-fill: #4CAF50; -fx-font-size: 12;");
+    private void updateRuleDisplay(Label ruleLabel, boolean isMet, String ruleText) {
+        if (ruleLabel == null) return;
+
+        if (isMet) {
+            ruleLabel.setText("✓  " + ruleText);
+            ruleLabel.setStyle("-fx-text-fill: #22C55E; -fx-font-weight: bold; -fx-font-size: 12;");
         } else {
-            label.setText("X  " + ruleText);
-            label.setStyle("-fx-text-fill: #999999; -fx-font-size: 12;");
+            ruleLabel.setText("X  " + ruleText);
+            ruleLabel.setStyle("-fx-text-fill: #9CA3AF; -fx-font-size: 12;");
         }
     }
 
@@ -262,15 +333,33 @@ public class ForgotPasswordController {
                 && password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");
     }
 
+    // ───────────────────────────────────────────────────────────
+    // OTP FIELD HELPERS
+    // ───────────────────────────────────────────────────────────
+
     private void setupOtpField(TextField current, TextField prev, TextField next) {
+        if (current == null) return;
+
+        // Only allow single digit input
         current.textProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal.length() > 1) {
                 current.setText(newVal.substring(0, 1));
+                return;
             }
-            if (newVal.length() == 1 && next != null) {
+
+            // Only allow digits
+            if (newVal.length() == 1 && !newVal.matches("[0-9]")) {
+                current.setText("");
+                return;
+            }
+
+            // Auto-advance to next field
+            if (newVal.length() == 1 && newVal.matches("[0-9]") && next != null) {
                 next.requestFocus();
             }
         });
+
+        // Handle backspace
         current.setOnKeyPressed(e -> {
             if (e.getCode().toString().equals("BACK_SPACE")
                     && current.getText().isEmpty() && prev != null) {
@@ -279,24 +368,54 @@ public class ForgotPasswordController {
         });
     }
 
+    private String getEnteredOtp() {
+        StringBuilder otp = new StringBuilder();
+        if (otp1 != null) otp.append(otp1.getText());
+        if (otp2 != null) otp.append(otp2.getText());
+        if (otp3 != null) otp.append(otp3.getText());
+        if (otp4 != null) otp.append(otp4.getText());
+        if (otp5 != null) otp.append(otp5.getText());
+        if (otp6 != null) otp.append(otp6.getText());
+        return otp.toString();
+    }
+
+    private void clearOtpFields() {
+        if (otp1 != null) otp1.clear();
+        if (otp2 != null) otp2.clear();
+        if (otp3 != null) otp3.clear();
+        if (otp4 != null) otp4.clear();
+        if (otp5 != null) otp5.clear();
+        if (otp6 != null) otp6.clear();
+        if (otp1 != null) otp1.requestFocus();
+    }
+
+    // ───────────────────────────────────────────────────────────
+    // COUNTDOWN TIMER
+    // ───────────────────────────────────────────────────────────
+
     private void startCountdown() {
         stopCountdown();
         secondsRemaining = 299;
-        resendBtn.setVisible(false);
-        timerLabel.setVisible(true);
+
+        if (timerLabel != null) timerLabel.setVisible(true);
+        if (resendBtn != null) resendBtn.setVisible(false);
 
         countdownTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
             secondsRemaining--;
             int minutes = secondsRemaining / 60;
             int seconds = secondsRemaining % 60;
-            timerLabel.setText(
-                    String.format("Resend code in %02d:%02d", minutes, seconds));
+
+            if (timerLabel != null) {
+                timerLabel.setText(String.format("Resend code in %02d:%02d", minutes, seconds));
+            }
+
             if (secondsRemaining <= 0) {
                 stopCountdown();
-                timerLabel.setVisible(false);
-                resendBtn.setVisible(true);
+                if (timerLabel != null) timerLabel.setVisible(false);
+                if (resendBtn != null) resendBtn.setVisible(true);
             }
         }));
+
         countdownTimer.setCycleCount(Timeline.INDEFINITE);
         countdownTimer.play();
     }
@@ -304,34 +423,44 @@ public class ForgotPasswordController {
     private void stopCountdown() {
         if (countdownTimer != null) {
             countdownTimer.stop();
+            countdownTimer = null;
         }
     }
 
-    private void clearOtpFields() {
-        otp1.clear(); otp2.clear(); otp3.clear();
-        otp4.clear(); otp5.clear(); otp6.clear();
-    }
+    // ───────────────────────────────────────────────────────────
+    // UTILITY METHODS
+    // ───────────────────────────────────────────────────────────
 
     private void showError(Label label, String message) {
-        label.setText(message);
-        label.setVisible(true);
+        if (label != null) {
+            label.setText(message);
+            label.setVisible(true);
+        } else {
+            System.err.println("Error: " + message);
+        }
     }
 
     private void navigateToLogin() {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("login.fxml"));
+                    getClass().getResource("login-view.fxml"));  // FIXED: was login.fxml
+
+            if (loader.getLocation() == null) {
+                System.err.println("Login page not found!");
+                return;
+            }
+
             Parent root = loader.load();
             Stage stage = (Stage) dot1.getScene().getWindow();
             stage.setScene(new Scene(root));
 
-            // re-center after scene change
+            // Re-center window
             stage.centerOnScreen();
-
             stage.show();
+
         } catch (Exception e) {
+            System.err.println("Error navigating to login: " + e.getMessage());
             e.printStackTrace();
         }
     }
 }
-

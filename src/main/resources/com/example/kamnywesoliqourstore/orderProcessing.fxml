@@ -21,35 +21,28 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.kamnywesoliqourstore.OrderProcessingController">
     <content>
-        <VBox style="-fx-background-color: #F4F6FA; -fx-padding: 24;"
-              spacing="20.0">
+        <VBox style="-fx-background-color: #F4F6FA; -fx-padding: 24;" spacing="20.0">
             <children>
 
-                <!-- ═══════════════════════════════════════
-                     HEADER
-                     ═══════════════════════════════════════ -->
+                <!-- HEADER -->
                 <HBox alignment="CENTER_LEFT">
                     <children>
                         <VBox spacing="3.0">
                             <children>
                                 <Label text="Order Processing"
                                        style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
-                                    <font><Font name="System Bold" size="22.0" /></font>
+                                    <font><Font name="System Bold" size="22.0"/></font>
                                 </Label>
                                 <Label text="Place a new order for walk-in or registered customers"
-                                       style="-fx-font-size: 13; -fx-text-fill: #666666;" />
+                                       style="-fx-font-size: 13; -fx-text-fill: #666666;"/>
                             </children>
                         </VBox>
-                        <javafx.scene.layout.Region HBox.hgrow="ALWAYS" />
-                        <Button onAction="#handleViewOrderHistory"
-                                text="View Order History"
-                                style="-fx-background-color: white; -fx-border-color: #DDDDDD; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #444444; -fx-font-size: 12; -fx-cursor: hand; -fx-padding: 8 16 8 16;" />
+                        <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+                        <Button onAction="#handleViewOrderHistory" text="View Order History"
+                                style="-fx-background-color: white; -fx-border-color: #DDDDDD; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #444444; -fx-font-size: 12; -fx-cursor: hand; -fx-padding: 8 16 8 16;"/>
                     </children>
                 </HBox>
 
-                <!-- ═══════════════════════════════════════
-                     MAIN CONTENT: LEFT FORM + RIGHT CART
-                     ═══════════════════════════════════════ -->
                 <HBox spacing="16.0" alignment="TOP_LEFT">
                     <children>
 
@@ -57,28 +50,21 @@
                         <VBox HBox.hgrow="ALWAYS" spacing="16.0">
                             <children>
 
-                                <!-- CUSTOMER TYPE TOGGLE -->
-                                <VBox style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 18;"
-                                      spacing="12.0">
+                                <!-- CUSTOMER TYPE -->
+                                <VBox style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 18;" spacing="12.0">
                                     <children>
                                         <Label text="Customer Type"
                                                style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
-                                            <font><Font name="System Bold" size="14.0" /></font>
+                                            <font><Font name="System Bold" size="14.0"/></font>
                                         </Label>
                                         <HBox spacing="10.0">
                                             <children>
-                                                <Button fx:id="walkInBtn"
-                                                        onAction="#handleWalkIn"
-                                                        prefHeight="38.0" prefWidth="160.0"
-                                                        text="Walk-in Customer"
-                                                        style="-fx-background-color: #E04A2A; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;">
-                                                </Button>
-                                                <Button fx:id="registeredBtn"
-                                                        onAction="#handleRegistered"
-                                                        prefHeight="38.0" prefWidth="160.0"
-                                                        text="Registered Customer"
-                                                        style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #444444; -fx-font-size: 12; -fx-cursor: hand;">
-                                                </Button>
+                                                <Button fx:id="walkInBtn" onAction="#handleWalkIn"
+                                                        prefHeight="38.0" prefWidth="160.0" text="Walk-in Customer"
+                                                        style="-fx-background-color: #E04A2A; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;"/>
+                                                <Button fx:id="registeredBtn" onAction="#handleRegistered"
+                                                        prefHeight="38.0" prefWidth="170.0" text="Registered Customer"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #444444; -fx-font-size: 12; -fx-cursor: hand;"/>
                                             </children>
                                         </HBox>
                                     </children>
@@ -91,95 +77,70 @@
                                     <children>
                                         <Label text="Customer Details"
                                                style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
-                                            <font><Font name="System Bold" size="14.0" /></font>
+                                            <font><Font name="System Bold" size="14.0"/></font>
                                         </Label>
-
                                         <GridPane hgap="12.0" vgap="12.0">
                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0" />
-                                                <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0" />
+                                                <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0"/>
+                                                <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0"/>
                                             </columnConstraints>
-                                            <rowConstraints>
-                                                <RowConstraints />
-                                                <RowConstraints />
-                                            </rowConstraints>
                                             <children>
                                                 <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" spacing="5.0">
                                                     <children>
-                                                        <Label text="FULL NAME"
-                                                               style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #666666;" />
-                                                        <TextField fx:id="customerNameField"
-                                                                   prefHeight="38.0"
-                                                                   promptText="John Doe"
-                                                                   style="-fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 0 8 0 8;" />
+                                                        <Label text="FULL NAME" style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #666666;"/>
+                                                        <TextField fx:id="customerNameField" prefHeight="38.0" promptText="John Doe"
+                                                                   style="-fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 0 8 0 8;"/>
                                                     </children>
                                                 </VBox>
                                                 <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" spacing="5.0">
                                                     <children>
-                                                        <Label text="PHONE NUMBER"
-                                                               style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #666666;" />
-                                                        <TextField fx:id="customerPhoneField"
-                                                                   prefHeight="38.0"
-                                                                   promptText="+254 7XX XXX XXX"
-                                                                   style="-fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 0 8 0 8;" />
+                                                        <Label text="PHONE NUMBER" style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #666666;"/>
+                                                        <TextField fx:id="customerPhoneField" prefHeight="38.0" promptText="+254 7XX XXX XXX"
+                                                                   style="-fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 0 8 0 8;"/>
                                                     </children>
                                                 </VBox>
                                                 <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" spacing="5.0">
                                                     <children>
-                                                        <Label text="BRANCH"
-                                                               style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #666666;" />
-                                                        <ComboBox fx:id="orderBranchCombo"
-                                                                  prefHeight="38.0" prefWidth="999.0"
+                                                        <Label text="BRANCH" style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #666666;"/>
+                                                        <ComboBox fx:id="orderBranchCombo" prefHeight="38.0" prefWidth="999.0"
                                                                   promptText="Select branch"
-                                                                  style="-fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 6; -fx-background-radius: 6;" />
+                                                                  style="-fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 6; -fx-background-radius: 6;"/>
                                                     </children>
                                                 </VBox>
                                                 <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" spacing="5.0">
                                                     <children>
-                                                        <Label text="LOYALTY CARD ID (optional)"
-                                                               style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #666666;" />
-                                                        <TextField fx:id="loyaltyCardField"
-                                                                   prefHeight="38.0"
-                                                                   promptText="LC-XXXXX"
-                                                                   style="-fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 0 8 0 8;" />
+                                                        <Label text="LOYALTY CARD ID (optional)" style="-fx-font-size: 11; -fx-font-weight: bold; -fx-text-fill: #666666;"/>
+                                                        <TextField fx:id="loyaltyCardField" prefHeight="38.0" promptText="LC-XXXXX"
+                                                                   style="-fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 0 8 0 8;"/>
                                                     </children>
                                                 </VBox>
                                             </children>
                                         </GridPane>
-
                                     </children>
                                 </VBox>
 
                                 <!-- SELECT DRINKS -->
-                                <VBox style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 18;"
-                                      spacing="14.0">
+                                <VBox style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 18;" spacing="14.0">
                                     <children>
-
                                         <HBox alignment="CENTER_LEFT">
                                             <children>
                                                 <Label text="Select Drinks"
                                                        style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
-                                                    <font><Font name="System Bold" size="14.0" /></font>
+                                                    <font><Font name="System Bold" size="14.0"/></font>
                                                 </Label>
-                                                <javafx.scene.layout.Region HBox.hgrow="ALWAYS" />
-                                                <TextField fx:id="drinkSearchField"
-                                                           prefHeight="34.0" prefWidth="180.0"
+                                                <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+                                                <TextField fx:id="drinkSearchField" prefHeight="34.0" prefWidth="180.0"
                                                            promptText="Search drinks..."
-                                                           style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 0 8 0 8; -fx-font-size: 12;" />
+                                                           style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 0 8 0 8; -fx-font-size: 12;"/>
                                             </children>
                                         </HBox>
 
-                                        <!-- Drink Cards Grid -->
                                         <GridPane fx:id="drinksGrid" hgap="12.0" vgap="12.0">
                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33" />
-                                                <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33" />
-                                                <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33" />
+                                                <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33"/>
+                                                <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33"/>
+                                                <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33"/>
                                             </columnConstraints>
-                                            <rowConstraints>
-                                                <RowConstraints />
-                                                <RowConstraints />
-                                            </rowConstraints>
                                             <children>
 
                                                 <!-- Alvaro -->
@@ -187,19 +148,13 @@
                                                       style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14;"
                                                       spacing="6.0" alignment="CENTER">
                                                     <children>
-                                                        <Label text="&#127866;" style="-fx-font-size: 28;" />
-                                                        <Label text="Alvaro"
-                                                               style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;" />
-                                                        <Label text="500ml · Non-alcoholic"
-                                                               style="-fx-font-size: 11; -fx-text-fill: #888888;" />
-                                                        <Label text="KES 120"
-                                                               style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #2563EB;" />
-                                                        <Label text="&#9679; 45 units"
-                                                               style="-fx-font-size: 11; -fx-text-fill: #059669;" />
-                                                        <Button onAction="#handleAddAlvaro"
-                                                                prefWidth="999.0" prefHeight="32.0"
-                                                                text="Add to Cart"
-                                                                style="-fx-background-color: #E04A2A; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;" />
+                                                        <Label text="&#127866;" style="-fx-font-size: 28;"/>
+                                                        <Label text="Alvaro" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;"/>
+                                                        <Label text="500ml · Non-alcoholic" style="-fx-font-size: 11; -fx-text-fill: #888888;"/>
+                                                        <Label text="KES 120" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #2563EB;"/>
+                                                        <Label text="45 units" style="-fx-font-size: 11; -fx-text-fill: #059669;"/>
+                                                        <Button onAction="#handleAddAlvaro" prefWidth="999.0" prefHeight="32.0" text="Add to Cart"
+                                                                style="-fx-background-color: #E04A2A; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;"/>
                                                     </children>
                                                 </VBox>
 
@@ -208,40 +163,29 @@
                                                       style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14;"
                                                       spacing="6.0" alignment="CENTER">
                                                     <children>
-                                                        <Label text="&#127859;" style="-fx-font-size: 28;" />
-                                                        <Label text="Fanta Orange"
-                                                               style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;" />
-                                                        <Label text="500ml · Soft drink"
-                                                               style="-fx-font-size: 11; -fx-text-fill: #888888;" />
-                                                        <Label text="KES 80"
-                                                               style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #2563EB;" />
-                                                        <Label text="&#9679; 120 units"
-                                                               style="-fx-font-size: 11; -fx-text-fill: #059669;" />
-                                                        <Button onAction="#handleAddFanta"
-                                                                prefWidth="999.0" prefHeight="32.0"
-                                                                text="Add to Cart"
-                                                                style="-fx-background-color: #E04A2A; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;" />
+                                                        <Label text="&#127863;" style="-fx-font-size: 28;"/>
+                                                        <Label text="Fanta Orange" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;"/>
+                                                        <Label text="500ml · Soft drink" style="-fx-font-size: 11; -fx-text-fill: #888888;"/>
+                                                        <Label text="KES 80" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #2563EB;"/>
+                                                        <Label text="120 units" style="-fx-font-size: 11; -fx-text-fill: #059669;"/>
+                                                        <Button onAction="#handleAddFanta" prefWidth="999.0" prefHeight="32.0" text="Add to Cart"
+                                                                style="-fx-background-color: #E04A2A; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;"/>
                                                     </children>
                                                 </VBox>
 
-                                                <!-- Coca Cola -->
+                                                <!-- Coca Cola — fixed emoji: use beverage cup not cutlery -->
                                                 <VBox GridPane.columnIndex="2" GridPane.rowIndex="0"
                                                       style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14;"
                                                       spacing="6.0" alignment="CENTER">
                                                     <children>
-                                                        <Label text="&#127860;" style="-fx-font-size: 28;" />
-                                                        <Label text="Coca Cola"
-                                                               style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;" />
-                                                        <Label text="500ml · Soft drink"
-                                                               style="-fx-font-size: 11; -fx-text-fill: #888888;" />
-                                                        <Label text="KES 80"
-                                                               style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #2563EB;" />
-                                                        <Label text="&#9679; 98 units"
-                                                               style="-fx-font-size: 11; -fx-text-fill: #059669;" />
-                                                        <Button onAction="#handleAddCocaCola"
-                                                                prefWidth="999.0" prefHeight="32.0"
-                                                                text="Add to Cart"
-                                                                style="-fx-background-color: #E04A2A; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;" />
+                                                        <!-- &#127861; = soft ice cream — wrong. Use &#129380; = bubble tea or just text -->
+                                                        <Label text="&#9749;" style="-fx-font-size: 28;"/>
+                                                        <Label text="Coca Cola" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;"/>
+                                                        <Label text="500ml · Soft drink" style="-fx-font-size: 11; -fx-text-fill: #888888;"/>
+                                                        <Label text="KES 80" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #2563EB;"/>
+                                                        <Label text="98 units" style="-fx-font-size: 11; -fx-text-fill: #059669;"/>
+                                                        <Button onAction="#handleAddCocaCola" prefWidth="999.0" prefHeight="32.0" text="Add to Cart"
+                                                                style="-fx-background-color: #E04A2A; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;"/>
                                                     </children>
                                                 </VBox>
 
@@ -250,19 +194,13 @@
                                                       style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14;"
                                                       spacing="6.0" alignment="CENTER">
                                                     <children>
-                                                        <Label text="&#127866;" style="-fx-font-size: 28;" />
-                                                        <Label text="Sprite"
-                                                               style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;" />
-                                                        <Label text="500ml · Soft drink"
-                                                               style="-fx-font-size: 11; -fx-text-fill: #888888;" />
-                                                        <Label text="KES 80"
-                                                               style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #2563EB;" />
-                                                        <Label text="&#9679; 8 units"
-                                                               style="-fx-font-size: 11; -fx-text-fill: #D97706;" />
-                                                        <Button onAction="#handleAddSprite"
-                                                                prefWidth="999.0" prefHeight="32.0"
-                                                                text="Add to Cart"
-                                                                style="-fx-background-color: #E04A2A; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;" />
+                                                        <Label text="&#127758;" style="-fx-font-size: 28;"/>
+                                                        <Label text="Sprite" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;"/>
+                                                        <Label text="500ml · Soft drink" style="-fx-font-size: 11; -fx-text-fill: #888888;"/>
+                                                        <Label text="KES 80" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #2563EB;"/>
+                                                        <Label text="8 units" style="-fx-font-size: 11; -fx-text-fill: #D97706;"/>
+                                                        <Button onAction="#handleAddSprite" prefWidth="999.0" prefHeight="32.0" text="Add to Cart"
+                                                                style="-fx-background-color: #E04A2A; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;"/>
                                                     </children>
                                                 </VBox>
 
@@ -271,182 +209,140 @@
                                                       style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14;"
                                                       spacing="6.0" alignment="CENTER">
                                                     <children>
-                                                        <Label text="&#128167;" style="-fx-font-size: 28;" />
-                                                        <Label text="Dasani Water"
-                                                               style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;" />
-                                                        <Label text="500ml · Water"
-                                                               style="-fx-font-size: 11; -fx-text-fill: #888888;" />
-                                                        <Label text="KES 50"
-                                                               style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #2563EB;" />
-                                                        <Label text="&#9679; 200 units"
-                                                               style="-fx-font-size: 11; -fx-text-fill: #059669;" />
-                                                        <Button onAction="#handleAddWater"
-                                                                prefWidth="999.0" prefHeight="32.0"
-                                                                text="Add to Cart"
-                                                                style="-fx-background-color: #E04A2A; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;" />
+                                                        <Label text="&#128167;" style="-fx-font-size: 28;"/>
+                                                        <Label text="Dasani Water" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;"/>
+                                                        <Label text="500ml · Water" style="-fx-font-size: 11; -fx-text-fill: #888888;"/>
+                                                        <Label text="KES 50" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #2563EB;"/>
+                                                        <Label text="200 units" style="-fx-font-size: 11; -fx-text-fill: #059669;"/>
+                                                        <Button onAction="#handleAddWater" prefWidth="999.0" prefHeight="32.0" text="Add to Cart"
+                                                                style="-fx-background-color: #E04A2A; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;"/>
                                                     </children>
                                                 </VBox>
 
                                                 <!-- Wine -->
                                                 <VBox GridPane.columnIndex="2" GridPane.rowIndex="1"
-                                                      style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14;"
+                                                      style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 14; -fx-opacity: 0.6;"
                                                       spacing="6.0" alignment="CENTER">
                                                     <children>
-                                                        <Label text="&#127863;" style="-fx-font-size: 28;" />
-                                                        <Label text="Shiraz Red Wine"
-                                                               style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;" />
-                                                        <Label text="750ml · Wine"
-                                                               style="-fx-font-size: 11; -fx-text-fill: #888888;" />
-                                                        <Label text="KES 950"
-                                                               style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #2563EB;" />
-                                                        <Label text="&#9679; 0 units"
-                                                               style="-fx-font-size: 11; -fx-text-fill: #DC2626;" />
-                                                        <Button onAction="#handleAddWine"
-                                                                prefWidth="999.0" prefHeight="32.0"
-                                                                text="Out of Stock"
-                                                                disable="true"
-                                                                style="-fx-background-color: #E5E7EB; -fx-background-radius: 6; -fx-text-fill: #999999; -fx-font-size: 12; -fx-cursor: default; -fx-border-color: transparent;" />
+                                                        <Label text="&#127863;" style="-fx-font-size: 28;"/>
+                                                        <Label text="Shiraz Red Wine" style="-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;"/>
+                                                        <Label text="750ml · Wine" style="-fx-font-size: 11; -fx-text-fill: #888888;"/>
+                                                        <Label text="KES 950" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #2563EB;"/>
+                                                        <Label text="Out of stock" style="-fx-font-size: 11; -fx-text-fill: #DC2626;"/>
+                                                        <Button onAction="#handleAddWine" prefWidth="999.0" prefHeight="32.0"
+                                                                text="Out of Stock" disable="true"
+                                                                style="-fx-background-color: #E5E7EB; -fx-background-radius: 6; -fx-text-fill: #999999; -fx-font-size: 12; -fx-border-color: transparent;"/>
                                                     </children>
                                                 </VBox>
 
                                             </children>
                                         </GridPane>
-
                                     </children>
                                 </VBox>
 
                             </children>
                         </VBox>
 
-                        <!-- RIGHT COLUMN: CART -->
-                        <VBox prefWidth="300.0" spacing="0.0"
+                        <!-- RIGHT: CART -->
+                        <VBox prefWidth="350.0" minWidth="350.0" spacing="0.0"
                               style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1;">
                             <children>
 
-                                <!-- Cart Header -->
                                 <HBox alignment="CENTER_LEFT"
                                       style="-fx-padding: 16 18 16 18; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;">
                                     <children>
                                         <Label text="Order Cart"
                                                style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
-                                            <font><Font name="System Bold" size="15.0" /></font>
+                                            <font><Font name="System Bold" size="15.0"/></font>
                                         </Label>
-                                        <javafx.scene.layout.Region HBox.hgrow="ALWAYS" />
-                                        <Label fx:id="cartItemCount"
-                                               text="0 items"
-                                               style="-fx-font-size: 12; -fx-text-fill: #888888;" />
+                                        <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+                                        <Label fx:id="cartItemCount" text="0 items"
+                                               style="-fx-font-size: 12; -fx-text-fill: #888888;"/>
                                     </children>
                                 </HBox>
 
-                                <!-- Cart Items -->
+                                <!-- Cart items area -->
                                 <VBox fx:id="cartItemsBox"
-                                      style="-fx-padding: 10 18 10 18; -fx-min-height: 180.0;"
+                                      style="-fx-padding: 10 10 10 10; -fx-min-height: 180.0;"
                                       spacing="10.0">
                                     <children>
                                         <Label fx:id="emptyCartLabel"
-                                               text="Your cart is empty.&#10;Add drinks from the left panel."
+                                               text="Your cart is empty.&#10;Add drinks from the panel."
                                                style="-fx-text-fill: #AAAAAA; -fx-font-size: 12; -fx-text-alignment: center; -fx-alignment: center; -fx-padding: 30 0 30 0;"
-                                               prefWidth="262.0" alignment="CENTER"
-                                               wrapText="true" />
+                                               prefWidth="262.0" alignment="CENTER" wrapText="true"/>
                                     </children>
                                 </VBox>
 
-                                <Separator style="-fx-background-color: #F3F4F6;" />
+                                <Separator style="-fx-background-color: #F3F4F6;"/>
 
                                 <!-- Low stock warning -->
-                                <HBox fx:id="lowStockWarning"
-                                      visible="false"
-                                      style="-fx-background-color: #FEF3C7; -fx-padding: 8 18 8 18; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;"
-                                      alignment="CENTER_LEFT" spacing="6.0">
+                                <HBox fx:id="lowStockWarning" visible="false"
+                                      style="-fx-background-color: #FEF3C7; -fx-padding: 8 18 8 18;" alignment="CENTER_LEFT" spacing="6.0">
                                     <children>
-                                        <Label text="&#9888;"
-                                               style="-fx-text-fill: #D97706; -fx-font-size: 13;" />
-                                        <Label text="Some items are running low on stock."
-                                               style="-fx-font-size: 11; -fx-text-fill: #92400E;" wrapText="true" prefWidth="220.0" />
+                                        <Label text="!" style="-fx-text-fill: #D97706; -fx-font-size: 14; -fx-font-weight: bold;"/>
+                                        <Label text="Some items are running low." style="-fx-font-size: 11; -fx-text-fill: #92400E;" wrapText="true" prefWidth="220.0"/>
                                     </children>
                                 </HBox>
 
-                                <!-- Order Summary -->
+                                <!-- Totals -->
                                 <VBox style="-fx-padding: 14 18 14 18;" spacing="8.0">
                                     <children>
-
                                         <HBox alignment="CENTER_LEFT">
                                             <children>
-                                                <Label text="Subtotal"
-                                                       style="-fx-font-size: 13; -fx-text-fill: #666666;" />
-                                                <javafx.scene.layout.Region HBox.hgrow="ALWAYS" />
-                                                <Label fx:id="subtotalLabel"
-                                                       text="KES 0"
-                                                       style="-fx-font-size: 13; -fx-text-fill: #0D1B2A;" />
+                                                <Label text="Subtotal" style="-fx-font-size: 13; -fx-text-fill: #666666;"/>
+                                                <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+                                                <Label fx:id="subtotalLabel" text="KES 0" style="-fx-font-size: 13; -fx-text-fill: #0D1B2A;"/>
                                             </children>
                                         </HBox>
-
                                         <HBox alignment="CENTER_LEFT">
                                             <children>
-                                                <Label text="Tax (16% VAT)"
-                                                       style="-fx-font-size: 13; -fx-text-fill: #666666;" />
-                                                <javafx.scene.layout.Region HBox.hgrow="ALWAYS" />
-                                                <Label fx:id="taxLabel"
-                                                       text="KES 0"
-                                                       style="-fx-font-size: 13; -fx-text-fill: #0D1B2A;" />
+                                                <Label text="Tax (16% VAT)" style="-fx-font-size: 13; -fx-text-fill: #666666;"/>
+                                                <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+                                                <Label fx:id="taxLabel" text="KES 0" style="-fx-font-size: 13; -fx-text-fill: #0D1B2A;"/>
                                             </children>
                                         </HBox>
-
-                                        <Separator style="-fx-background-color: #E5E7EB;" />
-
+                                        <Separator style="-fx-background-color: #E5E7EB;"/>
                                         <HBox alignment="CENTER_LEFT">
                                             <children>
-                                                <Label text="TOTAL"
-                                                       style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
-                                                    <font><Font name="System Bold" size="15.0" /></font>
+                                                <Label text="TOTAL" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                                                    <font><Font name="System Bold" size="15.0"/></font>
                                                 </Label>
-                                                <javafx.scene.layout.Region HBox.hgrow="ALWAYS" />
-                                                <Label fx:id="totalLabel"
-                                                       text="KES 0"
+                                                <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+                                                <Label fx:id="totalLabel" text="KES 0"
                                                        style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #E04A2A;">
-                                                    <font><Font name="System Bold" size="15.0" /></font>
+                                                    <font><Font name="System Bold" size="15.0"/></font>
                                                 </Label>
                                             </children>
                                         </HBox>
 
-                                        <!-- Loyalty points info -->
-                                        <HBox fx:id="loyaltyPointsBox"
-                                              visible="false"
+                                        <!-- Loyalty points -->
+                                        <HBox fx:id="loyaltyPointsBox" visible="false"
                                               style="-fx-background-color: #EEF2FF; -fx-border-color: #C7D2FE; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 10 8 10; -fx-border-width: 1;"
                                               alignment="CENTER_LEFT" spacing="6.0">
                                             <children>
-                                                <Label text="&#11088;"
-                                                       style="-fx-font-size: 13;" />
-                                                <Label fx:id="loyaltyPointsLabel"
-                                                       text="+0 loyalty points will be earned"
-                                                       style="-fx-font-size: 11; -fx-text-fill: #3730A3;" wrapText="true" prefWidth="210.0" />
+                                                <Label text="*" style="-fx-font-size: 14; -fx-text-fill: #3730A3; -fx-font-weight: bold;"/>
+                                                <Label fx:id="loyaltyPointsLabel" text="+0 loyalty points will be earned"
+                                                       style="-fx-font-size: 11; -fx-text-fill: #3730A3;" wrapText="true" prefWidth="210.0"/>
                                             </children>
                                         </HBox>
-
                                     </children>
                                 </VBox>
 
-                                <Separator style="-fx-background-color: #E5E7EB;" />
+                                <Separator style="-fx-background-color: #E5E7EB;"/>
 
-                                <!-- Error label -->
                                 <Label fx:id="orderErrorLabel"
                                        style="-fx-text-fill: #DC2626; -fx-font-size: 12; -fx-padding: 6 18 0 18;"
-                                       text="" visible="false" wrapText="true" prefWidth="264.0" />
+                                       text="" visible="false" wrapText="true" prefWidth="264.0"/>
 
-                                <!-- Submit Order Button -->
                                 <VBox style="-fx-padding: 14 18 18 18;" spacing="8.0">
                                     <children>
-                                        <Button fx:id="submitOrderBtn"
-                                                onAction="#handleSubmitOrder"
-                                                prefWidth="264.0" prefHeight="46.0"
-                                                text="Submit Order"
+                                        <Button fx:id="submitOrderBtn" onAction="#handleSubmitOrder"
+                                                prefWidth="350.0" prefHeight="46.0" text="Submit Order"
                                                 style="-fx-background-color: #E04A2A; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: transparent;">
-                                            <font><Font name="System Bold" size="14.0" /></font>
+                                            <font><Font name="System Bold" size="14.0"/></font>
                                         </Button>
-                                        <Button onAction="#handleClearCart"
-                                                prefWidth="264.0" prefHeight="36.0"
-                                                text="Clear Cart"
-                                                style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #666666; -fx-font-size: 12; -fx-cursor: hand;" />
+                                        <Button onAction="#handleClearCart" prefWidth="350.0" prefHeight="40.0" text="Clear Cart"
+                                                style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #666666; -fx-font-size: 12; -fx-cursor: hand;"/>
                                     </children>
                                 </VBox>
 
@@ -456,35 +352,26 @@
                     </children>
                 </HBox>
 
-                <!-- ═══════════════════════════════════════
-                     ORDER SUCCESS PANEL (hidden by default)
-                     ═══════════════════════════════════════ -->
+                <!-- SUCCESS PANEL -->
                 <VBox fx:id="successPanel" visible="false" managed="false"
                       style="-fx-background-color: white; -fx-border-color: #6EE7B7; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 30;"
                       alignment="CENTER" spacing="12.0">
                     <children>
-                        <Label text="&#10003;"
-                               style="-fx-font-size: 40; -fx-text-fill: #059669;" />
+                        <Label text="OK" style="-fx-font-size: 32; -fx-text-fill: #059669; -fx-font-weight: bold;"/>
                         <Label text="Order Submitted Successfully!"
                                style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #065F46;">
-                            <font><Font name="System Bold" size="18.0" /></font>
+                            <font><Font name="System Bold" size="18.0"/></font>
                         </Label>
-                        <Label fx:id="successOrderIdLabel"
-                               text="Order ID: #ORD-0000"
-                               style="-fx-font-size: 14; -fx-text-fill: #2563EB;" />
-                        <Label fx:id="successAmountLabel"
-                               text="Total: KES 0"
-                               style="-fx-font-size: 13; -fx-text-fill: #333333;" />
+                        <Label fx:id="successOrderIdLabel" text="Order ID: #ORD-0000"
+                               style="-fx-font-size: 14; -fx-text-fill: #2563EB;"/>
+                        <Label fx:id="successAmountLabel" text="Total: KES 0"
+                               style="-fx-font-size: 13; -fx-text-fill: #333333;"/>
                         <HBox alignment="CENTER" spacing="10.0">
                             <children>
-                                <Button onAction="#handlePrintReceipt"
-                                        prefHeight="38.0" prefWidth="140.0"
-                                        text="Print Receipt"
-                                        style="-fx-background-color: #0D1B2A; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;" />
-                                <Button onAction="#handleNewOrderAfterSuccess"
-                                        prefHeight="38.0" prefWidth="140.0"
-                                        text="New Order"
-                                        style="-fx-background-color: #E04A2A; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;" />
+                                <Button onAction="#handlePrintReceipt" prefHeight="38.0" prefWidth="140.0" text="Print Receipt"
+                                        style="-fx-background-color: #0D1B2A; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;"/>
+                                <Button onAction="#handleNewOrderAfterSuccess" prefHeight="38.0" prefWidth="140.0" text="New Order"
+                                        style="-fx-background-color: #E04A2A; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 12; -fx-cursor: hand; -fx-border-color: transparent;"/>
                             </children>
                         </HBox>
                     </children>

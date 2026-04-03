@@ -167,6 +167,8 @@ public class DashboardController {
         sidebarExpanded = !sidebarExpanded;
         if (sidebarExpanded) {
             sidebar.setPrefWidth(200.0);
+            sidebar.setMinWidth(200.0);
+
             sidebarStaffCard.setVisible(true);
             sidebarStaffCard.setManaged(true);
             secMainLabel.setVisible(true);
@@ -189,6 +191,7 @@ public class DashboardController {
             setNavText(navReturns,     "  Stock Returns");
         } else {
             sidebar.setPrefWidth(56.0);
+            sidebar.setMinWidth(56.0);
             sidebarStaffCard.setVisible(false);
             sidebarStaffCard.setManaged(false);
             secMainLabel.setVisible(false);
@@ -198,17 +201,17 @@ public class DashboardController {
             secReportsLabel.setVisible(false);
             secReportsLabel.setManaged(false);
             // Icon-only mode using symbols
-            setNavText(navDashboard,  "&#8962;");
-            setNavText(navOrders,     "&#128722;");
-            setNavText(navTracking,   "&#128666;");
-            setNavText(navCustomers,  "&#128101;");
-            setNavText(navInventory,  "&#128230;");
-            setNavText(navBranches,   "&#127968;");
-            setNavText(navStaff,      "&#128100;");
-            setNavText(navReports,    "&#128202;");
-            setNavText(navAlerts,     "&#9888;");
-            setNavText(navLoyalty,    "&#11088;");
-            setNavText(navReturns,    "&#8617;");
+            setNavText(navDashboard, "\u2302");      // ⌂ Home
+            setNavText(navOrders,    "\uD83D\uDED2"); // 🛒 Shopping Cart
+            setNavText(navTracking,  "\uD83D\uDE66"); // 🚦 Traffic/Tracking
+            setNavText(navCustomers, "\uD83D\uDC65"); // 👥 Customers
+            setNavText(navInventory, "\uD83D\uDCBE"); // 💾 Inventory
+            setNavText(navBranches,  "\uD83C\uDFE0"); // 🏠 Branches
+            setNavText(navStaff,     "\uD83D\uDC64"); // 👤 Staff
+            setNavText(navReports,   "\uD83D\uDCCA"); // 📊 Reports
+            setNavText(navAlerts,    "\u26A0");      // ⚠ Alerts
+            setNavText(navLoyalty,   "\u2B50");      // ⭐ Loyalty
+            setNavText(navReturns,   "\u21A9");      // ↩ Returns
         }
     }
 
@@ -245,7 +248,7 @@ public class DashboardController {
         stopSessionTimer();
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("login.fxml"));
+                    getClass().getResource("login-view.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) contentArea.getScene().getWindow();
             stage.setScene(new Scene(root));

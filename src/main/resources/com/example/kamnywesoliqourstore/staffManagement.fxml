@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true"
+            style="-fx-background-color: #F4F6FA; -fx-background: #F4F6FA; -fx-border-color: transparent;"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.kamnywesoliqourstore.StaffManagementController">
+    <content>
+        <VBox style="-fx-background-color: #F4F6FA; -fx-padding: 24;" spacing="20.0">
+            <children>
+
+                <!-- HEADER -->
+                <HBox alignment="CENTER_LEFT">
+                    <children>
+                        <VBox spacing="3.0">
+                            <children>
+                                <Label text="Staff Management"
+                                       style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                                    <font><Font name="System Bold" size="22.0"/></font>
+                                </Label>
+                                <Label text="Manage staff accounts, roles and pending approvals"
+                                       style="-fx-font-size: 13; -fx-text-fill: #666666;"/>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <!-- TAB TOGGLE -->
+                <HBox spacing="0.0">
+                    <children>
+                        <Button fx:id="staffTabBtn" onAction="#showStaffTab"
+                                prefHeight="38.0" prefWidth="180.0" text="Staff Accounts"
+                                style="-fx-background-color: #0D1B2A; -fx-background-radius: 8 0 0 8; -fx-text-fill: white; -fx-font-size: 13; -fx-cursor: hand; -fx-border-color: transparent;">
+                            <font><Font name="System Bold" size="13.0"/></font>
+                        </Button>
+                        <Button fx:id="pendingTabBtn" onAction="#showPendingTab"
+                                prefHeight="38.0" prefWidth="200.0" text="Pending Approvals (2)"
+                                style="-fx-background-color: white; -fx-border-color: #DDDDDD; -fx-border-radius: 0 8 8 0; -fx-text-fill: #444444; -fx-font-size: 13; -fx-cursor: hand;">
+                        </Button>
+                    </children>
+                </HBox>
+
+                <!-- STAFF ACCOUNTS TAB -->
+                <VBox fx:id="staffTab"
+                      style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 18;"
+                      spacing="12.0" visible="true" managed="true">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <children>
+                                <Label text="All Staff Accounts"
+                                       style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                                    <font><Font name="System Bold" size="15.0"/></font>
+                                </Label>
+                                <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+                                <TextField fx:id="staffSearchField" prefHeight="34.0" prefWidth="200.0"
+                                           promptText="Search staff..."
+                                           style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 0 8 0 8; -fx-font-size: 12;"/>
+                            </children>
+                        </HBox>
+                        <Separator style="-fx-background-color: #F3F4F6;"/>
+                        <!-- Table header -->
+                        <HBox style="-fx-padding: 6 0 6 0; -fx-background-color: #F9FAFB;">
+                            <children>
+                                <Label text="Name" prefWidth="150.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold; -fx-padding: 0 0 0 8;"/>
+                                <Label text="Staff ID" prefWidth="100.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                <Label text="Branch" prefWidth="120.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                <Label text="Role" prefWidth="120.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                <Label text="Status" prefWidth="90.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                <Label text="Last Login" prefWidth="120.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                <Label text="Actions" prefWidth="160.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                            </children>
+                        </HBox>
+                        <Separator style="-fx-background-color: #F3F4F6;"/>
+                        <!-- Staff rows -->
+                        <VBox spacing="0.0">
+                            <children>
+                                <!-- Row 1 -->
+                                <HBox style="-fx-padding: 10 0 10 0; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;" alignment="CENTER_LEFT">
+                                    <children>
+                                        <HBox prefWidth="150.0" alignment="CENTER_LEFT" spacing="8.0" style="-fx-padding: 0 0 0 8;">
+                                            <children>
+                                                <StackPane prefWidth="30.0" prefHeight="30.0">
+                                                    <children>
+                                                        <javafx.scene.shape.Circle radius="15.0" fill="#EEF2FF"/>
+                                                        <Label text="JD" style="-fx-font-size: 10; -fx-text-fill: #3730A3; -fx-font-weight: bold;"/>
+                                                    </children>
+                                                </StackPane>
+                                                <Label text="John Doe" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-font-weight: bold;"/>
+                                            </children>
+                                        </HBox>
+                                        <Label text="DS-0001" prefWidth="100.0" style="-fx-font-size: 12; -fx-text-fill: #2563EB;"/>
+                                        <Label text="Nairobi HQ" prefWidth="120.0" style="-fx-font-size: 12; -fx-text-fill: #444444;"/>
+                                        <Label text="Manager" prefWidth="120.0" style="-fx-font-size: 12; -fx-text-fill: #444444;"/>
+                                        <Label text="Active" prefWidth="90.0" style="-fx-font-size: 11; -fx-text-fill: #065F46; -fx-background-color: #D1FAE5; -fx-background-radius: 10; -fx-padding: 2 8 2 8;"/>
+                                        <Label text="Today 09:14" prefWidth="120.0" style="-fx-font-size: 11; -fx-text-fill: #666666;"/>
+                                        <HBox spacing="6.0">
+                                            <children>
+                                                <Button onAction="#handleViewStaff" prefHeight="26.0" prefWidth="46.0" text="View"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #444444; -fx-font-size: 11; -fx-cursor: hand;"/>
+                                                <Button onAction="#handleSuspendStaff" prefHeight="26.0" prefWidth="62.0" text="Suspend"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #D97706; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #D97706; -fx-font-size: 11; -fx-cursor: hand;"/>
+                                                <Button onAction="#handleResetPassword" prefHeight="26.0" prefWidth="50.0" text="Reset"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #2563EB; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #2563EB; -fx-font-size: 11; -fx-cursor: hand;"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </HBox>
+                                <!-- Row 2 -->
+                                <HBox style="-fx-padding: 10 0 10 0; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;" alignment="CENTER_LEFT">
+                                    <children>
+                                        <HBox prefWidth="150.0" alignment="CENTER_LEFT" spacing="8.0" style="-fx-padding: 0 0 0 8;">
+                                            <children>
+                                                <StackPane prefWidth="30.0" prefHeight="30.0">
+                                                    <children>
+                                                        <javafx.scene.shape.Circle radius="15.0" fill="#FEF3C7"/>
+                                                        <Label text="SJ" style="-fx-font-size: 10; -fx-text-fill: #92400E; -fx-font-weight: bold;"/>
+                                                    </children>
+                                                </StackPane>
+                                                <Label text="Sarah Juma" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-font-weight: bold;"/>
+                                            </children>
+                                        </HBox>
+                                        <Label text="DS-0002" prefWidth="100.0" style="-fx-font-size: 12; -fx-text-fill: #2563EB;"/>
+                                        <Label text="Mombasa" prefWidth="120.0" style="-fx-font-size: 12; -fx-text-fill: #444444;"/>
+                                        <Label text="Cashier" prefWidth="120.0" style="-fx-font-size: 12; -fx-text-fill: #444444;"/>
+                                        <Label text="Active" prefWidth="90.0" style="-fx-font-size: 11; -fx-text-fill: #065F46; -fx-background-color: #D1FAE5; -fx-background-radius: 10; -fx-padding: 2 8 2 8;"/>
+                                        <Label text="Today 08:30" prefWidth="120.0" style="-fx-font-size: 11; -fx-text-fill: #666666;"/>
+                                        <HBox spacing="6.0">
+                                            <children>
+                                                <Button onAction="#handleViewStaff" prefHeight="26.0" prefWidth="46.0" text="View"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #444444; -fx-font-size: 11; -fx-cursor: hand;"/>
+                                                <Button onAction="#handleSuspendStaff" prefHeight="26.0" prefWidth="62.0" text="Suspend"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #D97706; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #D97706; -fx-font-size: 11; -fx-cursor: hand;"/>
+                                                <Button onAction="#handleResetPassword" prefHeight="26.0" prefWidth="50.0" text="Reset"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #2563EB; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #2563EB; -fx-font-size: 11; -fx-cursor: hand;"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </HBox>
+                                <!-- Row 3: Suspended -->
+                                <HBox style="-fx-padding: 10 0 10 0;" alignment="CENTER_LEFT">
+                                    <children>
+                                        <HBox prefWidth="150.0" alignment="CENTER_LEFT" spacing="8.0" style="-fx-padding: 0 0 0 8;">
+                                            <children>
+                                                <StackPane prefWidth="30.0" prefHeight="30.0">
+                                                    <children>
+                                                        <javafx.scene.shape.Circle radius="15.0" fill="#F3F4F6"/>
+                                                        <Label text="PO" style="-fx-font-size: 10; -fx-text-fill: #6B7280; -fx-font-weight: bold;"/>
+                                                    </children>
+                                                </StackPane>
+                                                <Label text="Peter Ouma" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-font-weight: bold;"/>
+                                            </children>
+                                        </HBox>
+                                        <Label text="DS-0003" prefWidth="100.0" style="-fx-font-size: 12; -fx-text-fill: #2563EB;"/>
+                                        <Label text="Kisumu" prefWidth="120.0" style="-fx-font-size: 12; -fx-text-fill: #444444;"/>
+                                        <Label text="Supervisor" prefWidth="120.0" style="-fx-font-size: 12; -fx-text-fill: #444444;"/>
+                                        <Label text="Suspended" prefWidth="90.0" style="-fx-font-size: 11; -fx-text-fill: #92400E; -fx-background-color: #FEF3C7; -fx-background-radius: 10; -fx-padding: 2 8 2 8;"/>
+                                        <Label text="20 Mar 2026" prefWidth="120.0" style="-fx-font-size: 11; -fx-text-fill: #666666;"/>
+                                        <HBox spacing="6.0">
+                                            <children>
+                                                <Button onAction="#handleViewStaff" prefHeight="26.0" prefWidth="46.0" text="View"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #DDDDDD; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #444444; -fx-font-size: 11; -fx-cursor: hand;"/>
+                                                <Button onAction="#handleActivateStaff" prefHeight="26.0" prefWidth="62.0" text="Activate"
+                                                        style="-fx-background-color: #059669; -fx-background-radius: 4; -fx-text-fill: white; -fx-font-size: 11; -fx-cursor: hand; -fx-border-color: transparent;"/>
+                                                <Button onAction="#handleResetPassword" prefHeight="26.0" prefWidth="50.0" text="Reset"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #2563EB; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #2563EB; -fx-font-size: 11; -fx-cursor: hand;"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+                <!-- PENDING APPROVALS TAB -->
+                <VBox fx:id="pendingTab"
+                      style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 18;"
+                      spacing="14.0" visible="false" managed="false">
+                    <children>
+                        <Label text="Pending Registration Approvals"
+                               style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                            <font><Font name="System Bold" size="15.0"/></font>
+                        </Label>
+                        <Separator style="-fx-background-color: #F3F4F6;"/>
+                        <GridPane hgap="14.0" vgap="14.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0"/>
+                                <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0"/>
+                            </columnConstraints>
+                            <children>
+                                <!-- Pending Card 1 -->
+                                <VBox GridPane.columnIndex="0"
+                                      style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 16;"
+                                      spacing="8.0">
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                            <children>
+                                                <StackPane prefWidth="40.0" prefHeight="40.0">
+                                                    <children>
+                                                        <javafx.scene.shape.Circle radius="20.0" fill="#FEF3C7"/>
+                                                        <Label text="MK" style="-fx-font-size: 12; -fx-text-fill: #92400E; -fx-font-weight: bold;"/>
+                                                    </children>
+                                                </StackPane>
+                                                <VBox spacing="2.0">
+                                                    <children>
+                                                        <Label text="Mary Kiptoo"
+                                                               style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                                                            <font><Font name="System Bold" size="14.0"/></font>
+                                                        </Label>
+                                                        <Label text="Applied 25 Mar 2026"
+                                                               style="-fx-font-size: 11; -fx-text-fill: #888888;"/>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                        <Separator style="-fx-background-color: #E5E7EB;"/>
+                                        <VBox spacing="6.0">
+                                            <children>
+                                                <HBox><Label text="Role: " style="-fx-font-size: 12; -fx-text-fill: #888888;" prefWidth="80.0"/><Label text="Cashier" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A;"/></HBox>
+                                                <HBox><Label text="Branch: " style="-fx-font-size: 12; -fx-text-fill: #888888;" prefWidth="80.0"/><Label text="Nakuru Branch" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A;"/></HBox>
+                                                <HBox><Label text="Phone: " style="-fx-font-size: 12; -fx-text-fill: #888888;" prefWidth="80.0"/><Label text="+254 711 222 333" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A;"/></HBox>
+                                                <HBox><Label text="Email: " style="-fx-font-size: 12; -fx-text-fill: #888888;" prefWidth="80.0"/><Label text="mary.k@drinkshop.co.ke" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A;"/></HBox>
+                                            </children>
+                                        </VBox>
+                                        <HBox spacing="8.0" style="-fx-padding: 6 0 0 0;">
+                                            <children>
+                                                <Button onAction="#handleApproveStaff" prefHeight="36.0" HBox.hgrow="ALWAYS"
+                                                        text="Approve"
+                                                        style="-fx-background-color: #059669; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-size: 13; -fx-cursor: hand; -fx-border-color: transparent;">
+                                                    <font><Font name="System Bold" size="13.0"/></font>
+                                                </Button>
+                                                <Button onAction="#handleRejectStaff" prefHeight="36.0" HBox.hgrow="ALWAYS"
+                                                        text="Reject"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #DC2626; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #DC2626; -fx-font-size: 13; -fx-cursor: hand;">
+                                                    <font><Font name="System Bold" size="13.0"/></font>
+                                                </Button>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                                <!-- Pending Card 2 -->
+                                <VBox GridPane.columnIndex="1"
+                                      style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 16;"
+                                      spacing="8.0">
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                            <children>
+                                                <StackPane prefWidth="40.0" prefHeight="40.0">
+                                                    <children>
+                                                        <javafx.scene.shape.Circle radius="20.0" fill="#EDE9FE"/>
+                                                        <Label text="TN" style="-fx-font-size: 12; -fx-text-fill: #5B21B6; -fx-font-weight: bold;"/>
+                                                    </children>
+                                                </StackPane>
+                                                <VBox spacing="2.0">
+                                                    <children>
+                                                        <Label text="Tom Njoroge"
+                                                               style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                                                            <font><Font name="System Bold" size="14.0"/></font>
+                                                        </Label>
+                                                        <Label text="Applied 24 Mar 2026"
+                                                               style="-fx-font-size: 11; -fx-text-fill: #888888;"/>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                        <Separator style="-fx-background-color: #E5E7EB;"/>
+                                        <VBox spacing="6.0">
+                                            <children>
+                                                <HBox><Label text="Role: " style="-fx-font-size: 12; -fx-text-fill: #888888;" prefWidth="80.0"/><Label text="Stock Controller" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A;"/></HBox>
+                                                <HBox><Label text="Branch: " style="-fx-font-size: 12; -fx-text-fill: #888888;" prefWidth="80.0"/><Label text="Kisumu Branch" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A;"/></HBox>
+                                                <HBox><Label text="Phone: " style="-fx-font-size: 12; -fx-text-fill: #888888;" prefWidth="80.0"/><Label text="+254 722 444 555" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A;"/></HBox>
+                                                <HBox><Label text="Email: " style="-fx-font-size: 12; -fx-text-fill: #888888;" prefWidth="80.0"/><Label text="tom.n@drinkshop.co.ke" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A;"/></HBox>
+                                            </children>
+                                        </VBox>
+                                        <HBox spacing="8.0" style="-fx-padding: 6 0 0 0;">
+                                            <children>
+                                                <Button onAction="#handleApproveStaff" prefHeight="36.0" HBox.hgrow="ALWAYS"
+                                                        text="Approve"
+                                                        style="-fx-background-color: #059669; -fx-background-radius: 6; -fx-text-fill: white; -fx-font-size: 13; -fx-cursor: hand; -fx-border-color: transparent;">
+                                                    <font><Font name="System Bold" size="13.0"/></font>
+                                                </Button>
+                                                <Button onAction="#handleRejectStaff" prefHeight="36.0" HBox.hgrow="ALWAYS"
+                                                        text="Reject"
+                                                        style="-fx-background-color: transparent; -fx-border-color: #DC2626; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #DC2626; -fx-font-size: 13; -fx-cursor: hand;">
+                                                    <font><Font name="System Bold" size="13.0"/></font>
+                                                </Button>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </GridPane>
+                    </children>
+                </VBox>
+
+                <!-- ACTIVE SESSIONS -->
+                <VBox style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 18;" spacing="12.0">
+                    <children>
+                        <Label text="Active Sessions"
+                               style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
+                            <font><Font name="System Bold" size="15.0"/></font>
+                        </Label>
+                        <Separator style="-fx-background-color: #F3F4F6;"/>
+                        <HBox style="-fx-padding: 6 0 6 0; -fx-background-color: #F9FAFB;">
+                            <children>
+                                <Label text="Staff Name" prefWidth="160.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold; -fx-padding: 0 0 0 8;"/>
+                                <Label text="Branch" prefWidth="130.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                <Label text="Login Time" prefWidth="130.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                <Label text="Last Activity" prefWidth="130.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                <Label text="Actions" prefWidth="130.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                            </children>
+                        </HBox>
+                        <Separator style="-fx-background-color: #F3F4F6;"/>
+                        <VBox spacing="0.0">
+                            <children>
+                                <HBox style="-fx-padding: 9 0 9 0; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label text="John Doe" prefWidth="160.0" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-padding: 0 0 0 8;"/>
+                                        <Label text="Nairobi HQ" prefWidth="130.0" style="-fx-font-size: 12; -fx-text-fill: #444444;"/>
+                                        <Label text="09:14 AM" prefWidth="130.0" style="-fx-font-size: 12; -fx-text-fill: #444444;"/>
+                                        <Label text="2 mins ago" prefWidth="130.0" style="-fx-font-size: 12; -fx-text-fill: #059669;"/>
+                                        <Button onAction="#handleTerminateSession" prefHeight="28.0" prefWidth="120.0" text="Terminate Session"
+                                                style="-fx-background-color: transparent; -fx-border-color: #DC2626; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #DC2626; -fx-font-size: 11; -fx-cursor: hand;"/>
+                                    </children>
+                                </HBox>
+                                <HBox style="-fx-padding: 9 0 9 0;" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label text="Sarah Juma" prefWidth="160.0" style="-fx-font-size: 12; -fx-text-fill: #0D1B2A; -fx-padding: 0 0 0 8;"/>
+                                        <Label text="Mombasa" prefWidth="130.0" style="-fx-font-size: 12; -fx-text-fill: #444444;"/>
+                                        <Label text="08:30 AM" prefWidth="130.0" style="-fx-font-size: 12; -fx-text-fill: #444444;"/>
+                                        <Label text="15 mins ago" prefWidth="130.0" style="-fx-font-size: 12; -fx-text-fill: #D97706;"/>
+                                        <Button onAction="#handleTerminateSession" prefHeight="28.0" prefWidth="120.0" text="Terminate Session"
+                                                style="-fx-background-color: transparent; -fx-border-color: #DC2626; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #DC2626; -fx-font-size: 11; -fx-cursor: hand;"/>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>

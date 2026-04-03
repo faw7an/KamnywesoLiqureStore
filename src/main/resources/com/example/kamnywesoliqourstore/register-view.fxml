@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane prefHeight="700.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kamnywesoliqourstore.RegisterController">
+    <children>
+        <VBox alignment="TOP_CENTER" prefHeight="600" maxWidth="480.0" spacing="20.0" styleClass="card" style="-fx-padding: 30;">
+            <children>
+                <!-- Header Section -->
+                <VBox alignment="CENTER" spacing="8.0">
+                    <Label styleClass="logo-box" text="KLS" />
+                    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" styleClass="text-navy" text="Create Account" />
+                    <Label styleClass="text-muted" text="Join Kamnyweso Liquor Store" />
+                </VBox>
+
+                <!-- Progress Dots -->
+                <HBox alignment="CENTER" spacing="15.0">
+                    <Label fx:id="dot1" styleClass="dot, dot-active" text="●" />
+                    <Label fx:id="dot2" styleClass="dot" text="●" />
+                    <Label fx:id="dot3" styleClass="dot" text="●" />
+                </HBox>
+
+                <!-- ═════════════════════════════════════════════════════════════ -->
+                <!-- STEP 1: PERSONAL INFORMATION -->
+                <!-- ═════════════════════════════════════════════════════════════ -->
+                <VBox fx:id="step1Pane" spacing="12.0">
+                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" styleClass="text-navy" text="Personal Information" />
+
+                    <!-- Error Label -->
+                    <Label fx:id="step1ErrorLabel" styleClass="text-danger" text="Error message" visible="false" wrapText="true" />
+
+                    <!-- Full Name -->
+                    <VBox spacing="5.0">
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 11px;" styleClass="text-muted" text="FULL NAME" />
+                        <TextField fx:id="fullNameField" promptText="e.g. John Doe" styleClass="input-field" />
+                    </VBox>
+
+                    <!-- Phone Number -->
+                    <VBox spacing="5.0">
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 11px;" styleClass="text-muted" text="PHONE NUMBER" />
+                        <TextField fx:id="phoneField" promptText="+254712345678" styleClass="input-field" />
+                    </VBox>
+
+                    <!-- Email -->
+                    <VBox spacing="5.0">
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 11px;" styleClass="text-muted" text="EMAIL ADDRESS" />
+                        <TextField fx:id="emailField" promptText="john@example.com" styleClass="input-field" />
+                    </VBox>
+
+                    <!-- Branch -->
+                    <VBox spacing="5.0">
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 11px;" styleClass="text-muted" text="BRANCH" />
+                        <ComboBox fx:id="regBranchComboBox" maxWidth="Infinity" promptText="Select Branch" styleClass="input-field" />
+                    </VBox>
+
+                    <!-- Role -->
+                    <VBox spacing="5.0">
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 11px;" styleClass="text-muted" text="ROLE" />
+                        <ComboBox fx:id="roleComboBox" maxWidth="Infinity" promptText="Select Role" styleClass="input-field" />
+                    </VBox>
+
+                    <!-- Continue Button -->
+                    <Button maxWidth="Infinity" onAction="#handleStep1Continue" styleClass="button-primary" text="Continue →" />
+                </VBox>
+
+                <!-- ═════════════════════════════════════════════════════════════ -->
+                <!-- STEP 2: CREATE PASSWORD -->
+                <!-- ═════════════════════════════════════════════════════════════ -->
+                <VBox fx:id="step2Pane" spacing="12.0" visible="false" managed="false">
+                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" styleClass="text-navy" text="Create Password" />
+
+                    <!-- Error Label -->
+                    <Label fx:id="step2ErrorLabel" styleClass="text-danger" text="Error message" visible="false" wrapText="true" />
+
+                    <!-- Password -->
+                    <VBox spacing="5.0">
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 11px;" styleClass="text-muted" text="PASSWORD" />
+                        <PasswordField fx:id="regPasswordField" promptText="••••••••" styleClass="input-field" />
+                    </VBox>
+
+                    <!-- Confirm Password -->
+                    <VBox spacing="5.0">
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 11px;" styleClass="text-muted" text="CONFIRM PASSWORD" />
+                        <PasswordField fx:id="confirmPasswordField" promptText="••••••••" styleClass="input-field" />
+                    </VBox>
+
+                    <!-- Password Rules -->
+                    <VBox spacing="6.0" style="-fx-padding: 12; -fx-background-color: #f9fafb; -fx-background-radius: 8;">
+                        <Label style="-fx-font-size: 11px; -fx-font-weight: bold;" styleClass="text-muted" text="PASSWORD MUST HAVE:" />
+                        <Label fx:id="rule8Chars" styleClass="rule-text" text="X  At least 8 characters" />
+                        <Label fx:id="ruleUppercase" styleClass="rule-text" text="X  One uppercase letter (A-Z)" />
+                        <Label fx:id="ruleNumber" styleClass="rule-text" text="X  One number (0-9)" />
+                        <Label fx:id="ruleSpecial" styleClass="rule-text" text="X  One special character (!@#$%)" />
+                    </VBox>
+
+                    <!-- Navigation Buttons -->
+                    <HBox spacing="10.0">
+                        <Button maxWidth="Infinity" onAction="#handleStep2Back" styleClass="button-ghost" text="← Back" HBox.hgrow="ALWAYS" />
+                        <Button maxWidth="Infinity" onAction="#handleStep2Continue" styleClass="button-primary" text="Continue →" HBox.hgrow="ALWAYS" />
+                    </HBox>
+                </VBox>
+
+                <!-- ═════════════════════════════════════════════════════════════ -->
+                <!-- STEP 3: OTP VERIFICATION -->
+                <!-- ═════════════════════════════════════════════════════════════ -->
+                <VBox fx:id="step3Pane" spacing="12.0" visible="false" managed="false">
+                    <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" styleClass="text-navy" text="Verify Your Phone" />
+
+                    <!-- Error Label -->
+                    <Label fx:id="step3ErrorLabel" styleClass="text-danger" text="Error message" visible="false" wrapText="true" />
+
+                    <!-- OTP Sent Label -->
+                    <Label fx:id="otpSentLabel" styleClass="text-muted" text="OTP sent to +254XXXXXXXXX" />
+
+                    <!-- OTP Input Boxes -->
+                    <HBox alignment="CENTER" spacing="8.0" style="-fx-padding: 10;">
+                        <TextField fx:id="otp1" maxWidth="45.0" promptText="0" styleClass="otp-input" />
+                        <TextField fx:id="otp2" maxWidth="45.0" promptText="0" styleClass="otp-input" />
+                        <TextField fx:id="otp3" maxWidth="45.0" promptText="0" styleClass="otp-input" />
+                        <TextField fx:id="otp4" maxWidth="45.0" promptText="0" styleClass="otp-input" />
+                        <TextField fx:id="otp5" maxWidth="45.0" promptText="0" styleClass="otp-input" />
+                        <TextField fx:id="otp6" maxWidth="45.0" promptText="0" styleClass="otp-input" />
+                    </HBox>
+
+                    <!-- Timer and Resend -->
+                    <VBox alignment="CENTER" spacing="8.0" style="-fx-padding: 10; -fx-background-color: #f9fafb; -fx-background-radius: 8;">
+                        <Label fx:id="timerLabel" style="-fx-font-size: 13px; -fx-font-weight: bold;" styleClass="text-primary" text="Resend code in 04:59" />
+                        <Button fx:id="resendBtn" onAction="#handleResendOtp" styleClass="button-ghost" text="Resend OTP" visible="false" />
+                    </VBox>
+
+                    <!-- Complete Registration Button -->
+                    <Button maxWidth="Infinity" onAction="#handleCompleteRegistration" styleClass="button-primary" text="Complete Registration" />
+
+                    <!-- Back and Sign In -->
+                    <HBox alignment="CENTER" spacing="10.0">
+                        <Button onAction="#handleStep3Back" styleClass="button-ghost" text="← Back" HBox.hgrow="ALWAYS" />
+                        <Button onAction="#handleSignIn" styleClass="button-ghost" text="Back to Sign In" HBox.hgrow="ALWAYS" />
+                    </HBox>
+                </VBox>
+
+                <!-- Sign In Link -->
+                <HBox alignment="CENTER" spacing="5.0" style="-fx-border-color: #E2E8F0; -fx-border-width: 1 0 0 0; -fx-padding: 15 0 0 0;">
+                    <Label styleClass="text-muted" text="Already have an account?" />
+                    <Label onMouseClicked="#handleSignIn" style="-fx-font-weight: bold; -fx-cursor: hand;" styleClass="text-primary" text="Sign In" />
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </VBox>
+    </children>
+</StackPane>

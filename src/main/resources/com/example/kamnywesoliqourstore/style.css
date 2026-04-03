@@ -1,0 +1,209 @@
+/* Global Root - Deep Navy Background */
+.root {
+    -fx-background-color: #0f172a;
+    -fx-font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+/*landing page style*/
+/* Portal Card Container */
+.portal-card {
+    -fx-background-color: white;
+    -fx-background-radius: 16px;
+    -fx-padding: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-width: 2px;
+    -fx-border-radius: 16px;
+}
+
+.portal-card:hover {
+    -fx-border-color: #2563EB; /* primary */
+}
+
+/* Icon Containers */
+.icon-box-admin {
+    -fx-background-color: rgba(37, 99, 235, 0.1); 
+    -fx-background-radius: 12px;
+    -fx-min-width: 48px;
+    -fx-min-height: 48px;
+    -fx-max-width: 48px;
+    -fx-max-height: 48px;
+    -fx-alignment: center;
+}
+
+.icon-box-branch {
+    -fx-background-color: rgba(34, 197, 94, 0.1); 
+    -fx-background-radius: 12px;
+    -fx-min-width: 48px;
+    -fx-min-height: 48px;
+    -fx-max-width: 48px;
+    -fx-max-height: 48px;
+    -fx-alignment: center;
+}
+
+/* HQ admin Login page */
+
+/* The White Login Card */
+.card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 16px;
+    -fx-padding: 40px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 20, 0, 0, 10);
+}
+
+/* DS Logo Box */
+.logo-box {
+    -fx-background-color: #2563EB;
+    -fx-background-radius: 12px;
+    -fx-min-width: 60px;
+    -fx-min-height: 60px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+    -fx-alignment: center;
+}
+
+/* Primary Button - Bright Blue */
+.button-primary {
+    -fx-background-color: #2563EB;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px;
+    -fx-cursor: hand;
+}
+.button-primary:hover {
+    -fx-background-color: #1d4ed8;
+}
+
+/* Inputs */
+.input-field {
+    -fx-background-color: white;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 10px;
+}
+.input-field:focused {
+    -fx-border-color: #2563EB;
+}
+
+/* Text Colors */
+.text-navy { -fx-text-fill: #0f172a; }
+.text-muted { -fx-text-fill: #64748b; }
+.text-primary { -fx-text-fill: #2563EB; }
+
+/* 2FA Icon Circle */
+.icon-circle {
+    -fx-background-color: rgba(37, 99, 235, 0.1); /* primary/10 */
+    -fx-background-radius: 50;
+    -fx-min-width: 48px;
+    -fx-min-height: 48px;
+    -fx-alignment: center;
+}
+
+/* OTP Input Boxes */
+.otp-input {
+    -fx-background-color: transparent;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 8px;
+    -fx-min-width: 45px;
+    -fx-min-height: 55px;
+    -fx-alignment: center;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0f172a;
+}
+
+/* Red Warning Text */
+.text-danger {
+    -fx-text-fill: #ef4444;
+    -fx-font-weight: bold;
+    -fx-font-size: 10px;
+}
+
+/* Progress Dots */
+.dot {
+    -fx-min-width: 12px;
+    -fx-min-height: 12px;
+    -fx-background-radius: 50;
+    -fx-background-color: #E2E8F0; /* Default border color */
+}
+.dot-active { -fx-background-color: #2563EB; }
+.dot-complete { -fx-background-color: #22C55E; }
+
+/* Password Rules */
+.rule-text { -fx-font-size: 11px; -fx-text-fill: #64748b; }
+.rule-met { -fx-text-fill: #22C55E; -fx-font-weight: bold; }
+
+/* Back Button */
+.button-ghost {
+    -fx-background-color: transparent;
+    -fx-text-fill: #64748b;
+    -fx-font-weight: bold;
+}
+.button-ghost:hover { -fx-background-color: #f1f5f9; }
+
+/* HQ Dashboard*/
+/* Stat Cards */
+.stat-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-padding: 24px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 15, 0, 0, 5);
+}
+
+/* Sidebar Nav Button */
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12px 20px;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+}
+.nav-button SVGPath {
+    -fx-stroke: white;
+}
+.nav-button:hover {
+    -fx-background-color: #1E293B;
+    -fx-cursor: hand;
+}
+.nav-button-active {
+    -fx-background-color: #1E293B;
+    -fx-text-fill: white;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12px 20px;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+}
+.nav-button-active SVGPath {
+    -fx-stroke: #2563EB;
+}
+
+/* Revenue Chart Bars */
+.bar-nakuru { -fx-background-color: #2563EB; -fx-background-radius: 8 8 0 0; }
+.bar-mombasa { -fx-background-color: #7C3AED; -fx-background-radius: 8 8 0 0; }
+.bar-kisumu { -fx-background-color: #059669; -fx-background-radius: 8 8 0 0; }
+.bar-hq { -fx-background-color: #D97706; -fx-background-radius: 8 8 0 0; }
+
+/* Status Badges */
+.badge {
+    -fx-padding: 2 8;
+    -fx-background-radius: 12;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+.badge-ok { -fx-background-color: #DCFCE7; -fx-text-fill: #166534; }
+.badge-low { -fx-background-color: #FEF3C7; -fx-text-fill: #92400E; }
+.badge-critical { -fx-background-color: #FEE2E2; -fx-text-fill: #991B1B; }
+
+/* Alert Box */
+.alert-banner {
+    -fx-background-color: #FEF2F2;
+    -fx-border-color: #FEE2E2;
+    -fx-border-radius: 8;
+    -fx-padding: 12;
+    -fx-text-fill: #991B1B;
+    -fx-font-weight: bold;
+}

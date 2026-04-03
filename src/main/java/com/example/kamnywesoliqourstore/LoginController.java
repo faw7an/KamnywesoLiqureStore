@@ -10,14 +10,13 @@ import javafx.stage.Stage;
 public class LoginController {
 
     @FXML private ComboBox<String> branchComboBox;
-    @FXML private TextField usernameField;
+    @FXML private TextField staffIdField;              // FIXED: was usernameField
     @FXML private PasswordField passwordField;
-    @FXML private CheckBox rememberMeCheckBox;
-    @FXML private Hyperlink forgotPasswordLink;
-    @FXML private Hyperlink signUpLink;
+    @FXML private CheckBox rememberMeCheckBox;         // FIXED: added fx:id to FXML
+    @FXML private Label forgotPasswordLabel;           // FIXED: changed from Hyperlink to Label
+    @FXML private Label signUpLabel;                   // FIXED: changed from Hyperlink to Label
     @FXML private Label errorLabel;
-    @FXML private Button loginButton;
-    @FXML private Label orLabel;
+    @FXML private Button signInButton;                 // FIXED: was loginButton
 
     @FXML
     public void initialize() {
@@ -27,6 +26,11 @@ public class LoginController {
                 "Kisumu Branch",
                 "Nakuru Branch"
         );
+
+        // Clear error label on startup
+        if (errorLabel != null) {
+            errorLabel.setVisible(false);
+        }
     }
 
     @FXML
@@ -34,20 +38,25 @@ public class LoginController {
         String selectedBranch = branchComboBox.getValue();
         if (selectedBranch != null) {
             System.out.println("Branch selected: " + selectedBranch);
+            // Clear any previous errors when branch changes
+            if (errorLabel != null) {
+                errorLabel.setVisible(false);
+            }
         }
     }
 
     @FXML
     private void handleLogin() {
         String branch   = branchComboBox.getValue();
-        String username = usernameField.getText().trim();
+        String staffId  = staffIdField.getText().trim();    // FIXED: was usernameField
         String password = passwordField.getText().trim();
 
+        // Validation
         if (branch == null || branch.isEmpty()) {
             showError("Please select a branch.");
             return;
         }
-        if (username.isEmpty()) {
+        if (staffId.isEmpty()) {
             showError("Please enter your Staff ID or Email.");
             return;
         }
@@ -56,16 +65,28 @@ public class LoginController {
             return;
         }
 
-        // TODO: Replace with real authentication (database check)
-        // Simulated credentials for testing
-        // username: admin, password: Admin@123
-        if (username.equals("admin") && password.equals("Admin@123")) {
+        // TODO: Replace with real authentication (connect to server/database)
+        // For now: simulated credentials for testing
+        // Test credentials: staffId=admin, password=Admin@123
+
+        if (authenticateUser(staffId, password, branch)) {
             errorLabel.setVisible(false);
-            navigateToOtp(username, branch, "Manager", "John Doe",
-                    "+254712345678");
+            navigateToOtp(staffId, branch, "Manager", "John Doe", "+254712345678");
         } else {
             showError("Invalid Staff ID or password.");
         }
+    }
+
+    /**
+     * Authenticates user against the server/database
+     * TODO: Replace with actual backend call (REST API, RMI, Sockets, etc.)
+     */
+    private boolean authenticateUser(String staffId, String password, String branch) {
+        // Hardcoded for testing - REPLACE WITH SERVER CALL
+        if (staffId.equals("admin") && password.equals("Admin@123")) {
+            return true;
+        }
+        return false;
     }
 
     @FXML
@@ -73,12 +94,20 @@ public class LoginController {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("forgotPassword.fxml"));
+
+            if (loader.getLocation() == null) {
+                showError("Forgot Password page not found.");
+                return;
+            }
+
             Parent root = loader.load();
-            Stage stage = (Stage) loginButton.getScene().getWindow();
+            Stage stage = (Stage) signInButton.getScene().getWindow();  // FIXED: was loginButton
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
+            System.err.println("Error loading Forgot Password: " + e.getMessage());
             e.printStackTrace();
+            showError("Could not load Forgot Password page. Please try again.");
         }
     }
 
@@ -86,41 +115,61 @@ public class LoginController {
     private void handleSignUp() {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("register.fxml"));
+                    getClass().getResource("register-view.fxml"));
+
+            if (loader.getLocation() == null) {
+                showError("Registration page not found.");
+                return;
+            }
+
             Parent root = loader.load();
-            Stage stage = (Stage) loginButton.getScene().getWindow();
+            Stage stage = (Stage) signInButton.getScene().getWindow();  // FIXED: was loginButton
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
+            System.err.println("Error loading Registration: " + e.getMessage());
             e.printStackTrace();
+            showError("Could not load Registration page. Please try again.");
         }
     }
 
-    // ── Helpers ────────────────────────────────────────────────
+    // ── Helper Methods ────────────────────────────────────────────────
     private void showError(String message) {
-        errorLabel.setText(message);
-        errorLabel.setVisible(true);
+        if (errorLabel != null) {
+            errorLabel.setText(message);
+            errorLabel.setVisible(true);
+        } else {
+            System.err.println("Error: " + message);
+        }
     }
 
-    private void navigateToOtp(String username, String branch,
+    private void navigateToOtp(String staffId, String branch,
                                String role, String name, String phone) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("otpVerification.fxml"));
+                    getClass().getResource("otp-view.fxml"));
+
+            if (loader.getLocation() == null) {
+                showError("OTP Verification page not found.");
+                return;
+            }
+
             Parent root = loader.load();
 
             // Pass login data to OTP controller
             OtpVerificationController otpCtrl = loader.getController();
             otpCtrl.initData(phone, branch, role, name);
 
-            Stage stage = (Stage) loginButton.getScene().getWindow();
+            Stage stage = (Stage) signInButton.getScene().getWindow();  // FIXED: was loginButton
             stage.setScene(new Scene(root));
 
-            // re-center after scene change
-            stage.centerOnScreen();
 
+            // Re-center window after scene change
+            stage.centerOnScreen();
             stage.show();
+
         } catch (Exception e) {
+            System.err.println("Error navigating to OTP: " + e.getMessage());
             e.printStackTrace();
             showError("Navigation error. Please try again.");
         }

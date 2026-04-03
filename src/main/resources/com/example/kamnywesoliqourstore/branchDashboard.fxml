@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.kamnywesoliqourstore.BranchDashboardController"
+            style="-fx-background-color: #F4F6FA;">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox prefHeight="52.0"
+              style="-fx-background-color: #0D1B2A; -fx-padding: 0 20 0 0;"
+              alignment="CENTER_LEFT">
+            <children>
+
+                <Button fx:id="sidebarToggleBtn" onAction="#handleSidebarToggle"
+                        prefHeight="52.0" prefWidth="56.0" text="&#9776;"
+                        style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand; -fx-text-fill: white; -fx-font-size: 20; -fx-font-weight: bold;"/>
+
+                <HBox alignment="CENTER" spacing="6.0">
+                    <children>
+                        <StackPane prefWidth="30.0" prefHeight="30.0"
+                                   style="-fx-background-color: #2563EB; -fx-background-radius: 6;">
+                            <children>
+                                <Label text="DS" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;"/>
+                            </children>
+                        </StackPane>
+                        <Label text="DrinkShop" style="-fx-text-fill: white; -fx-font-size: 16; -fx-font-weight: bold;"/>
+                        <Label text=" MS" style="-fx-text-fill: #E04A2A; -fx-font-size: 16; -fx-font-weight: bold;"/>
+                    </children>
+                </HBox>
+
+                <Label fx:id="branchPill" text="Mombasa Branch"
+                       style="-fx-background-color: #2563EB; -fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold; -fx-padding: 3 10 3 10; -fx-background-radius: 20;">
+                    <HBox.margin><javafx.geometry.Insets left="12.0"/></HBox.margin>
+                </Label>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Button fx:id="alertBadge" onAction="#handleAlertClick"
+                        text="! Stock Alert" visible="false" managed="false"
+                        style="-fx-background-color: #633806; -fx-text-fill: #FAC775; -fx-font-size: 11; -fx-padding: 4 12 4 12; -fx-background-radius: 20; -fx-cursor: hand; -fx-border-color: transparent;">
+                    <HBox.margin><javafx.geometry.Insets right="14.0"/></HBox.margin>
+                </Button>
+
+                <HBox alignment="CENTER" spacing="5.0">
+                    <HBox.margin><javafx.geometry.Insets right="16.0"/></HBox.margin>
+                    <children>
+                        <StackPane prefWidth="10.0" prefHeight="10.0">
+                            <children>
+                                <javafx.scene.shape.Circle radius="5.0" fill="#059669"/>
+                            </children>
+                        </StackPane>
+                        <Label text="Connected to HQ" style="-fx-text-fill: #6EE7B7; -fx-font-size: 11;"/>
+                    </children>
+                </HBox>
+
+                <HBox alignment="CENTER" spacing="5.0">
+                    <HBox.margin><javafx.geometry.Insets right="16.0"/></HBox.margin>
+                    <children>
+                        <Label text="Session:" style="-fx-text-fill: #6B7280; -fx-font-size: 11;"/>
+                        <Label fx:id="sessionTimerLabel" text="30:00"
+                               style="-fx-text-fill: #4CAF50; -fx-font-size: 11; -fx-font-weight: bold;"/>
+                    </children>
+                </HBox>
+
+                <HBox alignment="CENTER" spacing="8.0">
+                    <HBox.margin><javafx.geometry.Insets right="14.0"/></HBox.margin>
+                    <children>
+                        <StackPane prefWidth="32.0" prefHeight="32.0">
+                            <children>
+                                <javafx.scene.shape.Circle radius="16.0" fill="#E04A2A"/>
+                                <Label fx:id="avatarLabel" text="SJ"
+                                       style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;"/>
+                            </children>
+                        </StackPane>
+                        <VBox spacing="1.0">
+                            <children>
+                                <Label fx:id="staffNameLabel" text="Staff Member"
+                                       style="-fx-text-fill: white; -fx-font-size: 12;"/>
+                                <Label fx:id="staffRoleLabel" text="Cashier"
+                                       style="-fx-text-fill: #888888; -fx-font-size: 10;"/>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <Button onAction="#handleLogout" text="Sign Out"
+                        style="-fx-background-color: transparent; -fx-border-color: #374151; -fx-border-radius: 6; -fx-background-radius: 6; -fx-text-fill: #9CA3AF; -fx-font-size: 12; -fx-cursor: hand; -fx-padding: 5 12 5 12;"/>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- BODY -->
+    <center>
+        <HBox>
+            <children>
+
+                <!-- SIDEBAR — minWidth prevents shrinking -->
+                <VBox fx:id="sidebar"
+                      prefWidth="200.0" minWidth="200.0"
+                      style="-fx-background-color: #16213e;"
+                      spacing="0.0">
+                    <children>
+
+                        <!-- Staff card -->
+                        <VBox fx:id="sidebarStaffCard"
+                              style="-fx-background-color: #0D1B2A; -fx-padding: 14 16 14 16;"
+                              spacing="3.0">
+                            <children>
+                                <Label fx:id="sidebarNameLabel" text="Staff Member"
+                                       style="-fx-text-fill: white; -fx-font-size: 13; -fx-font-weight: bold;"/>
+                                <Label fx:id="sidebarRoleLabel" text="Cashier · Mombasa Branch"
+                                       style="-fx-text-fill: #888888; -fx-font-size: 11;"/>
+                                <Label fx:id="sidebarBranchBadge" text="MOMBASA BRANCH"
+                                       style="-fx-text-fill: #2563EB; -fx-font-size: 10; -fx-font-weight: bold;"/>
+                            </children>
+                        </VBox>
+
+                        <Separator style="-fx-background-color: #2a3a5e;"/>
+
+                        <Label fx:id="dateLabel" text="Wed, 25 Mar 2026"
+                               style="-fx-text-fill: #555; -fx-font-size: 10; -fx-padding: 8 16 4 16;"/>
+
+                        <Separator style="-fx-background-color: #2a3a5e;"/>
+
+                        <!-- OPERATIONS -->
+                        <Label fx:id="secOperations" text="OPERATIONS"
+                               style="-fx-text-fill: #555; -fx-font-size: 10; -fx-padding: 12 16 4 16; -fx-font-weight: bold;"/>
+
+                        <Button fx:id="navPlaceOrder" onAction="#showPlaceOrder"
+                                text="  Place Order"
+                                prefWidth="200.0" prefHeight="40.0" maxWidth="Infinity"
+                                style="-fx-background-color: rgba(224,74,42,0.18); -fx-border-color: transparent; -fx-text-fill: white; -fx-font-size: 12; -fx-font-weight: bold; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 14;"/>
+
+                        <Button fx:id="navOrderHistory" onAction="#showOrderHistory"
+                                text="  Order History"
+                                prefWidth="200.0" prefHeight="40.0" maxWidth="Infinity"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 12; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"/>
+
+                        <Button fx:id="navTrackStock" onAction="#showTrackStock"
+                                text="  Track Stock Orders"
+                                prefWidth="200.0" prefHeight="40.0" maxWidth="Infinity"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 12; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"/>
+
+                        <!-- CUSTOMERS -->
+                        <Label fx:id="secCustomers" text="CUSTOMERS"
+                               style="-fx-text-fill: #555; -fx-font-size: 10; -fx-padding: 12 16 4 16; -fx-font-weight: bold;"/>
+
+                        <Button fx:id="navLoyalty" onAction="#showLoyalty"
+                                text="  Loyalty Programme"
+                                prefWidth="200.0" prefHeight="40.0" maxWidth="Infinity"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 12; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"/>
+
+                        <!-- STOCK -->
+                        <Label fx:id="secStock" text="STOCK"
+                               style="-fx-text-fill: #555; -fx-font-size: 10; -fx-padding: 12 16 4 16; -fx-font-weight: bold;"/>
+
+                        <Button fx:id="navReturns" onAction="#showReturns"
+                                text="  Stock Returns"
+                                prefWidth="200.0" prefHeight="40.0" maxWidth="Infinity"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 12; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"/>
+
+                        <Button fx:id="navAlerts" onAction="#showAlerts"
+                                text="  Stock Alerts"
+                                prefWidth="200.0" prefHeight="40.0" maxWidth="Infinity"
+                                style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #aaaaaa; -fx-font-size: 12; -fx-alignment: CENTER_LEFT; -fx-cursor: hand; -fx-padding: 0 0 0 17;"/>
+
+                        <Region VBox.vgrow="ALWAYS"/>
+
+                        <!-- HQ Contact -->
+                        <VBox style="-fx-background-color: #0D1B2A; -fx-padding: 12 16 12 16;" spacing="3.0">
+                            <children>
+                                <Label text="NAIROBI HQ"
+                                       style="-fx-text-fill: #555; -fx-font-size: 9; -fx-font-weight: bold;"/>
+                                <Label text="+254 794 723 456"
+                                       style="-fx-text-fill: #888888; -fx-font-size: 11;"/>
+                                <Label text="hq@drinkshop.co.ke"
+                                       style="-fx-text-fill: #888888; -fx-font-size: 11;"/>
+                            </children>
+                        </VBox>
+
+                    </children>
+                </VBox>
+
+                <!-- CONTENT AREA -->
+                <ScrollPane fx:id="contentScroll"
+                            HBox.hgrow="ALWAYS"
+                            fitToWidth="true"
+                            style="-fx-background-color: #F4F6FA; -fx-border-color: transparent; -fx-background: #F4F6FA;">
+                    <content>
+                        <StackPane fx:id="contentArea"
+                                   style="-fx-background-color: #F4F6FA;"
+                                   minHeight="600.0"/>
+                    </content>
+                </ScrollPane>
+
+            </children>
+        </HBox>
+    </center>
+
+</BorderPane>
