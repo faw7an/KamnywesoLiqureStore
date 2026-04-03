@@ -163,6 +163,7 @@ public class LoginController {
             Stage stage = (Stage) signInButton.getScene().getWindow();  // FIXED: was loginButton
             stage.setScene(new Scene(root));
 
+
             // Re-center window after scene change
             stage.centerOnScreen();
             stage.show();

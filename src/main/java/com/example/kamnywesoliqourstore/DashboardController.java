@@ -167,6 +167,8 @@ public class DashboardController {
         sidebarExpanded = !sidebarExpanded;
         if (sidebarExpanded) {
             sidebar.setPrefWidth(200.0);
+            sidebar.setMinWidth(200.0);
+
             sidebarStaffCard.setVisible(true);
             sidebarStaffCard.setManaged(true);
             secMainLabel.setVisible(true);
@@ -189,6 +191,7 @@ public class DashboardController {
             setNavText(navReturns,     "  Stock Returns");
         } else {
             sidebar.setPrefWidth(56.0);
+            sidebar.setMinWidth(56.0);
             sidebarStaffCard.setVisible(false);
             sidebarStaffCard.setManaged(false);
             secMainLabel.setVisible(false);

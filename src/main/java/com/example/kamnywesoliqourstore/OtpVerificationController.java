@@ -172,7 +172,16 @@ public class OtpVerificationController {
         if (errorLabel != null) {
             errorLabel.setVisible(false);
         }
-        navigateToDashboard();
+        // ══════════════════════════════════════════════════════
+        // ROUTING LOGIC
+        // Nairobi HQ  → full sidebar dashboard (dashboard.fxml)
+        // Other branches → tab-based branch dashboard
+        // ══════════════════════════════════════════════════════
+        if (branchName.equalsIgnoreCase("Nairobi HQ")) {
+            navigateToHQDashboard();
+        } else {
+            navigateToBranchDashboard();
+        }
     }
 
     // ───────────────────────────────────────────────────────────
@@ -215,6 +224,42 @@ public class OtpVerificationController {
         System.out.println("User returning to login screen.");
         stopCountdown();
         navigateToLogin();
+    }
+
+    // ── Nairobi HQ → full sidebar ──────────────────────────────
+    private void navigateToHQDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("dashboard.fxml"));
+            Parent root = loader.load();
+            DashboardController dc = loader.getController();
+            dc.initSession(staffName, staffRole, branchName);
+            Stage stage = (Stage) verifyBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setMaximized(true);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showError("Failed to load HQ dashboard. Check console.");
+        }
+    }
+
+    // ── Branch → tab-based dashboard ──────────────────────────
+    private void navigateToBranchDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("branchDashboard.fxml"));
+            Parent root = loader.load();
+            BranchDashboardController bc = loader.getController();
+            bc.initSession(staffName, staffRole, branchName);
+            Stage stage = (Stage) verifyBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setMaximized(true);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showError("Failed to load branch dashboard. Check console.");
+        }
     }
 
     // ───────────────────────────────────────────────────────────

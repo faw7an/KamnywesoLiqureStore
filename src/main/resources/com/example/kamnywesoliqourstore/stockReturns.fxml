@@ -10,7 +10,9 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -36,6 +38,19 @@
                                        style="-fx-font-size: 13; -fx-text-fill: #666666;"/>
                             </children>
                         </VBox>
+                    </children>
+                </HBox>
+
+                <!-- HQ ONLY: BRANCH SELECTOR -->
+                <HBox spacing="12.0" alignment="CENTER_LEFT"
+                      style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 14 16 14 16; -fx-border-width: 1;">
+                    <children>
+                        <Label text="View returns from:" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;"/>
+                        <ComboBox fx:id="hqBranchSelectorCombo" prefWidth="200.0"
+                                  style="-fx-font-size: 12; -fx-background-color: white; -fx-border-color: #CCCCCC; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+                        <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="hqBranchInfoLabel" text="Select a branch to view its return requests"
+                               style="-fx-font-size: 11; -fx-text-fill: #666666;"/>
                     </children>
                 </HBox>
 
@@ -108,7 +123,7 @@
                               style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 18;"
                               spacing="12.0">
                             <children>
-                                <Label text="My Return Requests"
+                                <Label fx:id="returnsTableTitle" text="My Return Requests"
                                        style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #0D1B2A;">
                                     <font><Font name="System Bold" size="15.0"/></font>
                                 </Label>
@@ -123,14 +138,16 @@
                                         <Label text="Reason" prefWidth="150.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
                                         <Label text="Date Raised" prefWidth="100.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
                                         <Label text="Status" prefWidth="110.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
-                                        <Label text="HQ Response" prefWidth="160.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
+                                        <Label text="HQ Response" prefWidth="180.0" style="-fx-font-size: 11; -fx-text-fill: #888888; -fx-font-weight: bold;"/>
                                     </children>
                                 </HBox>
                                 <Separator style="-fx-background-color: #F3F4F6;"/>
 
-                                <!-- Table rows -->
-                                <VBox spacing="0.0">
+                                <!-- Table body - scrollable -->
+                                <VBox fx:id="returnsTableContainer" spacing="0.0">
                                     <children>
+
+                                        <!-- Sample Row 1 -->
                                         <HBox style="-fx-padding: 10 0 10 0; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;" alignment="CENTER_LEFT">
                                             <children>
                                                 <Label text="RET-001" prefWidth="90.0" style="-fx-font-size: 12; -fx-text-fill: #2563EB; -fx-padding: 0 0 0 8;"/>
@@ -139,9 +156,16 @@
                                                 <Label text="Broken bottles" prefWidth="150.0" style="-fx-font-size: 12; -fx-text-fill: #666666;"/>
                                                 <Label text="25 Mar 2026" prefWidth="100.0" style="-fx-font-size: 11; -fx-text-fill: #666666;"/>
                                                 <Label text="Pending Review" prefWidth="110.0" style="-fx-font-size: 11; -fx-text-fill: #92400E; -fx-background-color: #FEF3C7; -fx-background-radius: 10; -fx-padding: 2 8 2 8;"/>
-                                                <Label text="Awaiting HQ review" prefWidth="160.0" style="-fx-font-size: 11; -fx-text-fill: #888888;"/>
+                                                <HBox spacing="6.0">
+                                                    <children>
+                                                        <Button onAction="#handleApproveReturn" prefHeight="26.0" prefWidth="60.0" text="Approve" style="-fx-background-color: #059669; -fx-background-radius: 4; -fx-text-fill: white; -fx-font-size: 10; -fx-cursor: hand; -fx-border-color: transparent;"/>
+                                                        <Button onAction="#handleRejectReturn" prefHeight="26.0" prefWidth="56.0" text="Reject" style="-fx-background-color: transparent; -fx-border-color: #CCCCCC; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #666666; -fx-font-size: 10; -fx-cursor: hand;"/>
+                                                    </children>
+                                                </HBox>
                                             </children>
                                         </HBox>
+
+                                        <!-- Sample Row 2 -->
                                         <HBox style="-fx-padding: 10 0 10 0; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;" alignment="CENTER_LEFT">
                                             <children>
                                                 <Label text="RET-002" prefWidth="90.0" style="-fx-font-size: 12; -fx-text-fill: #2563EB; -fx-padding: 0 0 0 8;"/>
@@ -150,9 +174,11 @@
                                                 <Label text="Expired stock" prefWidth="150.0" style="-fx-font-size: 12; -fx-text-fill: #666666;"/>
                                                 <Label text="20 Mar 2026" prefWidth="100.0" style="-fx-font-size: 11; -fx-text-fill: #666666;"/>
                                                 <Label text="Approved" prefWidth="110.0" style="-fx-font-size: 11; -fx-text-fill: #065F46; -fx-background-color: #D1FAE5; -fx-background-radius: 10; -fx-padding: 2 8 2 8;"/>
-                                                <Label text="Replacement: ORD-8840" prefWidth="160.0" style="-fx-font-size: 11; -fx-text-fill: #2563EB;"/>
+                                                <Label text="Replacement: ORD-8840" prefWidth="180.0" style="-fx-font-size: 11; -fx-text-fill: #2563EB;"/>
                                             </children>
                                         </HBox>
+
+                                        <!-- Sample Row 3 -->
                                         <HBox style="-fx-padding: 10 0 10 0; -fx-border-color: transparent transparent #F3F4F6 transparent; -fx-border-width: 1;" alignment="CENTER_LEFT">
                                             <children>
                                                 <Label text="RET-003" prefWidth="90.0" style="-fx-font-size: 12; -fx-text-fill: #2563EB; -fx-padding: 0 0 0 8;"/>
@@ -161,9 +187,11 @@
                                                 <Label text="Wrong delivery" prefWidth="150.0" style="-fx-font-size: 12; -fx-text-fill: #666666;"/>
                                                 <Label text="15 Mar 2026" prefWidth="100.0" style="-fx-font-size: 11; -fx-text-fill: #666666;"/>
                                                 <Label text="Rejected" prefWidth="110.0" style="-fx-font-size: 11; -fx-text-fill: #991B1B; -fx-background-color: #FEE2E2; -fx-background-radius: 10; -fx-padding: 2 8 2 8;"/>
-                                                <Label text="Insufficient evidence" prefWidth="160.0" style="-fx-font-size: 11; -fx-text-fill: #888888;"/>
+                                                <Label text="Insufficient evidence" prefWidth="180.0" style="-fx-font-size: 11; -fx-text-fill: #888888;"/>
                                             </children>
                                         </HBox>
+
+                                        <!-- Sample Row 4 -->
                                         <HBox style="-fx-padding: 10 0 10 0;" alignment="CENTER_LEFT">
                                             <children>
                                                 <Label text="RET-004" prefWidth="90.0" style="-fx-font-size: 12; -fx-text-fill: #2563EB; -fx-padding: 0 0 0 8;"/>
@@ -172,11 +200,13 @@
                                                 <Label text="Damaged packaging" prefWidth="150.0" style="-fx-font-size: 12; -fx-text-fill: #666666;"/>
                                                 <Label text="10 Mar 2026" prefWidth="100.0" style="-fx-font-size: 11; -fx-text-fill: #666666;"/>
                                                 <Label text="Replacement Sent" prefWidth="110.0" style="-fx-font-size: 11; -fx-text-fill: #1D4ED8; -fx-background-color: #DBEAFE; -fx-background-radius: 10; -fx-padding: 2 8 2 8;"/>
-                                                <Label text="ORD-8838 received" prefWidth="160.0" style="-fx-font-size: 11; -fx-text-fill: #059669;"/>
+                                                <Label text="ORD-8838 received" prefWidth="180.0" style="-fx-font-size: 11; -fx-text-fill: #059669;"/>
                                             </children>
                                         </HBox>
+
                                     </children>
                                 </VBox>
+
                             </children>
                         </VBox>
 

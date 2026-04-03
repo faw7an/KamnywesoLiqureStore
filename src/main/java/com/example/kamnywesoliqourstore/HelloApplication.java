@@ -14,6 +14,15 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
         stage.setTitle("Hello!");
         stage.setScene(scene);
+
+        // ✅ FULLSCREEN SETTINGS
+        stage.setFullScreen(true);
+
+// ✅ Show ESC hint (custom message)
+        stage.setFullScreenExitHint("Press ESC to exit full screen");
+
+// ✅ Allow ESC key to exit
+        stage.setFullScreenExitKeyCombination(javafx.scene.input.KeyCombination.valueOf("ESCAPE"));
         stage.show();
     }
 }
